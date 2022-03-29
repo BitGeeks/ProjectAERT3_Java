@@ -32,8 +32,8 @@ public class ShoppingSession {
     @JoinColumn(name = "Discount_id")
     private Discount Discount;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    List<CartItem> CartItems;
+//    @ElementCollection(fetch = FetchType.EAGER)
+//    List<CartItem> CartItems;
 
     @Column(name = "Created_at", columnDefinition = "DATE")
     public LocalDate Created_at;

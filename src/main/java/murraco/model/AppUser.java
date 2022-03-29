@@ -65,8 +65,8 @@ public class AppUser {
   @Column(name = "updated_at", columnDefinition = "DATE")
   public LocalDate updated_at;
 
-  @ElementCollection(fetch = FetchType.EAGER)
-  List<UserAddress> UserAddresss;
+//  @ElementCollection(fetch = FetchType.EAGER)
+//  List<UserAddress> UserAddresss;
 
 //  @ElementCollection(fetch = FetchType.EAGER)
 //  List<AppUserRole> appUserRoles;

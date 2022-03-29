@@ -46,8 +46,8 @@ public class Product {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Algorithm Algorithm;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    List<ProductImage> ProductImages;
+//    @ElementCollection(fetch = FetchType.EAGER)
+//    List<ProductImage> ProductImages;
 
     public double Price;
 

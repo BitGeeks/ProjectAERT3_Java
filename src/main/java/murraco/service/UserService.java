@@ -32,7 +32,7 @@ public class UserService {
   private final PasswordEncoder passwordEncoder;
   private final JwtTokenProvider jwtTokenProvider;
   private final AuthenticationManager authenticationManager;
-  private final stringHelper string;
+  private final stringHelper string = new stringHelper();
 
   public Object signin(String username, String password) {
     AppUser user = null;
