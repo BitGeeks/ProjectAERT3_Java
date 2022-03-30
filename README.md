@@ -9,18 +9,33 @@ Method: ```POST```
 ```/api/users/authenticate```  
 - Request: [account.service.ts#L33](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopApp/src/app/services/account.service.ts#L33)
 - Response: [UsersController.cs#L40](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopAPI/ViMinerShopAPI/Controllers/UsersController.cs#L40)
-### Nhận thông tin người dùng
+### Nhận thông tin người dùng (Authorize)
 Method: ```POST```  
 ```/api/users/:id```  
 - Request: [account.service.ts#L49](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopApp/src/app/services/account.service.ts#L49)
 - Response: [UsersController.cs#L122](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopAPI/ViMinerShopAPI/Controllers/UsersController.cs#L122)
-### Cập nhật thông tin người dùng
+### Cập nhật thông tin người dùng (Authorize)
 Method: ```PUT```  
 ```/api/users/update```  
 - Request: [account.service.ts#L69](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopApp/src/app/services/account.service.ts#L69)
 - Response: [UsersController.cs#L128](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopAPI/ViMinerShopAPI/Controllers/UsersController.cs#L128)
-### Toggle Subscription
+### Toggle Subscription (Authorize)
 Method: ```PUT```  
 ```/api/users/subscription```  
 - Request: [account.service.ts#L73](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopApp/src/app/services/account.service.ts#L73)
 - Response: [UsersController.cs#L149](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopAPI/ViMinerShopAPI/Controllers/UsersController.cs#L149)
+### Xóa tài khoản người dùng (Authorize, Option)
+Method: ```DELETE```  
+```/api/users/delete/:id```  
+- Request: ```None```
+- Response: [UsersController.cs#L182](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopAPI/ViMinerShopAPI/Controllers/UsersController.cs#L182)
+### Lấy bản ghi (Authorize)
+Method: ```GET```  
+```/api/users/records/all```  
+- Request: [account.service.ts#L57](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopApp/src/app/services/account.service.ts#L57)
+- Response: [UsersController.cs#L190](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopAPI/ViMinerShopAPI/Controllers/UsersController.cs#L190)
+### Đếm bản ghi (Authorize)
+Method: ```GET```  
+```/api/users/records/count```  
+- Request: [account.service.ts#L207](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopApp/src/app/services/account.service.ts#L207)
+- Response: [UsersController.cs#L199](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopAPI/ViMinerShopAPI/Controllers/UsersController.cs#L199)
