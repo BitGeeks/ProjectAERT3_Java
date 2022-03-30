@@ -64,3 +64,8 @@ Method: ```GET```
 ```/api/users/stats/point```
 - Request: [account.service.ts#L194](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopApp/src/app/services/account.service.ts#L194)
 - Response: [UsersController.cs#265](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopAPI/ViMinerShopAPI/Controllers/UsersController.cs#L265)
+### Lưu đăng ký đặt máy đào đã được bán hết (Authorize)
+Method: ```POST```  
+```/api/users/soldoutnotify```
+- Request: [account.service.ts#L198](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopApp/src/app/services/account.service.ts#L198)
+- Response: [UsersController.cs#281](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopAPI/ViMinerShopAPI/Controllers/UsersController.cs#L281)
