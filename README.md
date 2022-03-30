@@ -59,3 +59,8 @@ Method: ```POST```
 ```/api/users/register/resend```
 - Request: [account.service.ts#L53](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopApp/src/app/services/account.service.ts#L53)
 - Response: [UsersController.cs#250](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopAPI/ViMinerShopAPI/Controllers/UsersController.cs#L250)
+### Lấy điểm của người dùng (Authorize)
+Method: ```GET```  
+```/api/users/stats/point```
+- Request: [account.service.ts#L194](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopApp/src/app/services/account.service.ts#L194)
+- Response: [UsersController.cs#265](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopAPI/ViMinerShopAPI/Controllers/UsersController.cs#L265)
