@@ -54,3 +54,8 @@ Method: ```GET```
 ```/api/users/referrals/all```
 - Request: [account.service.ts#L190](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopApp/src/app/services/account.service.ts#L190)
 - Response: [UsersController.cs#234](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopAPI/ViMinerShopAPI/Controllers/UsersController.cs#L234)
+### Gửi lại mã xác minh đăng ký (Authorize)
+Method: ```POST```  
+```/api/users/register/resend```
+- Request: [account.service.ts#L53](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopApp/src/app/services/account.service.ts#L53)
+- Response: [UsersController.cs#250](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopAPI/ViMinerShopAPI/Controllers/UsersController.cs#L250)
