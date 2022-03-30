@@ -39,3 +39,8 @@ Method: ```GET```
 ```/api/users/records/count```  
 - Request: [account.service.ts#L207](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopApp/src/app/services/account.service.ts#L207)
 - Response: [UsersController.cs#L199](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopAPI/ViMinerShopAPI/Controllers/UsersController.cs#L199)
+### Xác thực email (Authorize)
+Method: ```POST  
+```/api/users/register/validate```  
+- Request: [account.service.ts#L77](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopApp/src/app/services/account.service.ts#L77)
+- Response: [UsersController.cs#L208](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopAPI/ViMinerShopAPI/Controllers/UsersController.cs#L208)
