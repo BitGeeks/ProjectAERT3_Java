@@ -49,3 +49,8 @@ Method: ```POST```
 ```/api/users/referrals/create```
 - Request: [account.service.ts#L187](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopApp/src/app/services/account.service.ts#L187)
 - Response: [UsersController.cs#L217](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopAPI/ViMinerShopAPI/Controllers/UsersController.cs#L217)
+### Lấy danh sách referral của người dùng (Authorize)
+Method: ```GET```  
+```/api/users/referrals/all```
+- Request: [account.service.ts#L190](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopApp/src/app/services/account.service.ts#L190)
+- Response: [UsersController.cs#234](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopAPI/ViMinerShopAPI/Controllers/UsersController.cs#L234)
