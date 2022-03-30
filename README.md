@@ -44,3 +44,8 @@ Method: ```POST```
 ```/api/users/register/validate```  
 - Request: [account.service.ts#L77](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopApp/src/app/services/account.service.ts#L77)
 - Response: [UsersController.cs#L208](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopAPI/ViMinerShopAPI/Controllers/UsersController.cs#L208)
+### Tạo referral (Authorize)
+Method: ```POST```  
+```/api/users/referrals/create```
+- Request: [account.service.ts#L187](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopApp/src/app/services/account.service.ts#L187)
+- Response: [UsersController.cs#L217](https://github.com/lesongvi/ViMinerShop/blob/main/ViMinerShopAPI/ViMinerShopAPI/Controllers/UsersController.cs#L217)
