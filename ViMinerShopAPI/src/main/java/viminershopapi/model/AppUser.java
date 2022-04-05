@@ -206,10 +206,10 @@ public class AppUser {
 
   public String ReferralBy;
 
-  @Column(name = "created_at", columnDefinition = "DATE")
+  @Column(name = "created_at", columnDefinition = "DATETIME")
   public LocalDate created_at;
 
-  @Column(name = "updated_at", columnDefinition = "DATE")
+  @Column(name = "updated_at", columnDefinition = "DATETIME")
   public LocalDate updated_at;
 
 //  @ElementCollection(fetch = FetchType.EAGER)

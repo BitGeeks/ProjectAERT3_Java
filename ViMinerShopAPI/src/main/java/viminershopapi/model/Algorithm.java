@@ -18,13 +18,13 @@ public class Algorithm {
 
     public String Name;
 
-    public String Desc;
+    public String Description;
 
     public String Slug;
 
-    @Column(name = "Created_at", columnDefinition = "DATE")
+    @Column(name = "Created_at", columnDefinition = "DATETIME")
     public LocalDate Created_at;
 
-    @Column(name = "Updated_at", columnDefinition = "DATE")
+    @Column(name = "Updated_at", columnDefinition = "DATETIME")
     public LocalDate Updated_at;
 }

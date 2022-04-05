@@ -35,9 +35,9 @@ public class ShoppingSession {
 //    @ElementCollection(fetch = FetchType.EAGER)
 //    List<CartItem> CartItems;
 
-    @Column(name = "Created_at", columnDefinition = "DATE")
+    @Column(name = "Created_at", columnDefinition = "DATETIME")
     public LocalDate Created_at;
 
-    @Column(name = "Updated_at", columnDefinition = "DATE")
+    @Column(name = "Updated_at", columnDefinition = "DATETIME")
     public LocalDate Updated_at;
 }

@@ -19,7 +19,7 @@ public class Product {
 
     public String Name;
 
-    public String Desc;
+    public String Description;
 
     public String NoteDesc;
 
@@ -55,9 +55,9 @@ public class Product {
 
     public boolean isActive;
 
-    @Column(name = "Created_at", columnDefinition = "DATE")
+    @Column(name = "Created_at", columnDefinition = "DATETIME")
     public LocalDate Created_at;
 
-    @Column(name = "Updated_at", columnDefinition = "DATE")
+    @Column(name = "Updated_at", columnDefinition = "DATETIME")
     public LocalDate Updated_at;
 }
