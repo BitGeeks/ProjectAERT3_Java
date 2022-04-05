@@ -31,10 +31,6 @@ public class Repair {
 
     public String CustomerAddress;
 
-    @OneToOne
-    @JoinColumn(name = "Repair_id", referencedColumnName = "Id")
-    public RepairOrder RepairOder;
-
     @ManyToOne
     @JoinColumn(name = "RepairSiteId")
     public RepairSite RepairSite;

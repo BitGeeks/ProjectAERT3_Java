@@ -16,7 +16,6 @@ import javax.persistence.Table;
 public class HPNotice {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public int Id;
 
     public String Title;

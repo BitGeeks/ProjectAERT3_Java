@@ -15,7 +15,6 @@ public class PaymentProvider {
 
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public int Id;
 
     public String Name;

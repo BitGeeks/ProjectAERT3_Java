@@ -15,11 +15,11 @@ public class RepairOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int Id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "Repair_id")
     public Repair Repair;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "Payment_id")
     public PaymentDetail PaymentDetail;
 

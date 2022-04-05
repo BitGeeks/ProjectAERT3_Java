@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -152,6 +153,7 @@ public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "Id")
   public Integer id;
 
   @Column(length=63)
@@ -161,13 +163,13 @@ public class User {
   public String LastName;
 
   @Size(min = 4, max = 127, message = "Minimum username length: 4 characters")
-  @Column(unique = true, nullable = false)
+  @Column(name = "Username", unique = true, nullable = false)
   public String username;
 
   @Column(length=255)
   public String SocialID;
 
-  @Column(unique = true, nullable = false)
+  @Column(name = "Email", unique = true, nullable = false)
   public String email;
 
   @Column(length=15)
@@ -212,10 +214,18 @@ public class User {
   @Column(name = "updated_at", columnDefinition = "DATETIME")
   public LocalDate updated_at;
 
-//  @ElementCollection(fetch = FetchType.EAGER)
-//  List<UserAddress> UserAddresss;
+  public List<UserAddress> getUserAddresss() {
+    return UserAddresss;
+  }
 
-//  @ElementCollection(fetch = FetchType.EAGER)
+  public void setUserAddresss(List<UserAddress> userAddresss) {
+    UserAddresss = userAddresss;
+  }
+
+  @OneToMany(mappedBy = "User")
+  List<UserAddress> UserAddresss;
+
+//  @OneToMany(mappedBy = "User")
 //  List<AppUserRole> appUserRoles;
 
 }

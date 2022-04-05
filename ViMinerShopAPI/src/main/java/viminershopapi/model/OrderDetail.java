@@ -15,7 +15,6 @@ import java.util.List;
 public class OrderDetail {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public int Id;
 
     @ManyToOne
@@ -31,7 +30,7 @@ public class OrderDetail {
 
     public double Total;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "Payment_id")
     public PaymentDetail PaymentDetail;
 

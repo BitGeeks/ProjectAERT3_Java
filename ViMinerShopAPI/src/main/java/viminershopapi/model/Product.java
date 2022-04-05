@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -36,7 +37,7 @@ public class Product {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private ProductCategory ProductCategory;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "Inventory_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private ProductInventory ProductInventory;
@@ -46,8 +47,8 @@ public class Product {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Algorithm Algorithm;
 
-//    @ElementCollection(fetch = FetchType.EAGER)
-//    List<ProductImage> ProductImages;
+    @OneToMany(mappedBy = "Product")
+    List<ProductImage> ProductImages;
 
     public double Price;
 

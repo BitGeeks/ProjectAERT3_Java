@@ -19,7 +19,7 @@ public class UserAddress {
 
     @ManyToOne
     @JoinColumn(name = "User_id")
-    private viminershopapi.model.User User;
+    private User User;
 
     public String Address;
 
