@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @Entity
 @Data
 @NoArgsConstructor
+@Table(name="cartitems")
 public class CartItem {
 
     @Id

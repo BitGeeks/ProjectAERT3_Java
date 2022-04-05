@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Data
 @NoArgsConstructor
+@Table(name="users")
 public class AppUser {
   public Integer getId() {
     return id;

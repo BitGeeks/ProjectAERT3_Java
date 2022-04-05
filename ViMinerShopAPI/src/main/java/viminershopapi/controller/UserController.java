@@ -51,7 +51,7 @@ public class UserController {
       @ApiResponse(code = 400, message = "Something went wrong"), //
       @ApiResponse(code = 403, message = "Access den"), //
       @ApiResponse(code = 422, message = "iedUsername is already in use")})
-  public String signup(@ApiParam("Signup User") @RequestBody UserDataDTO user) {
+  public Object signup(@ApiParam("Signup User") @RequestBody UserDataDTO user) {
     return userService.signup(modelMapper.map(user, AppUser.class));
   }
 

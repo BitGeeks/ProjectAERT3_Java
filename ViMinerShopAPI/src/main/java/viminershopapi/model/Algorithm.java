@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @Entity
 @Data
 @NoArgsConstructor
+@Table(name="algorithms")
 public class Algorithm {
 
     @Id

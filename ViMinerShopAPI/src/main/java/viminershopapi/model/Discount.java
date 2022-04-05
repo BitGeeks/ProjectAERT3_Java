@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @Entity
 @Data
 @NoArgsConstructor
+@Table(name="discounts")
 public class Discount {
 
     @Id
