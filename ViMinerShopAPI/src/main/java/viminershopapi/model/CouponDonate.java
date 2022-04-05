@@ -6,35 +6,37 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name="shoppingsessions")
-public class ShoppingSession {
+@Table(name="coupondonate")
+public class CouponDonate {
 
-    @Id
+    @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public int Id;
+
+    public String TransactionId;
 
     @ManyToOne
     @JoinColumn(name = "User_id")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private viminershopapi.model.User User;
 
-    public double Total;
+    @ManyToOne
+    @JoinColumn(name = "ReceiverId")
+    private viminershopapi.model.User Receiver;
 
     @ManyToOne
-    @JoinColumn(name = "Coupon_id")
-    private Coupon Coupon;
+    @JoinColumn(name = "CouponId")
+    public Coupon Coupon;
 
-    @ManyToOne
-    @JoinColumn(name = "Discount_id")
-    private Discount Discount;
+    public String CouponName;
 
-    @OneToMany(mappedBy = "ShoppingSession", fetch = FetchType.EAGER)
-    List<CartItem> CartItems;
+    public String CouponPercent;
+
+    public int Quantity;
 
     @Column(name = "Created_at", columnDefinition = "DATETIME")
     public LocalDate Created_at;

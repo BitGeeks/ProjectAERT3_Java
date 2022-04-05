@@ -3,7 +3,7 @@ package viminershopapi.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import lombok.RequiredArgsConstructor;
-import viminershopapi.model.AppUser;
+import viminershopapi.model.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -52,7 +52,7 @@ public class UserController {
       @ApiResponse(code = 403, message = "Access den"), //
       @ApiResponse(code = 422, message = "iedUsername is already in use")})
   public Object signup(@ApiParam("Signup User") @RequestBody UserDataDTO user) {
-    return userService.signup(modelMapper.map(user, AppUser.class));
+    return userService.signup(modelMapper.map(user, User.class));
   }
 
   @DeleteMapping(value = "/{username}")

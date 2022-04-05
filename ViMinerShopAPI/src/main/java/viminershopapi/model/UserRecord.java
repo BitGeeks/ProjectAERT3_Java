@@ -10,38 +10,27 @@ import java.time.LocalDate;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name="coupon")
-public class Coupon {
+@Table(name="userrecord")
+public class UserRecord {
 
-    @Id
+    @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int Id;
-
-    public String CouponCode;
 
     @ManyToOne
     @JoinColumn(name = "User_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private viminershopapi.model.User User;
+    public User User;
 
-    public String Description;
+    public String ActivityName;
 
-    public String CouponPercent;
+    @Column(nullable = true)
+    public String UserAgent;
 
-    public String CouponType;
+    public int loglevel;
 
-    public double MinPrice;
-
-    public boolean Active;
-
-    public int CouponLeft;
-
-    @Column(name = "Expired_at", columnDefinition = "DATETIME")
-    public LocalDate Expired_at;
+    public String ip;
 
     @Column(name = "Created_at", columnDefinition = "DATETIME")
     public LocalDate Created_at;
-
-    @Column(name = "Updated_at", columnDefinition = "DATETIME")
-    public LocalDate Updated_at;
 }

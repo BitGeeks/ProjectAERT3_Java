@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import viminershopapi.exception.CustomException;
-import viminershopapi.model.AppUser;
+import viminershopapi.model.User;
 import viminershopapi.repository.UserRepository;
 import viminershopapi.security.JwtTokenProvider;
 
@@ -28,7 +28,7 @@ public class UserService {
   private final stringHelper string = new stringHelper();
 
   public Object signin(String username, String password) {
-    AppUser user = null;
+    User user = null;
     try {
 //      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
       if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
@@ -56,7 +56,7 @@ public class UserService {
     }
   }
 
-  public Object signup(AppUser appUser) {
+  public Object signup(User appUser) {
     if (!userRepository.existsByUsername(appUser.getUsername()) || !userRepository.existsByEmail(appUser.getEmail())) {
       appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
       userRepository.save(appUser);
@@ -70,15 +70,15 @@ public class UserService {
     userRepository.deleteByUsername(username);
   }
 
-  public AppUser search(String username) {
-    AppUser appUser = userRepository.findByUsername(username);
+  public User search(String username) {
+    User appUser = userRepository.findByUsername(username);
     if (appUser == null) {
       throw new CustomException("The user doesn't exist", HttpStatus.NOT_FOUND);
     }
     return appUser;
   }
 
-  public AppUser whoami(HttpServletRequest req) {
+  public User whoami(HttpServletRequest req) {
     return userRepository.findByUsername(jwtTokenProvider.getUsername(jwtTokenProvider.resolveToken(req)));
   }
 

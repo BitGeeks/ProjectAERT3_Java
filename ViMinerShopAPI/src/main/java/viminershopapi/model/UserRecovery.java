@@ -6,35 +6,25 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name="shoppingsessions")
-public class ShoppingSession {
+@Table(name="userrecovery")
+public class UserRecovery {
 
-    @Id
+    @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int Id;
 
     @ManyToOne
     @JoinColumn(name = "User_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private viminershopapi.model.User User;
+    public User User;
 
-    public double Total;
+    public String recoveryCode;
 
-    @ManyToOne
-    @JoinColumn(name = "Coupon_id")
-    private Coupon Coupon;
-
-    @ManyToOne
-    @JoinColumn(name = "Discount_id")
-    private Discount Discount;
-
-    @OneToMany(mappedBy = "ShoppingSession", fetch = FetchType.EAGER)
-    List<CartItem> CartItems;
+    public boolean IsUsed;
 
     @Column(name = "Created_at", columnDefinition = "DATETIME")
     public LocalDate Created_at;

@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import io.jsonwebtoken.Claims;
-import viminershopapi.model.AppUser;
+import viminershopapi.model.User;
 import viminershopapi.model.response.signin;
 import viminershopapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +49,7 @@ public class JwtTokenProvider {
     secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
   }
 
-  public Object createToken(AppUser user) {
+  public Object createToken(User user) {
     Claims claims = Jwts.claims().setSubject(user.username);
     claims.put("id", user.id);
 

@@ -4,17 +4,17 @@ import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import viminershopapi.model.AppUser;
+import viminershopapi.model.User;
 
-public interface UserRepository extends JpaRepository<AppUser, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer> {
 
   boolean existsByUsername(String Username);
 
   boolean existsByEmail(String Email);
 
-  AppUser findByUsername(String Username);
+  User findByUsername(String Username);
 
-  AppUser findByEmail(String Email);
+  User findByEmail(String Email);
 
   @Transactional
   void deleteByUsername(String Username);
