@@ -40,9 +40,9 @@ public class UserController {
       @ApiResponse(code = 400, message = "Something went wrong"), //
       @ApiResponse(code = 422, message = "Invalid username/password supplied")})
   public Object login(
-      @ApiParam("Username") @RequestParam String username, //
-      @ApiParam("Password") @RequestParam String password) {
-    return userService.signin(username, password);
+      @ApiParam("Username") @RequestParam String Email, //
+      @ApiParam("Password") @RequestParam String Password) {
+    return userService.signin(Email, Password);
   }
 
   @PostMapping("/signup")

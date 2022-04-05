@@ -48,21 +48,22 @@ public class UserService {
       if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
         return null;
 
+      // Record service?
+
       return jwtTokenProvider.createToken(user);
     } catch (AuthenticationException e) {
-      throw new CustomException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
+      throw new CustomException("Địa chỉ email/mật khẩu đã cung cấp không hợp ", HttpStatus.UNPROCESSABLE_ENTITY);
     }
   }
 
-  public String signup(AppUser appUser) {
-//    if (!userRepository.existsByUsername(appUser.getUsername())) {
-//      appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
-//      userRepository.save(appUser);
-//      return jwtTokenProvider.createToken(appUser.getUsername(), appUser.getAppUserRoles());
-//    } else {
-//      throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
-//    }
-    throw new CustomException("Under development", HttpStatus.UNPROCESSABLE_ENTITY);
+  public Object signup(AppUser appUser) {
+    if (!userRepository.existsByUsername(appUser.getUsername()) || !userRepository.existsByEmail(appUser.getEmail())) {
+      appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
+      userRepository.save(appUser);
+      return jwtTokenProvider.createToken(appUser);
+    } else {
+      throw new CustomException("Tên tài khoản hoặc email đã được sử dụng", HttpStatus.UNPROCESSABLE_ENTITY);
+    }
   }
 
   public void delete(String username) {
