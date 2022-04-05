@@ -5,6 +5,7 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import viminershopapi.helper.stringHelper;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,7 +31,12 @@ public class UserService {
   public Object signin(String username, String password) {
     User user = null;
     try {
-//      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+      User usertest = userRepository.findByEmail(username);
+
+      if (usertest != null)
+        username = usertest.username;
+
+      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
       if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
         return null;
 
@@ -52,7 +58,7 @@ public class UserService {
 
       return jwtTokenProvider.createToken(user);
     } catch (AuthenticationException e) {
-      throw new CustomException("Địa chỉ email/mật khẩu đã cung cấp không hợp ", HttpStatus.UNPROCESSABLE_ENTITY);
+      throw new CustomException("Địa chỉ email/mật khẩu đã cung cấp không hợp lệ", HttpStatus.UNPROCESSABLE_ENTITY);
     }
   }
 
@@ -60,6 +66,7 @@ public class UserService {
     if (!userRepository.existsByUsername(appUser.getUsername()) || !userRepository.existsByEmail(appUser.getEmail())) {
       appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
       userRepository.save(appUser);
+
       return jwtTokenProvider.createToken(appUser);
     } else {
       throw new CustomException("Tên tài khoản hoặc email đã được sử dụng", HttpStatus.UNPROCESSABLE_ENTITY);

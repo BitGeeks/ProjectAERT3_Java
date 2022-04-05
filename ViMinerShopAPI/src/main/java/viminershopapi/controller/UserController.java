@@ -3,6 +3,7 @@ package viminershopapi.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import lombok.RequiredArgsConstructor;
+import viminershopapi.dto.users.AuthenticateModel;
 import viminershopapi.model.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -37,22 +38,29 @@ public class UserController {
   @PostMapping("/authenticate")
   @ApiOperation(value = "${UserController.signin}")
   @ApiResponses(value = {//
-      @ApiResponse(code = 400, message = "Something went wrong"), //
+      @ApiResponse(code = 400, message = "Có lỗi đã xảy ra"), //
       @ApiResponse(code = 422, message = "Invalid username/password supplied")})
-  public Object login(
-      @ApiParam("Username") @RequestParam String Email, //
-      @ApiParam("Password") @RequestParam String Password) {
-    return userService.signin(Email, Password);
+  public Object login(@RequestBody AuthenticateModel model) {
+    return userService.signin(model.email, model.password);
   }
 
-  @PostMapping("/signup")
+  @PostMapping("/register")
   @ApiOperation(value = "${UserController.signup}")
   @ApiResponses(value = {//
-      @ApiResponse(code = 400, message = "Something went wrong"), //
-      @ApiResponse(code = 403, message = "Access den"), //
-      @ApiResponse(code = 422, message = "iedUsername is already in use")})
-  public Object signup(@ApiParam("Signup User") @RequestBody UserDataDTO user) {
+      @ApiResponse(code = 400, message = "Có lỗi đã xảy ra"), //
+      @ApiResponse(code = 403, message = "Từ chối quyền truy dụng cập"), //
+      @ApiResponse(code = 422, message = "Tên tài khoản đã được sử ")})
+  public Object signup(@RequestBody UserDataDTO user) {
     return userService.signup(modelMapper.map(user, User.class));
+  }
+
+  @GetMapping("/test")
+  @ApiOperation(value = "${UserController.testApi}")
+  @ApiResponses(value = {
+
+  })
+  public String testApi () {
+    return "hello world";
   }
 
   @DeleteMapping(value = "/{username}")

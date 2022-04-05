@@ -1,6 +1,6 @@
 package viminershopapi.dto.users;
 
 public class AuthenticateModel {
-    private String Email;
-    private String Password;
+    public String email;
+    public String password;
 }

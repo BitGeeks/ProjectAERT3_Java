@@ -11,7 +11,7 @@ spring:
     min-idle: 15
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
 #        dialect: org.hibernate.dialect.H2Dialect
@@ -22,6 +22,8 @@ spring:
 
 server:
    port: 8080 # This is the default port anyway, but you can change it here
+   servlet:
+     contextPath: /api
 
 security:
   jwt:
@@ -35,3 +37,4 @@ UserController:
   delete: Deletes specific user by username
   search: Returns specific user by username
   me: Returns current user's data
+  test: Test api endpoint

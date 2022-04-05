@@ -28,7 +28,7 @@ public class ViMinerShopRestService implements CommandLineRunner {
 
   @Override
   public void run(String... params) throws Exception {
-    // Nothing to see
+    // Silent is Golden
   }
 
 }

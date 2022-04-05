@@ -8,15 +8,15 @@ import viminershopapi.model.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-  boolean existsByUsername(String Username);
+  boolean existsByUsername(String username);
 
-  boolean existsByEmail(String Email);
+  boolean existsByEmail(String email);
 
-  User findByUsername(String Username);
+  User findByUsername(String username);
 
-  User findByEmail(String Email);
+  User findByEmail(String email);
 
   @Transactional
-  void deleteByUsername(String Username);
+  void deleteByUsername(String username);
 
 }
