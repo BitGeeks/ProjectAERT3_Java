@@ -56,12 +56,17 @@ public class UserController {
 
   @GetMapping("/test")
   @ApiOperation(value = "${UserController.testApi}")
-  @ApiResponses(value = {
-
-  })
+  @ApiResponses(value = {})
   public String testApi () {
     return "hello world";
   }
+
+  @GetMapping("/{id}")
+  @ApiOperation(value = "${UserController.getId}", authorizations = { @Authorization(value="apiKey") })
+  public User GetUser (@ApiParam("Id") @PathVariable int Id) {
+    return userService.GetById(Id);
+  }
+
 
   @DeleteMapping(value = "/{username}")
   @PreAuthorize("hasRole('ROLE_ADMIN')")

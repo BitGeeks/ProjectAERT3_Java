@@ -5,7 +5,10 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.connector.Response;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.server.ResponseStatusException;
 import viminershopapi.helper.stringHelper;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -36,38 +39,42 @@ public class UserService {
       if (usertest != null)
         username = usertest.username;
 
-      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+//      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+
       if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
         return null;
 
-      if (userRepository.findByUsername(username) != null) {
-        user = userRepository.findByUsername(username);
-      } else {
-        user = userRepository.findByEmail(username);
-      }
+      user = userRepository.findByUsername(username);
+      if (true) return user;
 
       if (user == null)
-        return null;
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Đã có lỗi xảy ra, vui lòng thử phương thức khác");
 
       if (user.RoleVar.Id == 3) throw new CustomException("Tài khoản này đã bị gắn cờ!", HttpStatus.BAD_REQUEST);
 
-      if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
-        return null;
+//      if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+//        return null;
 
       // Record service?
 
       return jwtTokenProvider.createToken(user);
     } catch (AuthenticationException e) {
-      throw new CustomException("Địa chỉ email/mật khẩu đã cung cấp không hợp lệ", HttpStatus.UNPROCESSABLE_ENTITY);
+      return e.getMessage();
+//      throw new CustomException("Địa chỉ email/mật khẩu đã cung cấp không hợp lệ", HttpStatus.UNPROCESSABLE_ENTITY);
     }
+  }
+
+  public User GetById (int id) {
+    return userRepository.findById(id);
   }
 
   public Object signup(User appUser) {
     if (!userRepository.existsByUsername(appUser.getUsername()) || !userRepository.existsByEmail(appUser.getEmail())) {
       appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
+      appUser.setRoleVar_Id
       userRepository.save(appUser);
 
-      return jwtTokenProvider.createToken(appUser);
+      return new ResponseEntity<>("Ok", HttpStatus.OK);
     } else {
       throw new CustomException("Tên tài khoản hoặc email đã được sử dụng", HttpStatus.UNPROCESSABLE_ENTITY);
     }
