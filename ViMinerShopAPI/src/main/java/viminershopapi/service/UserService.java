@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.server.ResponseStatusException;
 import viminershopapi.helper.stringHelper;
 import org.springframework.http.HttpStatus;
@@ -18,15 +19,20 @@ import org.springframework.stereotype.Service;
 
 import viminershopapi.exception.CustomException;
 import viminershopapi.model.User;
+import viminershopapi.repository.RoleVarRepository;
 import viminershopapi.repository.UserRepository;
 import viminershopapi.security.JwtTokenProvider;
+
+import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
   private final UserRepository userRepository;
+  private final RoleVarRepository roleVarRepository;
   private final PasswordEncoder passwordEncoder;
+  private final BCryptPasswordEncoder encoder;
   private final JwtTokenProvider jwtTokenProvider;
   private final AuthenticationManager authenticationManager;
   private final stringHelper string = new stringHelper();
@@ -37,7 +43,7 @@ public class UserService {
       User usertest = userRepository.findByEmail(username);
 
       if (usertest != null)
-        username = usertest.username;
+        username = usertest.getUsername();
 
 //      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 
@@ -45,13 +51,14 @@ public class UserService {
         return null;
 
       user = userRepository.findByUsername(username);
-      if (true) return user;
 
       if (user == null)
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Đã có lỗi xảy ra, vui lòng thử phương thức khác");
 
-      if (user.RoleVar.Id == 3) throw new CustomException("Tài khoản này đã bị gắn cờ!", HttpStatus.BAD_REQUEST);
+      if (user.getRoleVar() != null && user.getRoleVar().getId() == 3) throw new CustomException("Tài khoản này đã bị gắn cờ!", HttpStatus.BAD_REQUEST);
 
+      if (!encoder.matches(password, user.Password))
+        throw new CustomException("Tên tài khoản hoặc email hoặc mật khẩu không hợp lệ", HttpStatus.UNPROCESSABLE_ENTITY);
 //      if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
 //        return null;
 
@@ -59,8 +66,7 @@ public class UserService {
 
       return jwtTokenProvider.createToken(user);
     } catch (AuthenticationException e) {
-      return e.getMessage();
-//      throw new CustomException("Địa chỉ email/mật khẩu đã cung cấp không hợp lệ", HttpStatus.UNPROCESSABLE_ENTITY);
+      throw new CustomException("Địa chỉ email/mật khẩu đã cung cấp không hợp lệ", HttpStatus.UNPROCESSABLE_ENTITY);
     }
   }
 
@@ -71,7 +77,10 @@ public class UserService {
   public Object signup(User appUser) {
     if (!userRepository.existsByUsername(appUser.getUsername()) || !userRepository.existsByEmail(appUser.getEmail())) {
       appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
-      appUser.setRoleVar_Id
+      appUser.setRoleVar(roleVarRepository.findById(1));
+      appUser.setCreated_at(LocalDate.now());
+      appUser.setUpdated_at(LocalDate.now());
+
       userRepository.save(appUser);
 
       return new ResponseEntity<>("Ok", HttpStatus.OK);

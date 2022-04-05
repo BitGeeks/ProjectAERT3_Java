@@ -87,22 +87,6 @@ public class User {
     LoginFailedCount = loginFailedCount;
   }
 
-  public byte[] getPasswordHash() {
-    return PasswordHash;
-  }
-
-  public void setPasswordHash(byte[] passwordHash) {
-    PasswordHash = passwordHash;
-  }
-
-  public byte[] getPasswordSalt() {
-    return PasswordSalt;
-  }
-
-  public void setPasswordSalt(byte[] passwordSalt) {
-    PasswordSalt = passwordSalt;
-  }
-
   public boolean isSubscribedToMailing() {
     return isSubscribedToMailing;
   }
@@ -111,11 +95,11 @@ public class User {
     isSubscribedToMailing = subscribedToMailing;
   }
 
-  public viminershopapi.model.RoleVar getRoleVar() {
+  public RoleVar getRoleVar() {
     return RoleVar;
   }
 
-  public void setRoleVar(viminershopapi.model.RoleVar roleVar) {
+  public void setRoleVar(RoleVar roleVar) {
     RoleVar = roleVar;
   }
 
@@ -154,29 +138,30 @@ public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "Id")
-  public Integer id;
+  private Integer id;
 
   @Column(length=63)
-  public String FirstName;
+  private String FirstName;
 
   @Column(length=63)
-  public String LastName;
+  private String LastName;
 
   @Size(min = 4, max = 127, message = "Minimum username length: 4 characters")
   @Column(name = "Username", unique = true, nullable = false)
-  public String username;
+  private String username;
 
   @Column(length=255)
-  public String SocialID;
+  private String SocialID;
 
   @Column(name = "Email", unique = true, nullable = false)
-  public String email;
+  private String email;
 
   @Column(length=15)
-  public String Telephone;
+  private String Telephone;
 
-  public String UserImage;
+  private String UserImage;
 
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   public String getPassword() {
     return Password;
   }
@@ -198,21 +183,21 @@ public class User {
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   public String Password;
 
-  public boolean isSubscribedToMailing;
+  private boolean isSubscribedToMailing;
 
   @ManyToOne
   @JoinColumn(name = "RoleVar_Id")
-  public RoleVar RoleVar;
+  private RoleVar RoleVar;
 
-  public String ReferralCode;
+  private String ReferralCode;
 
-  public String ReferralBy;
+  private String ReferralBy;
 
   @Column(name = "created_at", columnDefinition = "DATETIME")
-  public LocalDate created_at;
+  private LocalDate created_at;
 
   @Column(name = "updated_at", columnDefinition = "DATETIME")
-  public LocalDate updated_at;
+  private LocalDate updated_at;
 
   public List<UserAddress> getUserAddresss() {
     return UserAddresss;

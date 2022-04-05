@@ -1,12 +1,14 @@
 package viminershopapi.security;
 
-import java.util.Base64;
-import java.util.Date;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import io.jsonwebtoken.Claims;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import viminershopapi.model.User;
 import viminershopapi.model.response.signin;
 import viminershopapi.repository.UserRepository;
@@ -50,8 +52,10 @@ public class JwtTokenProvider {
   }
 
   public Object createToken(User user) {
-    Claims claims = Jwts.claims().setSubject(user.username);
-    claims.put("id", user.id);
+    List<GrantedAuthority> role_name= new ArrayList(List.of(user.getRoleVar().getRoleName()));
+    Claims claims = Jwts.claims().setSubject(user.getUsername());
+    claims.put("id", user.getId());
+    claims.put("auth", role_name);
 
     Date now = new Date();
     Date validity = new Date(now.getTime() + validityInMilliseconds);
@@ -63,7 +67,7 @@ public class JwtTokenProvider {
             .signWith(SignatureAlgorithm.HS256, secretKey)//
             .compact();
 
-    return new signin(user.id, user.email, user.username, user.FirstName, user.LastName, true, user.RoleVar.Id, tokenString);
+    return new signin(user.getId(), user.getEmail(), user.getUsername(), user.getFirstName(), user.getLastName(), true, user.getRoleVar().getId(), tokenString);
   }
 
   public Authentication getAuthentication(String token) {

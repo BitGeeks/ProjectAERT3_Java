@@ -61,10 +61,10 @@ public class UserController {
     return "hello world";
   }
 
-  @GetMapping("/{id}")
+  @PostMapping("/{id}")
   @ApiOperation(value = "${UserController.getId}", authorizations = { @Authorization(value="apiKey") })
-  public User GetUser (@ApiParam("Id") @PathVariable int Id) {
-    return userService.GetById(Id);
+  public Object GetUser (@ApiParam("id") @PathVariable int id) {
+    return userService.GetById(id);
   }
 
 
