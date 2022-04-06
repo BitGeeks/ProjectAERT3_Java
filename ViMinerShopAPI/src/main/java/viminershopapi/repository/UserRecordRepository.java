@@ -12,6 +12,6 @@ public interface UserRecordRepository extends JpaRepository<UserRecord, Integer>
     @Query("SELECT u FROM UserRecord u WHERE u.id = ?1")
     Page<UserRecord> findByIdContaining(int id, Pageable pageable);
 
-    @Query("SELECT COUNT(u) FROM UserRecord u WHERE u.name = ?1")
+    @Query("SELECT COUNT(u) FROM UserRecord u WHERE u.User.id = ?1")
     long countAllByUserId(int id);
 }

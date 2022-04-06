@@ -19,6 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 import viminershopapi.dto.users.PaginateRecordModel;
 import viminershopapi.dto.users.UpdateModel;
 import viminershopapi.dto.users.UserPoint;
+import viminershopapi.helper.responseHelper;
 import viminershopapi.helper.stringHelper;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -145,7 +146,7 @@ public class UserService {
 
       userRepository.save(appUser);
 
-      return new ResponseEntity<>("Ok", HttpStatus.OK);
+      return new responseHelper().Ok();
     } else {
       throw new CustomException("Tên tài khoản hoặc email đã được sử dụng", HttpStatus.UNPROCESSABLE_ENTITY);
     }
@@ -157,7 +158,7 @@ public class UserService {
     user.setSubscribedToMailing(!user.isSubscribedToMailing());
 
     try {
-      userRepository.save(user);
+      return userRepository.save(user);
     } catch (Exception ex) {
       return new ApplicationContextException(ex.getMessage());
     }

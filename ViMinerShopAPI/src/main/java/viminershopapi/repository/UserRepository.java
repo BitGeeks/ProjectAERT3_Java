@@ -21,7 +21,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
   User findByEmail(String email);
 
-  @Query("SELECT a FROM a WHERE a.referral_code = ?1")
+  @Query("SELECT a FROM User a WHERE a.ReferralCode = ?1")
   List<User> findAllByReferralCode (String refCode);
 
   @Transactional
