@@ -3,18 +3,13 @@ package viminershopapi.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import lombok.RequiredArgsConstructor;
-import viminershopapi.dto.users.AuthenticateModel;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.*;
+import viminershopapi.dto.users.*;
 import viminershopapi.model.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,9 +34,49 @@ public class UserController {
   @ApiOperation(value = "${UserController.signin}")
   @ApiResponses(value = {//
       @ApiResponse(code = 400, message = "Có lỗi đã xảy ra"), //
-      @ApiResponse(code = 422, message = "Invalid username/password supplied")})
+      @ApiResponse(code = 422, message = "Thông tin đăng nhập không hợp lệ")})
   public Object login(@RequestBody AuthenticateModel model) {
     return userService.signin(model.email, model.password);
+  }
+
+  @PostMapping("/socialauthenticate")
+  @ApiOperation(value = "${UserController.socialauthenticate}")
+  @ApiResponses(value = {//
+          @ApiResponse(code = 400, message = "Có lỗi đã xảy ra"), //
+          @ApiResponse(code = 422, message = "Thông tin đăng nhập không hợp lệ")})
+  public Object socialauth(@RequestBody SocialAuthenticateModel model) {
+    return userService.SocialAuthenticate(model.email, model.id);
+  }
+
+  @GetMapping("/")
+  @ApiOperation(value = "${UserController.socialauthenticate}")
+  @ApiResponses(value = {//
+          @ApiResponse(code = 400, message = "Có lỗi đã xảy ra"), //
+          @ApiResponse(code = 422, message = "Thông tin đăng nhập không hợp lệ")})
+  public Object GetUsers() {
+    UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+            .getPrincipal();
+    return userService.GetByUsername(jud.getUsername());
+  }
+
+  @PutMapping("/update")
+  @ApiResponses(value = {//
+          @ApiResponse(code = 400, message = "Có lỗi đã xảy ra"), //
+          @ApiResponse(code = 422, message = "Thông tin đăng nhập không hợp lệ")})
+  public Object PutUser(@RequestBody UpdateModel model) {
+    UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+            .getPrincipal();
+    return userService.updateByUsername(model, jud.getUsername());
+  }
+
+  @PutMapping("/subscription")
+  @ApiResponses(value = {//
+          @ApiResponse(code = 400, message = "Có lỗi đã xảy ra"), //
+          @ApiResponse(code = 422, message = "Thông tin đăng nhập không hợp lệ")})
+  public Object UpdateSubscription() {
+    UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+            .getPrincipal();
+    return userService.toggleSubscription(jud.getUsername());
   }
 
   @PostMapping("/register")
@@ -52,6 +87,97 @@ public class UserController {
       @ApiResponse(code = 422, message = "Tên tài khoản đã được sử ")})
   public Object signup(@RequestBody UserDataDTO user) {
     return userService.signup(modelMapper.map(user, User.class));
+  }
+
+  @DeleteMapping("/delete/{id}")
+  @ApiResponses(value = {//
+          @ApiResponse(code = 400, message = "Có lỗi đã xảy ra"), //
+          @ApiResponse(code = 422, message = "Thông tin đăng nhập không hợp lệ")})
+  public void DeleteUser() {
+    // Under development
+  }
+
+  @GetMapping("/records/all")
+  @ApiResponses(value = {//
+          @ApiResponse(code = 400, message = "Có lỗi đã xảy ra"), //
+          @ApiResponse(code = 422, message = "Thông tin đăng nhập không hợp lệ")})
+  public Object GetUserRecord(@RequestParam PaginateRecordModel paginate) {
+    UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+            .getPrincipal();
+    return userService.GetRecord(jud.getUsername(), paginate);
+  }
+
+  @GetMapping("/records/count")
+  @ApiResponses(value = {//
+          @ApiResponse(code = 400, message = "Có lỗi đã xảy ra"), //
+          @ApiResponse(code = 422, message = "Thông tin đăng nhập không hợp lệ")})
+  public long GetUserRecordCount() {
+    UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+            .getPrincipal();
+    return userService.GetRecordCount(jud.getUsername());
+  }
+
+  @PostMapping("/register/validate")
+  @ApiResponses(value = {//
+          @ApiResponse(code = 400, message = "Có lỗi đã xảy ra"), //
+          @ApiResponse(code = 422, message = "Thông tin đăng nhập không hợp lệ")})
+  public Object ValidateUser(@RequestBody UserRegistrationValidateModel model) {
+    UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+            .getPrincipal();
+    return userService.ValidateUser(jud.getUsername(), model.token);
+  }
+
+  @PostMapping("/referrals/create")
+  @ApiResponses(value = {//
+          @ApiResponse(code = 400, message = "Có lỗi đã xảy ra"), //
+          @ApiResponse(code = 422, message = "Thông tin đăng nhập không hợp lệ")})
+  public Object CreateRefCode() {
+    UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+            .getPrincipal();
+    return userService.CreateReferralCode(jud.getUsername());
+  }
+
+  @GetMapping("/referrals/all")
+  @ApiResponses(value = {//
+          @ApiResponse(code = 400, message = "Có lỗi đã xảy ra"), //
+          @ApiResponse(code = 422, message = "Thông tin đăng nhập không hợp lệ")})
+  public Object GetRefList() {
+    UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+            .getPrincipal();
+    return userService.GetRefList(jud.getUsername());
+  }
+
+  @PostMapping("/register/resend")
+  @ApiResponses(value = {//
+          @ApiResponse(code = 400, message = "Có lỗi đã xảy ra"), //
+          @ApiResponse(code = 422, message = "Thông tin đăng nhập không hợp lệ")})
+  public Object ResendVerification() {
+    UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+            .getPrincipal();
+
+    return userService.ResendVerification(jud.getUsername());
+  }
+
+  @GetMapping("/stats/point")
+  @ApiResponses(value = {//
+          @ApiResponse(code = 400, message = "Có lỗi đã xảy ra"), //
+          @ApiResponse(code = 422, message = "Thông tin đăng nhập không hợp lệ")})
+  public Object GetUserStatPoint() {
+    UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+            .getPrincipal();
+
+    return userService.GetUserStat(jud.getUsername());
+  }
+
+  @GetMapping("/soldoutnotify")
+  @ApiResponses(value = {//
+          @ApiResponse(code = 400, message = "Có lỗi đã xảy ra"), //
+          @ApiResponse(code = 422, message = "Thông tin đăng nhập không hợp lệ")})
+  public Object SetNewNotify() {
+    UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+            .getPrincipal();
+
+    return userService.SetNewNotify(jud.getUsername());
   }
 
   @GetMapping("/test")

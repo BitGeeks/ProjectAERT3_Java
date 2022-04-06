@@ -67,6 +67,7 @@ public class JwtTokenProvider {
             .signWith(SignatureAlgorithm.HS256, secretKey)//
             .compact();
 
+    // isActive tạm thời
     return new signin(user.getId(), user.getEmail(), user.getUsername(), user.getFirstName(), user.getLastName(), true, user.getRoleVar().getId(), tokenString);
   }
 
