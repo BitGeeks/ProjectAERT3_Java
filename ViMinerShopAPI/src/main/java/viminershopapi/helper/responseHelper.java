@@ -8,4 +8,9 @@ public class responseHelper {
     public static ResponseEntity Ok() {
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    // NotFound()
+    public static ResponseEntity NotFound() {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }

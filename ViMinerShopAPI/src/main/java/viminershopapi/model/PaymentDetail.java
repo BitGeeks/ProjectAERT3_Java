@@ -12,29 +12,37 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Table(name="paymentdetails")
 public class PaymentDetail {
+    public PaymentDetail(double amount, double provider, double status, String referralBy, LocalDate created_at, LocalDate updated_at) {
+        Amount = amount;
+        Provider = provider;
+        Status = status;
+        ReferralBy = referralBy;
+        Created_at = created_at;
+        Updated_at = updated_at;
+    }
 
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int Id;
+    private int Id;
 
-    public double Amount;
+    private double Amount;
 
-    public double Provider;
+    private double Provider;
 
-    public double Status;
-
-    @Column(nullable = true)
-    public String MaxMinesBillID;
+    private double Status;
 
     @Column(nullable = true)
-    public String PaypalID;
+    private String MaxMinesBillID;
 
     @Column(nullable = true)
-    public String ReferralBy;
+    private String PaypalID;
+
+    @Column(nullable = true)
+    private String ReferralBy;
 
     @Column(name = "Created_at", columnDefinition = "DATETIME")
-    public LocalDate Created_at;
+    private LocalDate Created_at;
 
     @Column(name = "Updated_at", columnDefinition = "DATETIME")
-    public LocalDate Updated_at;
+    private LocalDate Updated_at;
 }

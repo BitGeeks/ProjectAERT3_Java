@@ -48,7 +48,7 @@ public class UserController {
     return userService.SocialAuthenticate(model.email, model.id);
   }
 
-  @GetMapping("/")
+  @GetMapping("")
   @ApiOperation(value = "${UserController.socialauthenticate}")
   @ApiResponses(value = {//
           @ApiResponse(code = 400, message = "Có lỗi đã xảy ra"), //

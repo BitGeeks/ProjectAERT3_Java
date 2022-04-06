@@ -13,17 +13,89 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name="shoppingsessions")
 public class ShoppingSession {
+    public ShoppingSession () { }
+
+    public ShoppingSession(viminershopapi.model.User user, double total, LocalDate created_at, LocalDate updated_at) {
+        User = user;
+        Total = total;
+        Created_at = created_at;
+        Updated_at = updated_at;
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public viminershopapi.model.User getUser() {
+        return User;
+    }
+
+    public void setUser(viminershopapi.model.User user) {
+        User = user;
+    }
+
+    public double getTotal() {
+        return Total;
+    }
+
+    public void setTotal(double total) {
+        Total = total;
+    }
+
+    public viminershopapi.model.Coupon getCoupon() {
+        return Coupon;
+    }
+
+    public void setCoupon(viminershopapi.model.Coupon coupon) {
+        Coupon = coupon;
+    }
+
+    public viminershopapi.model.Discount getDiscount() {
+        return Discount;
+    }
+
+    public void setDiscount(viminershopapi.model.Discount discount) {
+        Discount = discount;
+    }
+
+    public List<CartItem> getCartItems() {
+        return CartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        CartItems = cartItems;
+    }
+
+    public LocalDate getCreated_at() {
+        return Created_at;
+    }
+
+    public void setCreated_at(LocalDate created_at) {
+        Created_at = created_at;
+    }
+
+    public LocalDate getUpdated_at() {
+        return Updated_at;
+    }
+
+    public void setUpdated_at(LocalDate updated_at) {
+        Updated_at = updated_at;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int Id;
+    private int Id;
 
     @ManyToOne
     @JoinColumn(name = "User_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private viminershopapi.model.User User;
 
-    public double Total;
+    private double Total;
 
     @ManyToOne
     @JoinColumn(name = "Coupon_id")
@@ -34,11 +106,11 @@ public class ShoppingSession {
     private Discount Discount;
 
     @OneToMany(mappedBy = "ShoppingSession", fetch = FetchType.EAGER)
-    List<CartItem> CartItems;
+    private List<CartItem> CartItems;
 
     @Column(name = "Created_at", columnDefinition = "DATETIME")
-    public LocalDate Created_at;
+    private LocalDate Created_at;
 
     @Column(name = "Updated_at", columnDefinition = "DATETIME")
-    public LocalDate Updated_at;
+    private LocalDate Updated_at;
 }
