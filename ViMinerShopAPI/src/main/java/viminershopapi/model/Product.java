@@ -13,6 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name="products")
 public class Product {
+    // Test comment in a line
+
     public int getId() {
         return Id;
     }
