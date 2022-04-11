@@ -10,7 +10,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import viminershopapi.model.ProductCategory;
-import viminershopapi.service.CartService;
 import viminershopapi.service.ProductCategoryService;
 
 @RestController

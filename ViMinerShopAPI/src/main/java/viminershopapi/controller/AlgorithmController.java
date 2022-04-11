@@ -3,17 +3,8 @@ package viminershopapi.controller;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import viminershopapi.dto.cartitems.CartAmountChangeModel;
-import viminershopapi.dto.cartitems.CartConfirmCreateModel;
-import viminershopapi.dto.cartitems.CartItemCreateModel;
-import viminershopapi.dto.coupons.ApplyCouponModel;
-import viminershopapi.dto.orders.ShippingPosModel;
-import viminershopapi.dto.users.AuthenticateModel;
 import viminershopapi.service.AlgorithmService;
-import viminershopapi.service.CartService;
 
 @RestController
 @RequestMapping("/algorithms")
