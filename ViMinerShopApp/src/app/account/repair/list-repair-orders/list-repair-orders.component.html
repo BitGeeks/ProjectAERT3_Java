@@ -1,0 +1,143 @@
+<div class="panel">
+    <div class="clearfix">
+      <h2 class="title pull-left" translate>Đơn sửa chữa của tôi</h2>
+    </div>
+    <div class="bt-space filter" style="margin: 40px 0px 15px;">
+      <div class="item {{ activeTab === 0 ? 'active' : '' }}" (click)="onUserClickTab(0)">
+        <span translate>Tất cả</span>
+      </div>
+      <div class="item {{ activeTab === 1 ? 'active' : '' }}" (click)="onUserClickTab(1)">
+        <span translate>Chưa thanh toán</span>
+      </div>
+      <div class="item {{ activeTab === 2 ? 'active' : '' }}" (click)="onUserClickTab(2)">
+        <span translate>Đang chờ</span>
+      </div>
+      <div class="item {{ activeTab === 3 ? 'active' : '' }}" (click)="onUserClickTab(3)">
+        <span translate>Đã thanh toán</span>
+      </div>
+    </div>
+    
+      <div *ngIf="!innerLoading && fetchError" class="row">
+        <div class="col-md-12">
+          <div class="alert-warning" translate>Đã có lỗi xảy ra, vui lòng thử lại sau!</div>
+        </div>
+      </div>
+
+      <div class="geer-loading" *ngIf="innerLoading">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
+      <div *ngIf="!innerLoading">
+        <div class="table vms-iv-table-wrapper" style="width: 878px;">
+            <div class="vms-iv-table">
+                <div class="vms-iv-table-header" style="overflow-x: auto;">
+                    <table cellspacing="0" cellpadding="0" border="0" style="width: 877px;">
+                        <colgroup>
+                            <col width="" />
+                            <col width="" />
+                            <col width="" />
+                            <col width="" />
+                            <col width="" />
+                            <col width="" />
+                            <col width="" />
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th class="">
+                                    <div class="vms-iv-table-cell">
+                                        <span translate>Mã phiếu</span>
+                                    </div>
+                                </th>
+                                <th class="">
+                                    <div class="vms-iv-table-cell">
+                                        <span translate>Mã theo dõi</span>
+                                    </div>
+                                </th>
+                                <th class="">
+                                    <div class="vms-iv-table-cell">
+                                        <span translate>Số sản phẩm</span>
+                                    </div>
+                                </th>
+                                <th class="vms-iv-table-column-left">
+                                    <div class="vms-iv-table-cell">
+                                        <span translate>Phương thức thanh toán</span>
+                                    </div>
+                                </th>
+                                <th class="vms-iv-table-column-right">
+                                    <div class="vms-iv-table-cell">
+                                        <span translate>Chi phí</span>
+                                    </div>
+                                </th>
+                                <th class="vms-iv-table-column-right">
+                                    <div class="vms-iv-table-cell">
+                                        <span translate>Trạng thái</span>
+                                    </div>
+                                </th>
+                                <th class="vms-iv-table-column-center">
+                                    <div class="vms-iv-table-cell">
+                                        <span translate>Hành động</span>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="vms-iv-table-body" style="display: none;overflow-x: auto;">
+                    <table cellspacing="0" cellpadding="0" border="0" style="width: 877px;">
+                        <colgroup>
+                            <col width="" />
+                            <col width="" />
+                            <col width="" />
+                            <col width="" />
+                            <col width="" />
+                            <col width="" />
+                            <col width="" />
+                        </colgroup>
+                        <tbody class="vms-iv-table-tbody">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="vms-iv-table-tip" style="overflow-x: auto;">
+                    <table cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                            <ng-container *ngIf="rOrders && rOrders.length !== 0">
+                                <tr *ngFor="let order of rOrders">
+                                    <td><span>{{ order.repair_id }}</span></td>
+                                    <td><span>{{ order.repair.trackingNo }}</span></td>
+                                    <td><span>{{ order.repair.repairItems.length }}</span></td>
+                                    <td><span>{{ renderProviderName(order.provider) }}</span></td>
+                                    <td><span>{{ order.price * currencyRate | currency: currency }}</span></td>
+                                    <td><span>{{ renderStatus(order.status) }}</span></td>
+                                    <td>
+                                        <button *ngIf="order.status === 0" (click)="repairOrderPayment(order)" class="button primary small" translate>Thanh toán</button>
+                                        <span *ngIf="order.status !== 0" translate>Đã thanh toán</span>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                            <tr *ngIf="!rOrders || rOrders && rOrders.length === 0">
+                                <td><span translate>Không có dữ liệu</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <div class="page" *ngIf="!innerLoading && rOrders && rOrders.length !== 0">
+        <ul class="vms-iv-page">
+            <li title="Trang Trước" class="vms-iv-page-prev{{ disablePrevPageBtn ? ' vms-iv-page-disabled' : '' }}" (click)="userClickPreviousPage()">
+                <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-left"></i></a>
+            </li>
+            <li title="{{ page + 1 }}" class="vms-iv-page-item vms-iv-page-item-active"><a>{{ page + 1 }}</a></li>
+            <li title="Trang Tiếp Theo" class="vms-iv-page-next{{ disableNextPageBtn ? ' vms-iv-page-disabled' : '' }}" (click)="userClickNextPage()">
+                <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-right"></i></a>
+            </li>
+        </ul>
+      </div>
+    
+    </div>
+    

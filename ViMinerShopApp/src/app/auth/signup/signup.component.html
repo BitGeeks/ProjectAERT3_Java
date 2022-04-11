@@ -1,0 +1,167 @@
+<div class="container">
+  <div class="signup-base">
+    <div class="signup-box">
+      <form [formGroup]="signUpForm" (ngSubmit)="onSubmitted()" class="form-part">
+        <div class="title" translate>Đăng ký tài khoản tại Shop máy đào của Vĩ!</div>
+        <div class="agreement" translate>
+          Bằng việc đăng ký, bạn chấp nhận <a routerLink="/info/disclaimer" rel="noopener noreferrer" translate>Tuyên bố từ chối trách nhiệm</a>
+        </div>
+        <p class="vms-s-warn" *ngIf="(authState | async).errors.length  > 1">
+          <span *ngFor="let e of (authState | async).errors">
+            <ng-container *ngIf="e.errorEffect === 'SIGN_UP'" class="alert-warning">
+              <div *ngIf="e.error.status === 400" translate>Thông tin tài khoản không hợp lệ</div>
+              <div *ngIf="e.error.status === 401" translate>401 Error</div>
+              <div *ngIf="e.error.status === 500 || e.error.status === 0" translate>
+                Lỗi không xác định!
+              </div>
+              <div *ngIf="e.error && e.error.status !== 400 && e.error.status !== 401 && e.error.status !== 500 && e.error.status !== 0" translate>
+                {{ e.error }}
+              </div>
+            </ng-container>
+          </span>
+        </p>
+        <div class="form-item">
+          <div class="input-group-base">
+            <div class="input-group{{ (signUpForm.get('fname').invalid && signUpForm.get('fname').touched) ? ' has-error' : '' }}">
+              <span class="input">
+                <input type="text" id="fname" name="fname" formControlName="fname"
+                [maxlength]="63" [placeholder]="'Nhập họ của bạn' | translate">
+              </span>
+              <span class="btn-icon" *ngIf="signUpForm.get('fname').value && signUpForm.get('fname').value.length !== 0" (click)="removeTextFromForm('fname')">
+                <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTYzNDIxMzE0OTA2IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjI5MTQiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMi4wMzk5MDkgMTIxLjEwMzE3MmMtMjE2LjE4Nzc2MSAwLTM5MS40NDIyNSAxNzUuMjU0NDg5LTM5MS40NDIyNSAzOTEuNDQ1MzIgMCAyMTYuMTg2NzM3IDE3NS4yNTQ0ODkgMzkxLjQ0MzI3MyAzOTEuNDQyMjUgMzkxLjQ0MzI3MyAyMTYuMTc1NDgxIDAgMzkxLjQyOTk3LTE3NS4yNTU1MTMgMzkxLjQyOTk3LTM5MS40NDMyNzNDOTAzLjQ2OTg3OSAyOTYuMzU4Njg1IDcyOC4yMTUzOSAxMjEuMTAzMTcyIDUxMi4wMzk5MDkgMTIxLjEwMzE3Mkw1MTIuMDM5OTA5IDEyMS4xMDMxNzJ6TTY3Ny4zNDE3MjIgNjc3LjUzNTEyN2MtMC4wMDYxNCAwLjAwNzE2My0wLjAxMjI4IDAuMDEzMzAzLTAuMDE5NDQzIDAuMDE5NDQzLTEwLjg4MTgzOCAxMC44ODE4MzgtMjguNTI0NjYgMTAuODkzMDk0LTM5LjQyMDgyNSAwLjAxNzM5Nkw1MTIuMDkxMDc0IDU1MS45ODc3MzYgMzg2LjUwNTgyMSA2NzcuODExNDJjLTAuMDA3MTYzIDAuMDA2MTQtMC4wMTMzMDMgMC4wMTQzMjYtMC4wMTk0NDMgMC4wMTg0Mi0xMC44ODI4NjEgMTAuODgyODYxLTI4LjUyNDY2IDEwLjg5NDExOC0zOS40MTk4MDEgMC4wMTk0NDMtMTAuOTE0NTg0LTEwLjg5NTE0MS0xMC45MzMwMDMtMjguNTUyMjktMC4wNTIxODktMzkuNDUzNTdsMTI1LjU4NjI3Ny0xMjUuODIzNjg0LTEyNS44MjU3My0xMjUuNTg4MzIzYy0xMC45MDAyNTgtMTAuODgxODM4LTEwLjkxODY3Ny0yOC41Mzg5ODctMC4wMzc4NjItMzkuNDQwMjY3IDAuMDA3MTYzLTAuMDA2MTQgMC4wMTMzMDMtMC4wMTMzMDMgMC4wMTk0NDMtMC4wMTk0NDMgMTAuODY3NTEyLTEwLjg2NzUxMiAyOC41MTEzNTctMTAuODc3NzQ1IDM5LjQwNjQ5OC0wLjAwMzA3bDEyNS44MjM2ODQgMTI1LjU4NjI3NyAxMjUuNTczOTk3LTEyNS44MjY3NTNjMC4wMDcxNjMtMC4wMDYxNCAwLjAxMzMwMy0wLjAxMzMwMyAwLjAxODQyLTAuMDE4NDIgMTAuODgyODYxLTEwLjg4Mjg2MSAyOC41MjU2ODQtMTAuODkzMDk0IDM5LjQzNTE1MS0wLjAwNTExNyAxMC45MDIzMDQgMTAuODgwODE1IDEwLjkxNjYzMSAyOC41Mzg5ODcgMC4wMzc4NjIgMzkuNDQwMjY3bC0xMjUuNTg3MyAxMjUuODI1NzMgMTI1LjgyNTczIDEyNS41ODYyNzdDNjg4LjE5MDgxNSA2NDguOTkxMDI0IDY4OC4yMDgyMTEgNjY2LjY1MDIxOSA2NzcuMzQxNzIyIDY3Ny41MzUxMjdMNjc3LjM0MTcyMiA2NzcuNTM1MTI3eiIgcC1pZD0iMjkxNSIgZmlsbD0iI2RmZGZkZiI+PC9wYXRoPjwvc3ZnPg==" alt="">
+              </span>
+            </div>
+            <div *ngIf="signUpForm.get('fname').invalid && signUpForm.get('fname').touched" class="input-error" translate>
+              Họ là bắt buộc
+            </div>
+          </div>
+        </div>
+        <div class="form-item">
+          <div class="input-group-base">
+            <div class="input-group{{ (signUpForm.get('lname').invalid && signUpForm.get('lname').touched) ? ' has-error' : ''}}">
+              <span class="input">
+                <input type="text" id="lname" name="lname" formControlName="lname"
+                [maxlength]="63" [placeholder]="'Nhập tên của bạn' | translate">
+              </span>
+              <span class="btn-icon" *ngIf="signUpForm.get('lname').value && signUpForm.get('lname').value.length !== 0" (click)="removeTextFromForm('lname')">
+                <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTYzNDIxMzE0OTA2IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjI5MTQiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMi4wMzk5MDkgMTIxLjEwMzE3MmMtMjE2LjE4Nzc2MSAwLTM5MS40NDIyNSAxNzUuMjU0NDg5LTM5MS40NDIyNSAzOTEuNDQ1MzIgMCAyMTYuMTg2NzM3IDE3NS4yNTQ0ODkgMzkxLjQ0MzI3MyAzOTEuNDQyMjUgMzkxLjQ0MzI3MyAyMTYuMTc1NDgxIDAgMzkxLjQyOTk3LTE3NS4yNTU1MTMgMzkxLjQyOTk3LTM5MS40NDMyNzNDOTAzLjQ2OTg3OSAyOTYuMzU4Njg1IDcyOC4yMTUzOSAxMjEuMTAzMTcyIDUxMi4wMzk5MDkgMTIxLjEwMzE3Mkw1MTIuMDM5OTA5IDEyMS4xMDMxNzJ6TTY3Ny4zNDE3MjIgNjc3LjUzNTEyN2MtMC4wMDYxNCAwLjAwNzE2My0wLjAxMjI4IDAuMDEzMzAzLTAuMDE5NDQzIDAuMDE5NDQzLTEwLjg4MTgzOCAxMC44ODE4MzgtMjguNTI0NjYgMTAuODkzMDk0LTM5LjQyMDgyNSAwLjAxNzM5Nkw1MTIuMDkxMDc0IDU1MS45ODc3MzYgMzg2LjUwNTgyMSA2NzcuODExNDJjLTAuMDA3MTYzIDAuMDA2MTQtMC4wMTMzMDMgMC4wMTQzMjYtMC4wMTk0NDMgMC4wMTg0Mi0xMC44ODI4NjEgMTAuODgyODYxLTI4LjUyNDY2IDEwLjg5NDExOC0zOS40MTk4MDEgMC4wMTk0NDMtMTAuOTE0NTg0LTEwLjg5NTE0MS0xMC45MzMwMDMtMjguNTUyMjktMC4wNTIxODktMzkuNDUzNTdsMTI1LjU4NjI3Ny0xMjUuODIzNjg0LTEyNS44MjU3My0xMjUuNTg4MzIzYy0xMC45MDAyNTgtMTAuODgxODM4LTEwLjkxODY3Ny0yOC41Mzg5ODctMC4wMzc4NjItMzkuNDQwMjY3IDAuMDA3MTYzLTAuMDA2MTQgMC4wMTMzMDMtMC4wMTMzMDMgMC4wMTk0NDMtMC4wMTk0NDMgMTAuODY3NTEyLTEwLjg2NzUxMiAyOC41MTEzNTctMTAuODc3NzQ1IDM5LjQwNjQ5OC0wLjAwMzA3bDEyNS44MjM2ODQgMTI1LjU4NjI3NyAxMjUuNTczOTk3LTEyNS44MjY3NTNjMC4wMDcxNjMtMC4wMDYxNCAwLjAxMzMwMy0wLjAxMzMwMyAwLjAxODQyLTAuMDE4NDIgMTAuODgyODYxLTEwLjg4Mjg2MSAyOC41MjU2ODQtMTAuODkzMDk0IDM5LjQzNTE1MS0wLjAwNTExNyAxMC45MDIzMDQgMTAuODgwODE1IDEwLjkxNjYzMSAyOC41Mzg5ODcgMC4wMzc4NjIgMzkuNDQwMjY3bC0xMjUuNTg3MyAxMjUuODI1NzMgMTI1LjgyNTczIDEyNS41ODYyNzdDNjg4LjE5MDgxNSA2NDguOTkxMDI0IDY4OC4yMDgyMTEgNjY2LjY1MDIxOSA2NzcuMzQxNzIyIDY3Ny41MzUxMjdMNjc3LjM0MTcyMiA2NzcuNTM1MTI3eiIgcC1pZD0iMjkxNSIgZmlsbD0iI2RmZGZkZiI+PC9wYXRoPjwvc3ZnPg==" alt="">
+              </span>
+            </div>
+            <div *ngIf="signUpForm.get('lname').invalid && signUpForm.get('lname').touched" class="input-error" translate>
+              Tên là bắt buộc
+            </div>
+          </div>
+        </div>
+        <div class="form-item">
+          <div class="input-group-base">
+            <div class="input-group{{ (signUpForm.get('username').invalid && signUpForm.get('username').touched) ? ' has-error' : '' }}">
+              <span class="input">
+                <input type="text" id="username" name="username" formControlName="username"
+                [maxlength]="126" [placeholder]="'Vui lòng nhập tên tài khoản của bạn' | translate">
+              </span>
+              <span class="btn-icon" *ngIf="signUpForm.get('username').value && signUpForm.get('username').value.length !== 0" (click)="removeTextFromForm('username')">
+                <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTYzNDIxMzE0OTA2IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjI5MTQiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMi4wMzk5MDkgMTIxLjEwMzE3MmMtMjE2LjE4Nzc2MSAwLTM5MS40NDIyNSAxNzUuMjU0NDg5LTM5MS40NDIyNSAzOTEuNDQ1MzIgMCAyMTYuMTg2NzM3IDE3NS4yNTQ0ODkgMzkxLjQ0MzI3MyAzOTEuNDQyMjUgMzkxLjQ0MzI3MyAyMTYuMTc1NDgxIDAgMzkxLjQyOTk3LTE3NS4yNTU1MTMgMzkxLjQyOTk3LTM5MS40NDMyNzNDOTAzLjQ2OTg3OSAyOTYuMzU4Njg1IDcyOC4yMTUzOSAxMjEuMTAzMTcyIDUxMi4wMzk5MDkgMTIxLjEwMzE3Mkw1MTIuMDM5OTA5IDEyMS4xMDMxNzJ6TTY3Ny4zNDE3MjIgNjc3LjUzNTEyN2MtMC4wMDYxNCAwLjAwNzE2My0wLjAxMjI4IDAuMDEzMzAzLTAuMDE5NDQzIDAuMDE5NDQzLTEwLjg4MTgzOCAxMC44ODE4MzgtMjguNTI0NjYgMTAuODkzMDk0LTM5LjQyMDgyNSAwLjAxNzM5Nkw1MTIuMDkxMDc0IDU1MS45ODc3MzYgMzg2LjUwNTgyMSA2NzcuODExNDJjLTAuMDA3MTYzIDAuMDA2MTQtMC4wMTMzMDMgMC4wMTQzMjYtMC4wMTk0NDMgMC4wMTg0Mi0xMC44ODI4NjEgMTAuODgyODYxLTI4LjUyNDY2IDEwLjg5NDExOC0zOS40MTk4MDEgMC4wMTk0NDMtMTAuOTE0NTg0LTEwLjg5NTE0MS0xMC45MzMwMDMtMjguNTUyMjktMC4wNTIxODktMzkuNDUzNTdsMTI1LjU4NjI3Ny0xMjUuODIzNjg0LTEyNS44MjU3My0xMjUuNTg4MzIzYy0xMC45MDAyNTgtMTAuODgxODM4LTEwLjkxODY3Ny0yOC41Mzg5ODctMC4wMzc4NjItMzkuNDQwMjY3IDAuMDA3MTYzLTAuMDA2MTQgMC4wMTMzMDMtMC4wMTMzMDMgMC4wMTk0NDMtMC4wMTk0NDMgMTAuODY3NTEyLTEwLjg2NzUxMiAyOC41MTEzNTctMTAuODc3NzQ1IDM5LjQwNjQ5OC0wLjAwMzA3bDEyNS44MjM2ODQgMTI1LjU4NjI3NyAxMjUuNTczOTk3LTEyNS44MjY3NTNjMC4wMDcxNjMtMC4wMDYxNCAwLjAxMzMwMy0wLjAxMzMwMyAwLjAxODQyLTAuMDE4NDIgMTAuODgyODYxLTEwLjg4Mjg2MSAyOC41MjU2ODQtMTAuODkzMDk0IDM5LjQzNTE1MS0wLjAwNTExNyAxMC45MDIzMDQgMTAuODgwODE1IDEwLjkxNjYzMSAyOC41Mzg5ODcgMC4wMzc4NjIgMzkuNDQwMjY3bC0xMjUuNTg3MyAxMjUuODI1NzMgMTI1LjgyNTczIDEyNS41ODYyNzdDNjg4LjE5MDgxNSA2NDguOTkxMDI0IDY4OC4yMDgyMTEgNjY2LjY1MDIxOSA2NzcuMzQxNzIyIDY3Ny41MzUxMjdMNjc3LjM0MTcyMiA2NzcuNTM1MTI3eiIgcC1pZD0iMjkxNSIgZmlsbD0iI2RmZGZkZiI+PC9wYXRoPjwvc3ZnPg==" alt="">
+              </span>
+            </div>
+            <div *ngIf="signUpForm.get('username').invalid && signUpForm.get('username').touched" class="input-error" translate>
+              Tên tài khoản là bắt buộc
+            </div>
+          </div>
+        </div>
+        <div class="form-item">
+          <div class="input-group-base">
+            <div class="input-group{{ (signUpForm.get('email').invalid && signUpForm.get('email').touched) ? ' has-error' : '' }}">
+              <span class="input">
+                <input type="text" id="email" name="email" formControlName="email"
+                [maxlength]="240" [placeholder]="'Vui lòng nhập địa chỉ email' | translate">
+              </span>
+              <span class="btn-icon" *ngIf="signUpForm.get('email').value && signUpForm.get('email').value.length !== 0" (click)="removeTextFromForm('email')">
+                <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTYzNDIxMzE0OTA2IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjI5MTQiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMi4wMzk5MDkgMTIxLjEwMzE3MmMtMjE2LjE4Nzc2MSAwLTM5MS40NDIyNSAxNzUuMjU0NDg5LTM5MS40NDIyNSAzOTEuNDQ1MzIgMCAyMTYuMTg2NzM3IDE3NS4yNTQ0ODkgMzkxLjQ0MzI3MyAzOTEuNDQyMjUgMzkxLjQ0MzI3MyAyMTYuMTc1NDgxIDAgMzkxLjQyOTk3LTE3NS4yNTU1MTMgMzkxLjQyOTk3LTM5MS40NDMyNzNDOTAzLjQ2OTg3OSAyOTYuMzU4Njg1IDcyOC4yMTUzOSAxMjEuMTAzMTcyIDUxMi4wMzk5MDkgMTIxLjEwMzE3Mkw1MTIuMDM5OTA5IDEyMS4xMDMxNzJ6TTY3Ny4zNDE3MjIgNjc3LjUzNTEyN2MtMC4wMDYxNCAwLjAwNzE2My0wLjAxMjI4IDAuMDEzMzAzLTAuMDE5NDQzIDAuMDE5NDQzLTEwLjg4MTgzOCAxMC44ODE4MzgtMjguNTI0NjYgMTAuODkzMDk0LTM5LjQyMDgyNSAwLjAxNzM5Nkw1MTIuMDkxMDc0IDU1MS45ODc3MzYgMzg2LjUwNTgyMSA2NzcuODExNDJjLTAuMDA3MTYzIDAuMDA2MTQtMC4wMTMzMDMgMC4wMTQzMjYtMC4wMTk0NDMgMC4wMTg0Mi0xMC44ODI4NjEgMTAuODgyODYxLTI4LjUyNDY2IDEwLjg5NDExOC0zOS40MTk4MDEgMC4wMTk0NDMtMTAuOTE0NTg0LTEwLjg5NTE0MS0xMC45MzMwMDMtMjguNTUyMjktMC4wNTIxODktMzkuNDUzNTdsMTI1LjU4NjI3Ny0xMjUuODIzNjg0LTEyNS44MjU3My0xMjUuNTg4MzIzYy0xMC45MDAyNTgtMTAuODgxODM4LTEwLjkxODY3Ny0yOC41Mzg5ODctMC4wMzc4NjItMzkuNDQwMjY3IDAuMDA3MTYzLTAuMDA2MTQgMC4wMTMzMDMtMC4wMTMzMDMgMC4wMTk0NDMtMC4wMTk0NDMgMTAuODY3NTEyLTEwLjg2NzUxMiAyOC41MTEzNTctMTAuODc3NzQ1IDM5LjQwNjQ5OC0wLjAwMzA3bDEyNS44MjM2ODQgMTI1LjU4NjI3NyAxMjUuNTczOTk3LTEyNS44MjY3NTNjMC4wMDcxNjMtMC4wMDYxNCAwLjAxMzMwMy0wLjAxMzMwMyAwLjAxODQyLTAuMDE4NDIgMTAuODgyODYxLTEwLjg4Mjg2MSAyOC41MjU2ODQtMTAuODkzMDk0IDM5LjQzNTE1MS0wLjAwNTExNyAxMC45MDIzMDQgMTAuODgwODE1IDEwLjkxNjYzMSAyOC41Mzg5ODcgMC4wMzc4NjIgMzkuNDQwMjY3bC0xMjUuNTg3MyAxMjUuODI1NzMgMTI1LjgyNTczIDEyNS41ODYyNzdDNjg4LjE5MDgxNSA2NDguOTkxMDI0IDY4OC4yMDgyMTEgNjY2LjY1MDIxOSA2NzcuMzQxNzIyIDY3Ny41MzUxMjdMNjc3LjM0MTcyMiA2NzcuNTM1MTI3eiIgcC1pZD0iMjkxNSIgZmlsbD0iI2RmZGZkZiI+PC9wYXRoPjwvc3ZnPg==" alt="">
+              </span>
+            </div>
+            <div *ngIf="signUpForm.get('email').invalid && signUpForm.get('email').touched" class="input-error" translate>
+              Vui lòng nhập địa chỉ email chính xác
+            </div>
+          </div>
+        </div>
+        <div class="form-item" formGroupName="passwordGroup">
+          <div class="input-group-base">
+            <div class="input-group">
+              <span class="input">
+                <input [type]="PasswordType" id="newPassword" name="newPassword" formControlName="newPassword"
+                [maxlength]="240" [placeholder]="'Vui lòng nhập mật khẩu' | translate">
+              </span>
+              <span class="btn-icon" *ngIf="signUpForm.get('passwordGroup.newPassword').value && signUpForm.get('passwordGroup.newPassword').value.length !== 0" (click)="removeTextFromForm('passwordGroup.newPassword')">
+                <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTYzNDIxMzE0OTA2IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjI5MTQiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMi4wMzk5MDkgMTIxLjEwMzE3MmMtMjE2LjE4Nzc2MSAwLTM5MS40NDIyNSAxNzUuMjU0NDg5LTM5MS40NDIyNSAzOTEuNDQ1MzIgMCAyMTYuMTg2NzM3IDE3NS4yNTQ0ODkgMzkxLjQ0MzI3MyAzOTEuNDQyMjUgMzkxLjQ0MzI3MyAyMTYuMTc1NDgxIDAgMzkxLjQyOTk3LTE3NS4yNTU1MTMgMzkxLjQyOTk3LTM5MS40NDMyNzNDOTAzLjQ2OTg3OSAyOTYuMzU4Njg1IDcyOC4yMTUzOSAxMjEuMTAzMTcyIDUxMi4wMzk5MDkgMTIxLjEwMzE3Mkw1MTIuMDM5OTA5IDEyMS4xMDMxNzJ6TTY3Ny4zNDE3MjIgNjc3LjUzNTEyN2MtMC4wMDYxNCAwLjAwNzE2My0wLjAxMjI4IDAuMDEzMzAzLTAuMDE5NDQzIDAuMDE5NDQzLTEwLjg4MTgzOCAxMC44ODE4MzgtMjguNTI0NjYgMTAuODkzMDk0LTM5LjQyMDgyNSAwLjAxNzM5Nkw1MTIuMDkxMDc0IDU1MS45ODc3MzYgMzg2LjUwNTgyMSA2NzcuODExNDJjLTAuMDA3MTYzIDAuMDA2MTQtMC4wMTMzMDMgMC4wMTQzMjYtMC4wMTk0NDMgMC4wMTg0Mi0xMC44ODI4NjEgMTAuODgyODYxLTI4LjUyNDY2IDEwLjg5NDExOC0zOS40MTk4MDEgMC4wMTk0NDMtMTAuOTE0NTg0LTEwLjg5NTE0MS0xMC45MzMwMDMtMjguNTUyMjktMC4wNTIxODktMzkuNDUzNTdsMTI1LjU4NjI3Ny0xMjUuODIzNjg0LTEyNS44MjU3My0xMjUuNTg4MzIzYy0xMC45MDAyNTgtMTAuODgxODM4LTEwLjkxODY3Ny0yOC41Mzg5ODctMC4wMzc4NjItMzkuNDQwMjY3IDAuMDA3MTYzLTAuMDA2MTQgMC4wMTMzMDMtMC4wMTMzMDMgMC4wMTk0NDMtMC4wMTk0NDMgMTAuODY3NTEyLTEwLjg2NzUxMiAyOC41MTEzNTctMTAuODc3NzQ1IDM5LjQwNjQ5OC0wLjAwMzA3bDEyNS44MjM2ODQgMTI1LjU4NjI3NyAxMjUuNTczOTk3LTEyNS44MjY3NTNjMC4wMDcxNjMtMC4wMDYxNCAwLjAxMzMwMy0wLjAxMzMwMyAwLjAxODQyLTAuMDE4NDIgMTAuODgyODYxLTEwLjg4Mjg2MSAyOC41MjU2ODQtMTAuODkzMDk0IDM5LjQzNTE1MS0wLjAwNTExNyAxMC45MDIzMDQgMTAuODgwODE1IDEwLjkxNjYzMSAyOC41Mzg5ODcgMC4wMzc4NjIgMzkuNDQwMjY3bC0xMjUuNTg3MyAxMjUuODI1NzMgMTI1LjgyNTczIDEyNS41ODYyNzdDNjg4LjE5MDgxNSA2NDguOTkxMDI0IDY4OC4yMDgyMTEgNjY2LjY1MDIxOSA2NzcuMzQxNzIyIDY3Ny41MzUxMjdMNjc3LjM0MTcyMiA2NzcuNTM1MTI3eiIgcC1pZD0iMjkxNSIgZmlsbD0iI2RmZGZkZiI+PC9wYXRoPjwvc3ZnPg==" alt="">
+              </span>
+              <span class="eye" (click)="onUserClickShowPass('password')">
+                <img
+                    [src]="
+                      PasswordType === 'password' ? 'https://static.maxmines.com/self/lesongvi/viminershop/icon/eye.svg'
+                      : 'https://static.maxmines.com/self/lesongvi/viminershop/icon/eye-non-slash.svg'
+                    "
+                    alt=""
+                />
+              </span>
+            </div>
+            <ng-container
+              *ngIf="signUpForm.get('passwordGroup.newPassword').invalid && signUpForm.get('passwordGroup.newPassword').touched">
+              <div *ngIf="signUpForm.get('passwordGroup.newPassword').errors['required']" class="input-error" translate>
+                Mật khẩu là bắt buộc!
+              </div>
+              <div *ngIf="signUpForm.get('passwordGroup.newPassword').errors['minlength']" class="input-error" translate>
+                Độ dài mật khẩu không hợp lệ
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="form-item" formGroupName="passwordGroup">
+          <div class="input-group-base">
+            <div class="input-group{{ (signUpForm.get('passwordGroup').invalid && signUpForm.get('passwordGroup').touched) || (signUpForm.get('passwordGroup.newPasswordConfirm').invalid && signUpForm.get('passwordGroup.newPasswordConfirm').touched) ? ' has-error' : ''}}">
+              <span class="input">
+                <input [type]="nPasswordType" id="newPasswordConfirm" name="newPasswordConfirm" formControlName="newPasswordConfirm"
+                [maxlength]="240" [placeholder]="'Vui lòng nhập lại mật khẩu' | translate">
+              </span>
+              <span class="btn-icon" *ngIf="signUpForm.get('passwordGroup.newPasswordConfirm').value && signUpForm.get('passwordGroup.newPasswordConfirm').value.length !== 0" (click)="removeTextFromForm('passwordGroup.newPasswordConfirm')">
+                <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTYzNDIxMzE0OTA2IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjI5MTQiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMi4wMzk5MDkgMTIxLjEwMzE3MmMtMjE2LjE4Nzc2MSAwLTM5MS40NDIyNSAxNzUuMjU0NDg5LTM5MS40NDIyNSAzOTEuNDQ1MzIgMCAyMTYuMTg2NzM3IDE3NS4yNTQ0ODkgMzkxLjQ0MzI3MyAzOTEuNDQyMjUgMzkxLjQ0MzI3MyAyMTYuMTc1NDgxIDAgMzkxLjQyOTk3LTE3NS4yNTU1MTMgMzkxLjQyOTk3LTM5MS40NDMyNzNDOTAzLjQ2OTg3OSAyOTYuMzU4Njg1IDcyOC4yMTUzOSAxMjEuMTAzMTcyIDUxMi4wMzk5MDkgMTIxLjEwMzE3Mkw1MTIuMDM5OTA5IDEyMS4xMDMxNzJ6TTY3Ny4zNDE3MjIgNjc3LjUzNTEyN2MtMC4wMDYxNCAwLjAwNzE2My0wLjAxMjI4IDAuMDEzMzAzLTAuMDE5NDQzIDAuMDE5NDQzLTEwLjg4MTgzOCAxMC44ODE4MzgtMjguNTI0NjYgMTAuODkzMDk0LTM5LjQyMDgyNSAwLjAxNzM5Nkw1MTIuMDkxMDc0IDU1MS45ODc3MzYgMzg2LjUwNTgyMSA2NzcuODExNDJjLTAuMDA3MTYzIDAuMDA2MTQtMC4wMTMzMDMgMC4wMTQzMjYtMC4wMTk0NDMgMC4wMTg0Mi0xMC44ODI4NjEgMTAuODgyODYxLTI4LjUyNDY2IDEwLjg5NDExOC0zOS40MTk4MDEgMC4wMTk0NDMtMTAuOTE0NTg0LTEwLjg5NTE0MS0xMC45MzMwMDMtMjguNTUyMjktMC4wNTIxODktMzkuNDUzNTdsMTI1LjU4NjI3Ny0xMjUuODIzNjg0LTEyNS44MjU3My0xMjUuNTg4MzIzYy0xMC45MDAyNTgtMTAuODgxODM4LTEwLjkxODY3Ny0yOC41Mzg5ODctMC4wMzc4NjItMzkuNDQwMjY3IDAuMDA3MTYzLTAuMDA2MTQgMC4wMTMzMDMtMC4wMTMzMDMgMC4wMTk0NDMtMC4wMTk0NDMgMTAuODY3NTEyLTEwLjg2NzUxMiAyOC41MTEzNTctMTAuODc3NzQ1IDM5LjQwNjQ5OC0wLjAwMzA3bDEyNS44MjM2ODQgMTI1LjU4NjI3NyAxMjUuNTczOTk3LTEyNS44MjY3NTNjMC4wMDcxNjMtMC4wMDYxNCAwLjAxMzMwMy0wLjAxMzMwMyAwLjAxODQyLTAuMDE4NDIgMTAuODgyODYxLTEwLjg4Mjg2MSAyOC41MjU2ODQtMTAuODkzMDk0IDM5LjQzNTE1MS0wLjAwNTExNyAxMC45MDIzMDQgMTAuODgwODE1IDEwLjkxNjYzMSAyOC41Mzg5ODcgMC4wMzc4NjIgMzkuNDQwMjY3bC0xMjUuNTg3MyAxMjUuODI1NzMgMTI1LjgyNTczIDEyNS41ODYyNzdDNjg4LjE5MDgxNSA2NDguOTkxMDI0IDY4OC4yMDgyMTEgNjY2LjY1MDIxOSA2NzcuMzQxNzIyIDY3Ny41MzUxMjdMNjc3LjM0MTcyMiA2NzcuNTM1MTI3eiIgcC1pZD0iMjkxNSIgZmlsbD0iI2RmZGZkZiI+PC9wYXRoPjwvc3ZnPg==" alt="">
+              </span>
+              <span class="eye" (click)="onUserClickShowPass('npassword')">
+                <img
+                    [src]="
+                      nPasswordType === 'password' ? 'https://static.maxmines.com/self/lesongvi/viminershop/icon/eye.svg'
+                      : 'https://static.maxmines.com/self/lesongvi/viminershop/icon/eye-non-slash.svg'
+                    "
+                    alt=""
+                />
+              </span>
+            </div>
+            <ng-container
+              *ngIf="signUpForm.get('passwordGroup.newPasswordConfirm').invalid && signUpForm.get('passwordGroup.newPasswordConfirm').touched">
+              <div *ngIf="signUpForm.get('passwordGroup.newPasswordConfirm').errors['required']"
+                class="input-error" translate>Nhập lại mật khẩu là bắt buộc!</div>
+            </ng-container>
+            <ng-container *ngIf="signUpForm.get('passwordGroup').invalid && signUpForm.get('passwordGroup').touched">
+              <div *ngIf="signUpForm.get('passwordGroup').errors !== null && signUpForm.get('passwordGroup').errors['noMatch']"
+                class="input-error" translate>Mật khẩu của bạn phải trùng khớp!</div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="captcha-item">
+          <div #captcha></div>
+        </div>
+        <div class="form-item">
+          <button class="button primary large block fill{{ (signUpForm.invalid || signUpForm.pending || (authState | async).loading) ? ' loading' : ''}}" type="submit"
+          [disabled]="signUpForm.invalid || signUpForm.pending || (authState | async).loading || !isCaptchaSolved"><img
+          class="icon"
+          src="data:image/png;base64,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"
+          alt=""
+          draggable="false"
+          *ngIf="signUpForm.pending || (authState | async).loading"
+      />{{ 'Đăng ký' | translate }}</button>
+        </div>
+      </form>
+      <div class="box-bottom" translate>
+        Đã có tài khoản? <a routerLink="/login" translate>&nbsp;Đăng nhập </a></div>
+    </div>
+  </div>
+

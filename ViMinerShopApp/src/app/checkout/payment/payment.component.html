@@ -1,0 +1,91 @@
+<div class="content" style="min-height: 380px;">
+  <div class="order-confirm">
+    <div class="steps">
+      <div>
+          <span>
+              <em class="step-done"><i class="vms-iv-icon vms-iv-icon-checkmark"></i></em>
+          </span>
+          <p translate>Giỏ hàng</p>
+      </div>
+      <div>
+          <span>
+              <em class="step-done"><i class="vms-iv-icon vms-iv-icon-checkmark"></i></em>
+          </span>
+          <p translate>Thông tin order</p>
+      </div>
+      <div>
+          <span>
+              <em class="step-done"><i class="vms-iv-icon vms-iv-icon-checkmark"></i></em>
+          </span>
+          <p translate>Thanh toán</p>
+      </div>
+      <div>
+          <span>
+              <em class=""><i>4</i></em>
+          </span>
+          <p translate>Hoàn thành</p>
+      </div>
+    </div>
+    <div class="content" *ngIf="orderData && orderData.paymentDetail.status === 0">
+      <div class="user-addr item">
+        <div class="shopping-method item">
+          <div class="title" translate>
+              Phương thức thanh toán
+          </div>
+          <div class="content" *ngIf="providerList">
+            <span class="item{{ paymentMethodSelected === paymentMethod.id ? ' active' : '' }}" *ngFor="let paymentMethod of providerList" (click)="onUserSelectPaymentMethod(paymentMethod.id)">
+              {{ paymentMethod.name }}
+            </span>
+          </div>
+        </div>
+        <div class="coupons item">
+          <div class="title">
+              <span translate>Hướng dẫn thanh toán đơn hàng số {{ orderData.id }}</span>
+          </div>
+          <div style="padding: 20px;" *ngIf="paymentDesc !== null && !isMaxMinesAuthenticate && !paypalPayment" [innerHTML]="elementRepair(paymentDesc, orderData.id)">
+          </div>
+          <div style="padding: 20px;" *ngIf="isMaxMinesAuthenticate" translate>
+            Đăng nhập tài khoản MaxMines của bạn và chấp nhận chuyển hashes cho Vĩ Miner Shop!
+            <div class="submit">
+              <button type="button" class="button vms-iv-btn" (click)="onMaxMinesPaymentClick()">
+                  <span translate>Thanh toán qua MaxMines Payment (BETA)</span>
+              </button>
+            </div>
+          </div>
+          <div style="padding: 20px;" *ngIf="paypalPayment">
+            <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="foot" *ngIf="orderData">
+      <table>
+          <tr>
+              <td translate>Tiền hàng:</td>
+              <td>{{ orderData.subTotal * currencyRate | currency: currency }}</td>
+          </tr>
+          <tr>
+              <td translate>Phí vận chuyển:</td>
+              <td>{{ orderData.shippingAmount * currencyRate | currency: currency }}</td>
+          </tr>
+          <tr>
+              <td translate>Coupon:</td>
+              <td>-{{ orderData.couponAmount * currencyRate | currency: currency }}</td>
+          </tr>
+          <tr>
+              <td translate>Discount:</td>
+              <td>-{{ orderData.discountAmount * currencyRate | currency: currency }}</td>
+          </tr>
+          <tr>
+              <td translate>Tổng tiền:</td>
+              <td class="text-strong text-nm">{{ orderData.total * currencyRate | currency: currency }}</td>
+          </tr>
+      </table>
+      <div class="clear-float"></div>
+      <div class="submit">
+          <button type="button" class="button vms-iv-btn{{ isLoading ? ' disabled' : '' }}" [disabled]="isLoading" (click)="onPaymentSubmit()">
+              <span translate>Tiếp theo</span>
+          </button>
+      </div>
+    </div>
+  </div>

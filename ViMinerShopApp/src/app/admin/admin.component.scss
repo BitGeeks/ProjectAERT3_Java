@@ -1,0 +1,123 @@
+#container {
+    margin: 68px auto 90px;
+    min-height: 990px;
+}
+#container-inside {
+    max-width: 1230px;
+    margin: 0 auto;
+    background-color: #f1f1f1;
+}
+.container-fluid {
+    padding: 0;
+    margin: 0;
+}
+.member-container {
+    margin: 47px 0 100px;
+}
+.row {
+    margin: 0;
+    padding: 0;
+}
+.member-sidebar {
+    box-shadow: 0 1px 4px 0 rgb(35 35 35 / 16%);
+}
+@media (min-width: 1200px) {
+    .col-lg-3 {
+        width: 25%;
+    }
+    .col-lg-1,
+    .col-lg-10,
+    .col-lg-11,
+    .col-lg-12,
+    .col-lg-2,
+    .col-lg-3,
+    .col-lg-4,
+    .col-lg-5,
+    .col-lg-6,
+    .col-lg-7,
+    .col-lg-8,
+    .col-lg-9 {
+        float: left;
+    }
+}
+.member-sidebar-navigation {
+    background-color: #fff;
+    border-radius: 5px;
+}
+main,
+nav {
+    display: block;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+ul {
+    list-style: none;
+    margin-bottom: 0;
+    padding: 0;
+}
+ul {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.relative {
+    position: relative;
+}
+.member-sidebar-list-item-link.active {
+    border-left: solid 4px #E00;
+    color: #000;
+    font-weight: 500;
+    background: rgba(241, 241, 241, 0.3);
+}
+a.active,
+a:active,
+a:focus,
+a:hover {
+    color: #971e1e;
+    text-decoration: none;
+    outline: 0;
+}
+.member-sidebar-list-item-link {
+    padding: 20px 25px;
+    border-left: solid 4px #fff;
+    display: block;
+    color: #000;
+    transition: all 0.2s ease;
+}
+.member-sidebar-list-item-link span {
+    color: #bdc0c7;
+    margin-right: 20px;
+    font-size: 16px;
+}
+.glyphicon {
+    font-family: serif;
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 4px;
+}
+.glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: "Glyphicons Halflings";
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.member-sidebar-list-item-link.active span:before {
+    color: #E00;
+}
+.glyphicon-user-info:before {
+    content: "\e93f";
+    color: #d8d8d8;
+}

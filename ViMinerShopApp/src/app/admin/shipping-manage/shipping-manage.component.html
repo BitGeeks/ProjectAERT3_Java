@@ -1,0 +1,51 @@
+<div class="vms_apc-main col-lg-8 col-md-8 col-sm-8 clo-xs-12">
+    <h4 class="vms_apc-main-header">
+        <span>Quản lý đơn vị vận chuyển</span>
+    </h4>
+
+    <div class="vms_apc-main-tabs viminer-tabs">
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/shipping/manage" routerLinkActive="active">Quản lý đơn vị vận chuyển</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/shipping/add" routerLinkActive="active">Thêm đơn vị vận chuyển</a>
+    </div>
+
+    <div class="vms-admin-container">
+        <div class="shipping-method-table" style="overflow-x: auto;">
+            <table border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th>Đơn vị</th>
+                        <th>Tên ngắn</th>
+                        <th>Sửa chữa</th>
+                        <th>Đặt hàng</th>
+                        <th>Freeship</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let method of shippingMethods">
+                        <td>{{ method.name }}</td>
+                        <td>{{ method.shortName }}</td>
+                        <td>{{ method.repairFlag === '1' ? 'Có' : 'Không' }}</td>
+                        <td>{{ method.salesFlag === '1' ? 'Có' : 'Không' }}</td>
+                        <td>{{ method.supportFreeShip === '1' ? 'Có' : 'Không' }}</td>
+                        <td>
+                            <a href="javascript:" (click)="editShippingManage(method)">Chỉnh sửa</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="page" *ngIf="shippingMethods && shippingMethods.length !== 0">
+      <ul class="vms-iv-page">
+          <li title="Trang Trước" class="vms-iv-page-prev{{ disablePrevPageBtn ? ' vms-iv-page-disabled' : '' }}" (click)="userClickPreviousPage()">
+              <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-left"></i></a>
+          </li>
+          <li title="{{ page + 1 }}" class="vms-iv-page-item vms-iv-page-item-active"><a>{{ page + 1 }}</a></li>
+          <li title="Trang Tiếp Theo" class="vms-iv-page-next{{ disableNextPageBtn ? ' vms-iv-page-disabled' : '' }}" (click)="userClickNextPage()">
+              <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-right"></i></a>
+          </li>
+      </ul>
+    </div>
+</div>

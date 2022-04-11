@@ -1,0 +1,81 @@
+<div class="vms_apc-main col-lg-8 col-md-8 col-sm-8 clo-xs-12">
+    <h4 class="vms_apc-main-header">
+        <span>Quản lý kho hàng</span>
+    </h4>
+
+    <div class="vms_apc-main-tabs viminer-tabs">
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/inventories/manage" routerLinkActive="active">Quản lý kho hàng</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/inventories/add" routerLinkActive="active">Thêm kho hàng</a>
+    </div>
+
+    <div class="main-content">
+        <div class="form-box">
+            <form [formGroup]="addInventoryForm" (ngSubmit)="FormSubmittedEv()">
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Số lượng
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Số lượng" type="number" class="vms-input" value="" formControlName="quantity" />
+                            <div class="input-error" *ngIf="addInventoryForm.get('quantity').invalid && addInventoryForm.get('quantity').touched">Số lượng là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Cờ sản phẩm
+                    </div>
+                    <div class="item-value">
+                        <select class="vms-select-selection vms-select-selection--single" formControlName="flag">
+                            <option value="NULL">Không</option>
+                            <option value="FLAG_SPOT_ORDER">Giao ngay</option>
+                            <option value="FLAG_FEATURE_ORDER">Đặt trước</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> H/s
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Hashrate trên giây" type="number" class="vms-input" value="" formControlName="hps" />
+                            <div class="input-error" *ngIf="addInventoryForm.get('hps').invalid && addInventoryForm.get('hps').touched">Hashrate là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Trọng lượng máy
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Trọng lượng máy" type="number" class="vms-input" value="" formControlName="weight" />
+                            <div class="input-error" *ngIf="addInventoryForm.get('weight').invalid && addInventoryForm.get('weight').touched">Trọng lượng là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Thông tin ship
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Thông tin ship" type="text" class="vms-input" value="" formControlName="shippingInfo" />
+                            <div class="input-error" *ngIf="addInventoryForm.get('shippingInfo').invalid && addInventoryForm.get('shippingInfo').touched">Thông tin ship là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label"></div>
+                    <div class="item-value">
+                        <button type="button" class="vms-btn vms-btn-primary" (click)="FormSubmittedEv()">
+                            <span>Thêm kho hàng</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,115 @@
+.panel {
+    -ms-flex: 1;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 0 0 1px #ccc;
+    flex: 1;
+    margin-left: 15px;
+    padding: 25px 30px;
+}
+.panel .serial {
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+    border-bottom: 1px solid #ebebeb;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 45px 0 25px;
+}
+.panel .serial h3 {
+    -ms-flex: 1;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 40px;
+}
+.panel .serial .actions .bt-button {
+    min-width: 120px;
+}
+.panel .basis {
+    margin-bottom: 30px;
+}
+.panel .basis .text-sm {
+    color: #757575;
+}
+.panel .box {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+.panel .box .header {
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+    border-bottom: 1px solid #e8e8e8;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 16px;
+    line-height: 1;
+    margin-bottom: 20px;
+    padding: 20px 0;
+}
+.panel .box .header .title {
+    -ms-flex: 1;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    font-weight: 500;
+}
+.panel .box .content {
+    color: #999;
+}
+.panel .products {
+    margin: 10px 0;
+}
+.panel .products .product {
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+    color: #000;
+    cursor: pointer;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding-bottom: 8px;
+}
+.panel .products .product .tag {
+    padding-right: 30px;
+    position: relative;
+}
+.panel .products .product .text {
+    -ms-flex: 1;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    align-items: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex: 1;
+}
+.panel .products .product .bt-icon {
+    -webkit-transition: -webkit-transform 0.3s;
+    transition: -webkit-transform 0.3s;
+    transition: transform 0.3s;
+    transition: transform 0.3s, -webkit-transform 0.3s;
+}
+.panel .total-items {
+    float: right;
+    margin-right: 30px;
+}

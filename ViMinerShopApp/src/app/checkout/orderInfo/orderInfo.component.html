@@ -1,0 +1,41 @@
+<div class="content" style="min-height: 380px;">
+  <div class="order-confirm">
+    <div class="steps">
+      <div>
+          <span>
+              <em class="step-done"><i class="vms-iv-icon vms-iv-icon-checkmark"></i></em>
+          </span>
+          <p translate>Giỏ hàng</p>
+      </div>
+      <div>
+          <span>
+              <em class="step-done"><i class="vms-iv-icon vms-iv-icon-checkmark"></i></em>
+          </span>
+          <p translate>Thông tin order</p>
+      </div>
+      <div>
+          <span>
+              <em class="step-done"><i class="vms-iv-icon vms-iv-icon-checkmark"></i></em>
+          </span>
+          <p translate>Thanh toán</p>
+      </div>
+      <div>
+          <span>
+              <em class="step-done"><i class="vms-iv-icon vms-iv-icon-checkmark"></i></em>
+          </span>
+          <p translate>Hoàn thành</p>
+      </div>
+    </div>
+    <div class="content" *ngIf="orderData">
+      <div class="user-addr item">
+        <div class="coupons item">
+          <div class="title">
+              <span translate>Order máy đào thành công tại Vĩ Miner Shop {{ '\<3 \<3' }}</span>
+          </div>
+          <div style="padding: 20px;">
+            {{ 'Bạn đã order thành công đơn hàng số' | translate }} {{ orderData.id }} ({{ orderLine }}), {{ 'vui lòng xem chi tiết trong quản lý tài khoản.' | translate }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

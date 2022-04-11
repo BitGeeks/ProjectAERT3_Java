@@ -1,0 +1,65 @@
+<div class="vms-dialog-1" *ngIf="initialState">
+    <div class="v-modal" style="z-index: 2000;"></div>
+    <div class="vms-element-dialog__wrapper" style="z-index: 2001;">
+        <div class="vms-element-dialog vms-element-dialog--small" style="top: 15%;">
+            <div class="vms-element-dialog__header">
+                <span class="vms-element-dialog__title">Sửa Danh Mục</span><button type="button" aria-label="Close" class="vms-element-dialog__headerbtn" (click)="onUserClickClose()"><i class="vms-element-dialog__close vms-element-icon vms-element-icon-close"></i></button>
+            </div>
+            <div class="vms-element-dialog__body" *ngIf="initialState">
+                <form class="vms-element-form addrAdd-en" [formGroup]="editCategory" (ngSubmit)="onEditSubmitted()">
+                    <input type="hidden" formControlName="id" value="{{ initialState.id }}" />
+                    <div class="vms-element-form-item{{editCategory.get('name').invalid && editCategory.get('name').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="name" class="vms-element-form-item__label" style="width: 120px;">Tên danh mục:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <input autocomplete="off" type="text" class="vms-element-input__inner" formControlName="name" value="{{ initialState.name }}" />
+                            </div>
+                            <p class="err-info" style="display: none;"></p>
+                            <ng-container *ngIf="editCategory.get('name').invalid && editCategory.get('name').touched">
+                                <div class="vms-element-form-item__error" *ngIf="editCategory.get('name').errors['required']">Tên danh mục không được để trống</div>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item" style="position: relative;">
+                        <label for="desc" class="vms-element-form-item__label" style="width: 120px;">Mô tả danh mục:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <textarea rows="5" class="vms-element-textarea__inner" formControlName="desc" value="{{ initialState.desc }}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item" style="position: relative;">
+                        <label for="image" class="vms-element-form-item__label" style="width: 120px;">Hình ảnh danh mục:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <input autocomplete="off" type="text" class="vms-element-input__inner" formControlName="image" value="{{ initialState.image }}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item{{editCategory.get('slug').invalid && editCategory.get('slug').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="slug" class="vms-element-form-item__label" style="width: 120px;">Liên kết danh mục:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <input autocomplete="off" type="text" class="vms-element-input__inner" formControlName="slug" value="{{ initialState.slug }}" />
+                            </div>
+                            <p class="err-info" style="display: none;"></p>
+                            <ng-container *ngIf="editCategory.get('slug').invalid && editCategory.get('slug').touched">
+                                <div class="vms-element-form-item__error" *ngIf="editCategory.get('slug').errors['required']">Liên kết danh mục không được để trống</div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="vms-element-dialog__footer">
+                <div class="dialog-footer">
+                    <button type="button" class="vms-element-button vms-element-button--default" (click)="onUserClickClose()">
+                        <span>Hủy bỏ</span>
+                    </button>
+                    <button type="button" class="vms-element-button vms-element-button--primary" (click)="onEditSubmitted()">
+                        <span>Lưu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

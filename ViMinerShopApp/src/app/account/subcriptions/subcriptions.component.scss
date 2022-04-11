@@ -1,0 +1,71 @@
+.subscription {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  min-height: 650px;
+}
+.mailct {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-top: 50px;
+  padding: 20px 0;
+  border-top: 1px solid #dbdfe3;
+  border-bottom: 1px solid #dbdfe3;
+}
+.mailct div.img_des {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+.mailct div.img_des img {
+  margin-top: 4px;
+}
+.mailct div.img_des div.desCluster {
+  margin-left: 9px;
+}
+.mailct div.img_des div.desCluster p.title {
+  color: #262626;
+  font-size: 14px;
+}
+.mailct div.img_des div.desCluster p.subTitle {
+  color: #b4b4b4;
+  font-size: 12px;
+}
+.mailct div.imgCluster img:hover {
+  cursor: pointer;
+}
+h2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: 400;
+  line-height: 1;
+}
+h2 .title {
+  -ms-flex: 1;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  font-size: 20px;
+  font-weight: 700;
+}
+.vms_apc-main-header {
+  border-bottom: 1px solid #ddd;
+  padding: 15px 30px;
+}

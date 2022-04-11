@@ -1,0 +1,73 @@
+<div class="panel">
+    <h2 translate>Thông Tin Chi Tiết Phiếu Sửa</h2>
+    <section *ngIf="ticketData">
+        <div class="serial">
+            <h3 translate>Mã Phiếu: {{ ticketData.id }}</h3>
+            <div class="actions">
+                <button class="bt-button bt-default{{ ticketData.status === 0 ? '' : ' disabled' }}" [disabled]="ticketData.status !== 0" (click)="onUserClickDelete()">
+                    <span translate>Xóa</span>
+                </button>
+                <button class="bt-button bt-primary{{ ticketData.status === 0 ? '' : ' disabled' }}" [disabled]="ticketData.status !== 0" (click)="onUserClickEdit()">
+                    <span translate>Chỉnh Sửa</span>
+                </button>
+            </div>
+        </div>
+        <div class="basis">
+            <div class="bt-space text-strong text-driving" style="margin: 15px 0px;">{{ renderStatus(ticketData.status) }}</div>
+            <p class="text-sm" translate>Thời gian: {{ ticketData.created_at | date: "dd/MM/yyyy HH:ss" }}</p>
+            <p class="text-sm" translate>Loại: Phiếu Sửa Chữa</p>
+        </div>
+        <div class="box">
+            <div class="header"><h4 class="title" translate>Thông Tin Hàng</h4></div>
+            <div class="content clearfix">
+                <div class="products text-sm">
+                    <div class="product" *ngFor="let product of ticketData.repairItems">
+                        <div class="tag text-primary">{{ product.product.productCategory.name }}</div>
+                        <div class="text">
+                            <span [title]="product.product.name" class="">{{ product.product.name }}</span>
+                        </div>
+                        <div class="bt-space" style="margin: 0px 15px;">x {{ product.quantity }}</div>
+                        <!--<i class="bt-icon text-gray"></i>-->
+                    </div>
+                </div>
+                <div class="total-items"><span class="label" translate>Tổng Sản Phẩm: </span> <span class="value text-strong">{{ ticketData.repairItems.length }}</span></div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="header"><h4 class="title" translate>Thông Tin Đại Lý Sửa Chữa</h4></div>
+            <div class="content">
+                <div class="text">
+                    <div>
+                        <p *ngIf="repairSiteName" translate>Đại lý : {{ repairSiteName }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="header"><h4 class="title" translate>Thông tin vận chuyển của các mặt hàng bị lỗi</h4></div>
+            <div class="content">
+                <div class="text">
+                    <div class="text-justify"><span class="label" translate>Đơn vị vận chuyển</span>: <span class="value" *ngIf="shippingMethods">{{ shippingUnitName }}</span></div>
+                    <div class="text-justify"><span class="label" translate>Mã theo dõi</span>: <span class="value">{{ ticketData.trackingNo }}</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="header"><h4 class="title" translate>Thông Tin Khách Hàng</h4></div>
+            <div class="content">
+                <div class="text">
+                    <div class="text-justify"><span class="label" translate>Địa chỉ</span>: <span class="value">{{ ticketData.customerAddress }}</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="header"><h4 class="title" translate>Đơn Vị Trả Hàng</h4></div>
+            <div class="content">
+                <div class="text">
+                    <div class="text-justify"><span class="label" translate>Đơn vị vận chuyển:</span> <span class="value" *ngIf="returnShippingUnitName">{{ returnShippingUnitName }}</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="repair-attention"></div>
+    </section>
+</div>

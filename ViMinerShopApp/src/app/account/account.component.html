@@ -1,0 +1,70 @@
+<div class="home">
+  <div style="min-height: 364px;">
+    <div class="panel">
+      <div class="userBar">
+        <p class="title" translate>Đơn hàng</p>
+        <p>
+          <a routerLink="/account/orders" routerLinkActive="router-link-exact-active router-link-active"> <i class="fa fa-archive" aria-hidden="true"></i>
+            <p translate>Đơn đã đặt</p>
+          </a>
+        </p>
+        <p class="title" translate>Coupon</p>
+        <p>
+          <a routerLink="/account/couponList" routerLinkActive="router-link-exact-active router-link-active"> <i class="fa fa-archive" aria-hidden="true"></i>
+            <p translate>Danh sách coupon</p>
+          </a>
+        </p>
+        <p>
+          <a routerLink="/account/couponDonate" routerLinkActive="router-link-exact-active router-link-active"> <i class="fa fa-archive" aria-hidden="true"></i>
+            <p translate>Danh sách giao dịch</p>
+          </a>
+        </p>
+        <p class="title" translate>Dịch vụ sau</p>
+        <p>
+          <a routerLink="/account/repair/tickets" routerLinkActive="router-link-exact-active router-link-active"> <i class="fa fa-archive" aria-hidden="true"></i>
+            <p translate>Phiếu sửa chữa</p>
+          </a>
+        </p>
+        <p>
+          <a routerLink="/account/repair/orders" routerLinkActive="router-link-exact-active router-link-active"> <i class="fa fa-archive" aria-hidden="true"></i>
+            <p translate>Đơn sửa chữa</p>
+          </a>
+        </p>
+        <p class="title" translate>Cài đặt</p>
+        <p>
+          <a routerLink="/account/info" routerLinkActive="router-link-exact-active router-link-active">
+            <p translate>Tài khoản</p>
+          </a>
+        </p>
+        <p>
+          <a routerLink="/account/address" routerLinkActive="router-link-exact-active router-link-active"><i class="fa fa-home" aria-hidden="true"></i>
+            <p translate>Địa chỉ</p>
+          </a>
+        </p>
+        <p>
+          <a routerLink="/account/subscription" routerLinkActive="router-link-exact-active router-link-active"> <i class="fa fa-question-circle-o"
+              aria-hidden="true"></i>
+            <p translate>Theo dõi</p>
+          </a>
+        </p>
+        <p class="title" translate>Khác</p>
+        <p>
+          <a routerLink="/account/records" routerLinkActive="router-link-exact-active router-link-active">
+            <p translate>Hoạt động</p>
+          </a>
+        </p>
+        <p>
+          <a routerLink="/account/referrals" routerLinkActive="router-link-exact-active router-link-active"> <i class="fa fa-question-circle-o"
+              aria-hidden="true"></i>
+            <p translate>Giới thiệu</p>
+          </a>
+        </p>
+      </div>
+      <div class="main">
+        <div class="panvms-element-inside big-shadow">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

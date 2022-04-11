@@ -1,0 +1,42 @@
+<div class="activity-record-box">
+    <div class="title"><div class="text" translate>Nhật ký hoạt động</div></div>
+
+    <div class="geer-loading" *ngIf="innerLoading">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <div class="record-table" style="overflow-x: auto;" *ngIf="!innerLoading">
+        <table border="0" cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+                    <th translate>Hoạt động</th>
+                    <th translate>IP</th>
+                    <th translate>Cấp độ ưu tiên</th>
+                    <th translate>Thời gian</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let record of recordData;let i = index">
+                    <td>{{ record.activityName }}</td>
+                    <td>{{ record.ip }}</td>
+                    <td>{{ record.loglevel }}</td>
+                    <td>{{ record.created_at | date: "dd/MM/yyyy HH:ss" }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="page" *ngIf="recordData && recordData.length !== 0">
+      <ul class="vms-iv-page">
+          <li title="Trang Trước" class="vms-iv-page-prev{{ disablePrevPageBtn ? ' vms-iv-page-disabled' : '' }}" [disabled]="disablePrevPageBtn" (click)="userClickPreviousPage()">
+              <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-left"></i></a>
+          </li>
+          <li title="{{ page + 1 }}" class="vms-iv-page-item vms-iv-page-item-active"><a>{{ page + 1 }}</a></li>
+          <li title="Trang Tiếp Theo" class="vms-iv-page-next{{ disableNextPageBtn ? ' vms-iv-page-disabled' : '' }}" [disabled]="disableNextPageBtn" (click)="userClickNextPage()">
+              <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-right"></i></a>
+          </li>
+      </ul>
+    </div>
+</div>

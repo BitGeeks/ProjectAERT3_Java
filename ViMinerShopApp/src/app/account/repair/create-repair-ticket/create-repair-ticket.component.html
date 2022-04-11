@@ -1,0 +1,276 @@
+<div class="create">
+    <div class="create1">
+        <section class="panel">
+            <h2><span class="title" translate>Tạo phiếu sửa chữa</span> <a target="_blank" href="https://blog.error.vn" class="text-primary text-sm" translate>Hướng dẫn sử dụng</a></h2>
+            <div class="box">
+                <div class="header"><h4 class="title" translate>Thông tin phiếu sửa</h4></div>
+                <div class="content">
+                    <div class="types clearfix">
+                        <div class="item{{ flag.flag === ticketReasonSelected ? ' selected' : '' }}" *ngFor="let flag of ticketReason" (click)="onUserSelectTicketReason(flag.flag)">{{ flag.name }}</div>
+                    </div>
+                </div>
+                <div class="tips text-sm">
+                    <p class="text-strong" translate>Ghi chú:</p>
+                    <p translate>
+                        1. Vui lòng gói hàng cẩn thận. Chúng tôi không chịu trách nhiệm nếu hàng của bạn hư hỏng trong quá trình vận chuyển.
+                    </p>
+                    <p translate>
+                        2. Nếu đội ngũ kỹ thuật của chúng tôi phát hiện vấn đề thuộc về phần chuyên của nhà sản xuất, chúng tôi sẽ chuyển tiếp máy đào của bạn cho nhà sản xuất sửa chữa. Phí sữa chữa và hóa đơn sẽ được tính thêm vào khi giao hàng lại cho bạn.
+                    </p>
+                    <p translate>
+                        3. Máy đào bitmain sẽ được chuyển qua cho đội ngũ Bitmain tại Hồng Kông sửa chữa.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <div class="panel margin-top-10">
+            <div class="box hair-line">
+                <div class="header">
+                    <div class="bt-space" style="margin: 0px 0px 10px;"><h4 class="title" translate>Thông tin sản phẩm</h4></div>
+                    <p href="" class="text-gray text-sm">
+                        <a target="_blank" href="https://maxmines.com/contact" class="text-primary" translate>Liên hệ đội kỹ thuật</a> <i class="bt-icon"></i>
+                    </p>
+                </div>
+                <div class="content">
+                    <button class="bt-button bt-primary bt-button-md" (click)="onUserClickAddProduct()">
+                        <span translate>Thêm sản phẩm</span>
+                    </button>
+                    <div class="products" style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th translate>Loại</th>
+                                    <th translate>Hàng</th>
+                                    <th translate>Số lượng</th>
+                                    <th translate>Ghi chú</th>
+                                    <th translate>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let product of itemForRepair">
+                                    <td><div class="tag text-primary">{{ product.categoryName }}</div></td>
+                                    <td>{{ product.productName }}</td>
+                                    <td>{{ product.quantity }}</td>
+                                    <td class="device-remark text-left">{{ product.remark && product.remark.length >= 20 ? product.remark.splice(0, 20) + '...' : product.remark }}</td>
+                                    <td class="text-primary text-pointer text-md"><i class="bt-icon" (click)="onUserClickEditRepairItem(product.id)"></i>&nbsp;&nbsp; <i class="bt-icon" (click)="onUserClickRemoveRepairItem(product.id)"></i></td>
+                                </tr>                                
+                                <tr *ngIf="itemForRepair.length === 0">
+                                    <td colspan="5" class="text-gray" translate>Không có dữ liệu</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="bt-space" style="margin: 10px 0px 0px;">
+                            <p class="text-right" translate>Tổng sản phẩm: <span class="text-strong">{{ itemForRepair.length }}</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box hair-line">
+                <div class="header"><h4 class="title" translate>Thông tin giao hàng</h4></div>
+                <div class="content">
+                    <div class="shipment">
+                        <div class="item input-field">
+                            <label><i class="text-warning">*</i> {{ 'Mã theo dõi' | translate }} </label>
+                            <div class="field">
+                                <input type="text" value="{{ trackingNo }}" name="tracking" maxlength="20" placeholder="Tracking No." data-vv-as="Tracking No." aria-required="true" aria-invalid="false" (change)="onRemarkTxtChange('trackingNo', $event.target.value)" />
+                            </div>
+                            &nbsp;
+                            <div class="ex-tips top">
+                                <i class="bt-icon text-gray text-lg"></i>
+                                <div class="desc orange" style="width: 340px;">
+                                    <div>
+                                        <p>
+                                            <b>1.</b> {{ 'Hàn của bạn chỉ có thể được nhận khi mã theo dõi chính xác. Trong trường hợp bạn không có mã theo dõi, hãy nhập số tạm thời theo định dạng ngày/tháng/năm/thời_gian_theo_chuẩn_24h (ví dụ: 190420211557) và nhớ cập nhật khi bạn có thông tin từ đơn vị chuyển phát.' | translate }}
+                                        </p>
+                                        <p><b>2.</b> {{ 'Sau khi đơn hàng của bạn được chuyển trạng thái đang chờ, bạn sẽ không thể sửa phiếu yêu cầu được nữa!' | translate }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <label><span class="text-warning">*</span> <span translate>Đơn vị chuyển phát</span></label>
+                            <select class="" [(ngModel)]="shippingMethodSelected">
+                                <option value="{{ method.id }}" *ngFor="let method of shippingMethods">{{ method.shortName }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bt-widget-layer _1K-VPncT" *ngIf="isAddItemDialogShowing">
+            <div class="bt-modal">
+                <div class="bt-title" translate>Thêm thiết bị</div>
+                <div class="bt-content">
+                    <div class="bt-space" style="margin: 20px 10px;">
+                        <div class="device-form">
+                            <form onsubmit="return false" autocomplete="off" [formGroup]="addNewItemForRepairForm" (ngSubmit)="onAddProductForm()">
+                                <input type="hidden" formControlName="productItemId" />
+                                <div class="input-field" *ngIf="productType.length !== 0">
+                                    <label><i class="text-warning">*</i> {{ 'Loại:' | translate }} </label>
+                                    <div class="field">
+                                        <select name="type" class="" aria-required="true" aria-invalid="false" formControlName="productType" [(ngModel)]="currentTypeId" (change)="onSelectCategoryChange($event)">
+                                            <option value="{{ type.id }}" *ngFor="let type of productType">{{ type.name }}</option>
+                                        </select>
+                                        <p class="message"></p>
+                                    </div>
+                                </div>
+                                <div class="input-field" *ngIf="productByType.length !== 0">
+                                    <label><i class="text-warning">*</i> {{ 'Sản phẩm:' | translate }} </label>
+                                    <div class="field">
+                                        <select name="item" data-vv-as="Item" class="" aria-required="true" aria-invalid="false" formControlName="product" [(ngModel)]="currentPBTypeId">
+                                            <option value="{{ product.id }}" *ngFor="let product of productByType">{{ product.name }}</option>
+                                        </select>
+                                        <p class="message"></p>
+                                    </div>
+                                </div>
+                                <div class="input-field">
+                                    <label><i class="text-warning">*</i> {{ 'Số lượng:' | translate }} </label>
+                                    <div class="field">
+                                        <input type="number" name="quantity" maxlength="20" data-vv-as="Quantity" aria-required="true" aria-invalid="false" formControlName="quantity" />
+                                        <p class="message"></p>
+                                    </div>
+                                </div>
+                                <div class="input-field">
+                                    <label translate>
+                                        Ghi chú:
+                                    </label>
+                                    <div class="field">
+                                        <input type="text" name="remark" maxlength="100" data-vv-as="Remark" aria-required="false" aria-invalid="false" formControlName="remark" />
+                                        <p class="message"></p>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="bt-space" style="margin: 30px 0px 0px;">
+                                <footer class="footer text-right">
+                                    <button class="bt-button bt-default" (click)="onUserClickAddProduct()">
+                                        <span translate>Hủy bỏ</span>
+                                    </button>
+                                    <button class="bt-button bt-primary" (click)="onAddProductForm()">
+                                        <span translate>Xác nhận</span>
+                                    </button>
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <i class="bt-icon close" (click)="onUserClickAddProduct()"></i>
+            </div>
+        </div>
+    </div>
+    <div class="create2">
+        <section class="panel">
+            <div class="box hair-line">
+                <div class="header">
+                    <h4 class="title">
+                        <span translate>Thông tin khách hàng </span>
+                        <div class="ex-tips top">
+                            <div class="bt-space" style="margin: 8px 0px;"><i class="bt-icon text-orange"></i></div>
+                            <div class="desc orange" style="width: 340px;">
+                                <div class="text-sm addr-tips" translate>
+                                    Chúng tôi sẽ gửi các thiết bị đã được sửa đến địa chỉ mà bạn chọn bên dưới. Trong trường hợp đổi địa chỉ, vui lòng gửi 1 phiếu hỗ trợ qua email vi@maxmines.com. Sau khi gửi, địa chỉ hỗ trợ này là duy nhất.
+                                </div>
+                            </div>
+                        </div>
+                    </h4>
+                    <a class="text-primary text-pointer text-sm" (click)="userClickAddNewAddress()" translate>+ Thêm địa chỉ mới</a>
+                </div>
+                <div class="content">
+                    <div class="address clearfix" *ngIf="userData">
+                        <div class="item{{ shippingAddressSelected === uaddress.id ? ' selected' : ''}}" *ngFor="let uaddress of userData.userAddresss" (click)="shippingAddressSelected = uaddress.id">
+                            <div class="wrap">
+                                <span alt="{{ uaddress.telephone }}" class="name">{{ uaddress.telephone }}</span>
+                                <div class="wrap-r">
+                                    <span
+                                        title='{{ uaddress.address + ", " + uaddress.street_name + ", " + uaddress.city + ", " + uaddress.country + ", " + uaddress.postal_code + ", " + uaddress.telephone + ", " + uaddress.mobile }}'
+                                        class="addr"
+                                    >
+                                    {{ uaddress.address + ", " + uaddress.street_name + ", " + uaddress.city + ", " + uaddress.country + ", " + uaddress.postal_code + ", " + uaddress.telephone + ", " + uaddress.mobile }}
+                                    </span>
+                                    <span class="dftag" *ngIf="uaddress.isDefault" translate>Mặc định</span>
+                                    <div class="operation">
+                                        <span *ngIf="!uaddress.isDefault" (click)="onUserClickDefault(uaddress.id)" translate>Đặt là mặc định</span>
+                                        <span (click)="onUserClickAddrEdit(uaddress)" translate>Sửa</span>
+                                        <span (click)="onUserClickAddrDelete(uaddress)" *ngIf="!uaddress.isDefault" translate>Xóa</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box hair-line">
+                <div class="header"><h4 class="title" translate>Thông tin đại lý sửa chữa</h4></div>
+                <div class="content stations">
+                    <ng-container *ngFor="let site of repairSitePreconfig">
+                        <div class="station{{ siteSelected === site.code ? ' selected' : '' }}" (click)="onUserClickSite(site.code)">{{ site.name }}</div>
+                        <div class="base-info _3fUXheq-" *ngIf="siteSelected === site.code && site.note !== null">
+                            <div [innerHTML]="site.note">
+                            </div>
+                        </div>
+                        <div class="extra-info _3fUXheq-" *ngIf="siteSelected === site.code && site.extraInfo !== null">
+                            <div [innerHTML]="site.extraInfo">
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="box">
+                <div class="header">
+                    <h4 class="title" translate>
+                        Thông tin đơn vị trả hàng
+                        <div class="ex-tips top">
+                            <div class="bt-space" style="margin: 8px 0px;"><i class="bt-icon text-orange"></i></div>
+                            <div class="desc orange" style="width: 340px;">
+                                <div class="text-sm addr-tips" translate>
+                                    Đơn vị ưu tiên trả hàng: Trong trường hợp đơn vị vận chuyển chính mà bạn chọn không hỗ trợ trong trường hợp bất khả kháng, Vĩ Miner Shop sẽ gửi hàng của bạn thông qua đơn vị vận chuyển này mà không cần báo trước.
+                                </div>
+                            </div>
+                        </div>
+                    </h4>
+                </div>
+                <div class="content">
+                    <div class="channels clearfix">
+                        <div class="item{{ returnShippingAddressSelected === method.id ? ' selected' : '' }}" *ngFor="let method of returnShippingMethods" (click)="onUserClickReturnShippingMethod(method.id)">
+                            {{ method.shortName }}
+                        </div>
+                    </div>
+                    <div class="bt-space text-gray text-center" style="margin: 0px;" *ngIf="returnShippingMethods && returnShippingMethods.length === 0" translate>- Vui lòng chọn đại lý sửa chữa trước -</div>
+                </div>
+            </div>
+        </section>
+        <section class="panel margin-top-10">
+            <div class="box">
+                <div class="header">
+                    <h4 class="title" translate>
+                        Ghi chú
+                    </h4>
+                </div>
+                <div class="content">
+                    <div class="input-field">
+                        <div class="field">
+                            <textarea type="text" name="remark" value="{{ lastRemark }}" maxlength="100" placeholder="Ghi chú" aria-required="false" aria-invalid="false" (input)="onRemarkTxtChange('lastRemark', $event.target.value)"></textarea>
+                            <p class="message"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="box">
+        <div class="bt-space protocol" style="margin: 0px;">
+            <div class="bt-checkbox{{ acceptTerms ? ' checked' : '' }}" (click)="onUserClickAcceptTerm()">
+                <span class="bt-checkbox-input">
+                    <i class="bt-checkbox-icon"><b class="bt-icon"></b></i>
+                </span>
+                <span class="bt-checkbox-label" translate>
+                    Tôi đã đọc và đồng ý với <a target="_blank" href="/support/terms" class="text-primary" translate>Tuyên bố từ chối trách nhiệm</a>
+                </span>
+            </div>
+        </div>
+        <div class="bt-space" style="padding: 20px 0px;">
+            <button [disabled]="!acceptTerms" class="bt-button bt-primary next" (click)="submitRepairTicket()">
+                <span translate>Gửi</span>
+            </button>
+        </div>
+    </div>
+</div>

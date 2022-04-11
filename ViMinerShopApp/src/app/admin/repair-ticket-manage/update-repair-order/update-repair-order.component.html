@@ -1,0 +1,46 @@
+<div class="vms-dialog-1">
+    <div class="v-modal" style="z-index: 2000;"></div>
+    <div class="vms-element-dialog__wrapper" style="z-index: 2001;">
+        <div class="vms-element-dialog vms-element-dialog--small" style="top: 15%;">
+            <div class="vms-element-dialog__header">
+                <span class="vms-element-dialog__title">Chi tiết đơn đặt vé</span><button type="button" aria-label="Close" class="vms-element-dialog__headerbtn" (click)="onUserClickClose()"><i class="vms-element-dialog__close vms-element-icon vms-element-icon-close"></i></button>
+            </div>
+            <div class="vms-element-dialog__body" *ngIf="initialState">
+                <form [formGroup]="updateRepairOrderStatus" (ngSubmit)="onEditSubmitted()">
+                    <input type="hidden" formControlName="id" />
+                    <div class="vms-element-form-item is-required" style="position: relative;">
+                        <label for="repairOrderStatus" class="vms-element-form-item__label" style="width: 120px;">Trạng thái đơn:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <i class="vms-element-input__icon vms-element-icon-caret-top"></i>
+                                <select class="vms-element-input__inner" formControlName="repairOrderStatus">
+                                    <option value="0">Chưa thanh toán</option>
+                                    <option value="1">Đang chờ</option>
+                                    <option value="2">Đã thanh toán</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item is-error is-required" style="position: relative;">
+                        <label for="price" class="vms-element-form-item__label" style="width: 120px;">Chi phí sửa chữa:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <input autocomplete="off" type="number" class="vms-element-input__inner" formControlName="price" value="{{ initialState.price }}" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="vms-element-dialog__footer">
+                <div class="dialog-footer">
+                    <button type="button" class="vms-element-button vms-element-button--default" (click)="onUserClickClose()">
+                        <span>Đóng</span>
+                    </button>
+                    <button type="button" class="vms-element-button vms-element-button--primary" (click)="onEditSubmitted()">
+                        <span>Lưu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

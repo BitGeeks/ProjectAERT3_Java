@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="login-base">
+    <div class="login-box">
+      <div class="body">
+        <div class="form-box">
+            <div class="form-item" *ngIf="isVerified && !isError">
+              <p translate>
+                  Tài khoản của bạn đã được xác minh thành công, bây giờ bạn có thể tự do mua sắm tại Vĩ Miner Shop
+              </p>
+            </div>
+            <div class="form-item" *ngIf="!isVerified && !isError">
+              <p translate>
+                  Đang xác minh...
+              </p>
+            </div>
+            <div class="form-item" *ngIf="isError">
+              <p translate>
+                  Đã có lỗi xảy ra trong quá trình xác minh tài khoản của bạn, vui lòng xác minh lại
+              </p>
+            </div>
+            <div class="form-item">
+              <button class="button primary large block fill" type="submit" (click)="onUserClickLogin()" translate>Đăng nhập lại</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,158 @@
+.myAddress {
+  width: 100%;
+}
+.myAddress .vms_apc-main-header {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+.add-address {
+  margin-right: 37px;
+  background: #E00;
+  width: 120px;
+  height: 30px;
+  color: #fff;
+  border-radius: 2px;
+  font-size: 14px;
+  line-height: 30px;
+  text-align: center;
+  cursor: pointer;
+  float: right;
+}
+.user-addr {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 20px 0 0;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.user-addr .addr-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 275px;
+  height: 180px;
+  border: 1px solid hsla(0, 0%, 76%, 0.4);
+  margin: 0 10px 10px 0;
+  padding: 0 19px;
+  border-radius: 4px;
+}
+.user-addr .addr-item > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+.user-addr .addr-item .td1 .username {
+  margin: 20px 0 0;
+  font-family: sans-serif;
+  font-weight: 700;
+  color: #4a4a4a;
+  font-size: 16px;
+  line-height: 22px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.user-addr .addr-item .td2 {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 15px;
+  opacity: 0.6;
+}
+.user-addr .addr-item .td2 .mobile {
+  display: inline-block;
+  width: 100%;
+  vertical-align: top;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.user-addr .addr-item .td2 li {
+  display: inline-block;
+  overflow-x: hidden;
+  vertical-align: middle;
+}
+.user-addr .addr-item .td2 .td2-li1 {
+  margin: 8px 0 0;
+  height: 42px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.user-addr .addr-item .td2 .td2-li1 span:not(:last-child):after {
+  content: ",";
+}
+.user-addr .addr-item .td3 {
+  margin-top: 10px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.user-addr .addr-item .td3 .op_3 {
+  min-width: 60px;
+}
+.user-addr .addr-item .td3 .op_3 span {
+  display: inline-block;
+  margin: 0 0 0 10px;
+}
+.user-addr .addr-item .active {
+  border-radius: 2px;
+}
+.user-addr .addr-item .operating {
+  visibility: hidden;
+  color: #E00;
+  cursor: pointer;
+}
+.user-addr .addr-item:hover .operating {
+  visibility: visible;
+}
+.user-addr .addr-item:hover {
+  -webkit-box-shadow: 0 0 0 2px #E00;
+  box-shadow: 0 0 0 2px #E00;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+.user-addr .page {
+  display: block;
+  width: 100%;
+  margin: 20px auto;
+  text-align: center;
+}
+.user-addr .base {
+  color: #E00;
+}
+.vms_apc-main-header {
+  border-bottom: 1px solid #ddd;
+  padding: 15px 30px;
+}
+.pull-right {
+  float: right;
+}
+h2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: 400;
+  line-height: 1;
+}
+h2 .title {
+  -ms-flex: 1;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  font-size: 20px;
+  font-weight: 700;
+}

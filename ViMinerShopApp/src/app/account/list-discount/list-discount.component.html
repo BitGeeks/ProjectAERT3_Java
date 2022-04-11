@@ -1,0 +1,86 @@
+<div class="couponList">
+  <div class="clearfix">
+    <h2 class="title pull-left">
+      <span translate>Danh sách coupon</span>
+    </h2>
+  </div>
+    <div class="bt-space filter" style="margin: 40px 0px 15px;">
+      <div class="item{{ selectedTab === 0 ? ' active' : '' }}" (click)="onClickSelectTab(0)"><span translate>Hiệu lực</span></div>
+      <div class="item{{ selectedTab === 1 ? ' active' : '' }}" (click)="onClickSelectTab(1)"><span translate>Đã dùng</span></div>
+      <div class="item{{ selectedTab === 2 ? ' active' : '' }}" (click)="onClickSelectTab(2)"><span translate>Hết hạn</span></div>
+    </div>
+
+    <div class="geer-loading" *ngIf="innerLoading">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <div class="couponAvailableList" *ngIf="!innerLoading">
+        <div class="coupons" *ngFor="let coupon of couponList">
+            <div class="coupon">
+                <div class="couponImg checked{{ selectedTab !== 0 ? ' disabled' : '' }}">
+                  <div class="couponInfo">
+                    <div class="countAndMoney">
+                      <div class="couponCount">
+                        x{{ coupon.couponLeft }}
+                      </div>
+                      <div class="money">
+                        <span>
+                          <span class="price" style="font-size: 12px;">
+                            {{ 'Giảm' | translate }} {{ coupon.couponPercent }}%
+                          </span>
+                        </span>
+                      </div>
+                      <div class="couponType" *ngIf="coupon.couponType === 'sales'" translate>
+                        Bán hàng
+                      </div>
+                      <div class="couponType" *ngIf="coupon.couponType === 'after_sales'" translate>
+                        Sau khi bán
+                      </div>
+                      <div class="couponType" *ngIf="coupon.couponType === 'orders'" translate>
+                        Order
+                      </div>
+                    </div>
+                    <div class="infoAndRules">
+                      <div class="moreInfo">
+                        <div class="names">
+                          <span class="couponName" *ngIf="coupon.couponCode !== null">
+                            {{ coupon.couponCode }}
+                          </span>
+                        </div>
+                        <div class="limitMoney" translate>
+                          Đơn hàng tối thiểu {{ coupon.minPrice * currencyRate | currency: currency }}
+                        </div>
+                        <div class="couponIdAndDonate">
+                          <div class="couponId" translate>
+                            Hết hạn: {{ coupon.expired_at | date: "dd/MM/yyyy HH:ss" }}
+                          </div>
+                          <div class="btn-pane">
+                              <div class="donateButton" (click)="onUserClickDonate(coupon)" translate>
+                                  Donate
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" *ngIf="!innerLoading && couponList && couponList.length !== 0">
+      <ul class="vms-iv-page">
+          <li title="Trang Trước" class="vms-iv-page-prev{{ disablePrevPageBtn ? ' vms-iv-page-disabled' : '' }}" (click)="userClickPreviousPage()">
+              <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-left"></i></a>
+          </li>
+          <li title="{{ page + 1 }}" class="vms-iv-page-item vms-iv-page-item-active"><a>{{ page + 1 }}</a></li>
+          <li title="Trang Tiếp Theo" class="vms-iv-page-next{{ disableNextPageBtn ? ' vms-iv-page-disabled' : '' }}" (click)="userClickNextPage()">
+              <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-right"></i></a>
+          </li>
+      </ul>
+    </div>
+    <div class="notice" *ngIf="couponList && couponList.length === 0"><p translate>Không có coupon nào</p></div>
+</div>

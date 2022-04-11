@@ -1,0 +1,126 @@
+<div class="couponDonate">
+    <div class="clearfix">
+      <h2 class="title pull-left">
+        <span translate>Danh sách giao dịch</span>
+      </h2>
+    </div>
+    <div class="bt-space filter" style="margin: 40px 0px 15px;">
+        <div class="item{{ selectTab === 0 ? ' active' : '' }}" (click)="onUserClickSelectTab(0)"><span translate>Đã chuyển</span></div>
+        <div class="item{{ selectTab === 1 ? ' active' : '' }}" (click)="onUserClickSelectTab(1)"><span translate>Đã nhận</span></div>
+    </div>
+
+    <div class="geer-loading" *ngIf="innerLoading">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <div *ngIf="!innerLoading">
+        <div class="table vms-iv-table-wrapper" style="width: 878px;">
+            <div class="vms-iv-table">
+                <div class="vms-iv-table-header" style="overflow-x: auto;">
+                    <table cellspacing="0" cellpadding="0" border="0" style="width: 877px;">
+                        <colgroup>
+                            <col width="" />
+                            <col width="" />
+                            <col width="" />
+                            <col width="" />
+                            <col width="" />
+                            <col width="" />
+                            <col width="" />
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th class="">
+                                    <div class="vms-iv-table-cell">
+                                        <span translate>Mã giao dịch</span>
+                                    </div>
+                                </th>
+                                <th class="">
+                                    <div class="vms-iv-table-cell">
+                                        <span *ngIf="selectTab === 0" translate>ID nhận</span>
+                                        <span *ngIf="selectTab === 1" translate>ID gửi</span>
+                                    </div>
+                                </th>
+                                <th class="">
+                                    <div class="vms-iv-table-cell">
+                                        <span translate>ID coupon</span>
+                                    </div>
+                                </th>
+                                <th class="vms-iv-table-column-left">
+                                    <div class="vms-iv-table-cell">
+                                        <span translate>Tên Coupon</span>
+                                    </div>
+                                </th>
+                                <th class="vms-iv-table-column-right">
+                                    <div class="vms-iv-table-cell">
+                                        <span translate>Giảm</span>
+                                    </div>
+                                </th>
+                                <th class="vms-iv-table-column-right">
+                                    <div class="vms-iv-table-cell">
+                                        <span translate>Số lượng</span>
+                                    </div>
+                                </th>
+                                <th class="vms-iv-table-column-center">
+                                    <div class="vms-iv-table-cell">
+                                        <span translate>Ngày thanh toán</span>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="vms-iv-table-body" style="display: none;overflow-x: auto;">
+                    <table cellspacing="0" cellpadding="0" border="0" style="width: 877px;">
+                        <colgroup>
+                            <col width="" />
+                            <col width="" />
+                            <col width="" />
+                            <col width="" />
+                            <col width="" />
+                            <col width="" />
+                            <col width="" />
+                        </colgroup>
+                        <tbody class="vms-iv-table-tbody">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="vms-iv-table-tip" style="overflow-x: auto;">
+                    <table cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                            <ng-container *ngIf="listTransaction && listTransaction.length !== 0">
+                                <tr *ngFor="let trans of listTransaction">
+                                    <td value="{{ trans.transactionId }}"><span>{{ trans.transactionId.slice(0, 7) + "..." }}</span></td>
+                                    <td *ngIf="selectTab === 0"><span>{{ trans.receiverId }}</span></td>
+                                    <td *ngIf="selectTab === 1"><span>{{ trans.user_id }}</span></td>
+                                    <td><span>{{ trans.couponId }}</span></td>
+                                    <td><span>{{ trans.couponName }}</span></td>
+                                    <td><span>{{ trans.couponPercent }}</span></td>
+                                    <td><span>{{ trans.quantity }}</span></td>
+                                    <td><span>{{ trans.created_at | date: "dd/MM/yyyy HH:mm" }}</span></td>
+                                </tr>
+                            </ng-container>
+                            <tr *ngIf="!listTransaction || listTransaction && listTransaction.length === 0">
+                                <td><span translate>Không có dữ liệu</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" *ngIf="!innerLoading && listTransaction && listTransaction.length !== 0">
+      <ul class="vms-iv-page">
+          <li title="Trang Trước" class="vms-iv-page-prev{{ disablePrevPageBtn ? ' vms-iv-page-disabled' : '' }}" (click)="userClickPreviousPage()">
+              <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-left"></i></a>
+          </li>
+          <li title="{{ page + 1 }}" class="vms-iv-page-item vms-iv-page-item-active"><a>{{ page + 1 }}</a></li>
+          <li title="Trang Tiếp Theo" class="vms-iv-page-next{{ disableNextPageBtn ? ' vms-iv-page-disabled' : '' }}" (click)="userClickNextPage()">
+              <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-right"></i></a>
+          </li>
+      </ul>
+    </div>
+</div>

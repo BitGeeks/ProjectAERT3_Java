@@ -1,0 +1,41 @@
+<div class="vms_apc-main col-lg-8 col-md-8 col-sm-8 clo-xs-12">
+    <h4 class="vms_apc-main-header">
+        <span>Quản lý giao dịch</span>
+    </h4>
+
+    <div class="vms-admin-container">
+        <div class="trasaction-table" style="overflow-x: auto;">
+            <table border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Tổng tiền</th>
+                        <th>Phương thức giao dịch</th>
+                        <th>Mã thanh toán của nhà cung cấp</th>
+                        <th>Thời gian</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let transaction of transactionList">
+                        <td>{{ transaction.id }}</td>
+                        <td>{{ transaction.amount | currency: 'USD' }}</td>
+                        <td>{{ renderProvider(transaction.provider).name }}</td>
+                        <td [title]='transaction.maxMinesBillID !== null ? transaction.maxMinesBillID : transaction.paypalID !== null ? transaction.paypalID : "Không"'>{{ transaction.maxMinesBillID !== null ? transaction.maxMinesBillID : transaction.paypalID !== null ? transaction.paypalID : "Không" }}</td>
+                        <td>{{ transaction.created_at | date: "dd/MM/yyyy HH:ss" }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="page" *ngIf="transactionList && transactionList.length !== 0">
+              <ul class="vms-iv-page">
+                  <li title="Trang Trước" class="vms-iv-page-prev{{ disablePrevPageBtn ? ' vms-iv-page-disabled' : '' }}" [disabled]="disablePrevPageBtn" (click)="userClickPreviousPage()">
+                      <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-left"></i></a>
+                  </li>
+                  <li title="{{ page + 1 }}" class="vms-iv-page-item vms-iv-page-item-active"><a>{{ page + 1 }}</a></li>
+                  <li title="Trang Tiếp Theo" class="vms-iv-page-next{{ disableNextPageBtn ? ' vms-iv-page-disabled' : '' }}" [disabled]="disableNextPageBtn" (click)="userClickNextPage()">
+                      <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-right"></i></a>
+                  </li>
+              </ul>
+            </div>
+        </div>
+    </div>
+</div>

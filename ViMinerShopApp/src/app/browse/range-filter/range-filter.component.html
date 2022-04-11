@@ -1,0 +1,8 @@
+<!--<div>
+    <span *ngIf="!model.currencyRange" style="float: left;">From {{model.filterValue[0]}}</span>
+    <span *ngIf="model.currencyRange" style="float: left;">From {{model.filterValue[0] | currency}}</span>
+    <span *ngIf="!model.currencyRange" style="float: right;">To {{model.filterValue[1] === model.max ? 'max' : model.filterValue[1]}}</span>
+    <span *ngIf="model.currencyRange" style="float: right;">To {{model.filterValue[1] | currency}}</span>
+    <div style="height: 4px; clear: both;"></div>
+</div>-->
+<p-slider [(ngModel)]="model.filterValue" [range]="true" [min]="model.min" [max]="model.max" (onSlideEnd)="rangeChanged($event)"></p-slider>

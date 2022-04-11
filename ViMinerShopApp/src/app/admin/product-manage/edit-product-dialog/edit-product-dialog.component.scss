@@ -1,0 +1,57 @@
+.uploadbox:hover {
+    background: #f9f9f9;
+    color: #d44646;
+    border-color: #d44646;
+}
+
+.uploadbox {
+    padding: 40px 20px 20px;
+    border-radius: 4px;
+    border: 1px dashed #ccc;
+    text-align: center;
+    cursor: pointer;
+    height: 240px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.vmsicon {
+    display: inline-block;
+    color: inherit;
+    font-style: normal;
+    line-height: 0;
+    text-align: center;
+    text-transform: none;
+    vertical-align: -.125em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.vmsicon svg {
+    display: inline-block;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+.vmsicon>* {
+    line-height: 1;
+}
+
+.uploadbox .upload-tips {
+    padding: 5px 0;
+    font-size: 11px;
+    color: #777;
+}

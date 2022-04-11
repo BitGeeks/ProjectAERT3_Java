@@ -1,0 +1,153 @@
+<div class="content" style="min-height: 380px;">
+  <div class="wrapper">
+    <div class="product-filter item">
+      <div class="content">
+        <div class="categories">
+          <p translate>Danh mục</p>
+          <span class="item{{selectedCategory === c.name ? ' active': ''}}" *ngFor="let c of (browseState | async).categories" (click)="selectCategory(c.name)">
+            {{c.name}}
+          </span>
+          <div *ngFor="let e of (browseState | async).errors">
+            <div *ngIf="e.errorEffect === 'FETCH_CATEGORY'" class="alert-warning">
+              <div *ngIf="e.error.status === 400 || e.error.status === 401" translate>
+                Có lỗi xảy ra trong quá trình lấy danh sách danh mục
+              </div>
+              <div *ngIf="e.error.status === 500 || e.error.status === 0 " translate>
+                Lỗi không xác định!
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="algorithms">
+          <p translate>Thuật toán</p>
+          <span class="item{{selectedAlgorithm === c.name ? ' active': ''}}" *ngFor="let c of (browseState | async).algorithms" (click)="selectAlgorithm(c.name)">
+            {{c.name}}
+          </span>
+          <div *ngFor="let e of (browseState | async).errors">
+            <div *ngIf="e.errorEffect === 'FETCH_CATEGORY'" class="alert-warning">
+              <div *ngIf="e.error.status === 400 || e.error.status === 401" translate>
+                Có lỗi xảy ra trong quá trình lấy danh sách danh mục
+              </div>
+              <div *ngIf="e.error.status === 500 || e.error.status === 0 " translate>
+                Lỗi không xác định!
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="price">
+          <div class="row">
+            <p translate>Lọc theo giá <span [innerText]="'(' + currency + ')'"></span></p>
+            <div class="min col-md-4">
+              <input class="vms-element-input__inner browse-value" placeholder="Nhập giá thấp nhất" type="number" min="0.00" (change)="selectMin($event.target.value)" value="{{minPrice !== '0' ? minPrice : ''}}">
+            </div>
+            <div class="max col-md-4">
+              <input class="vms-element-input__inner browse-value" placeholder="Nhập giá cao nhất" type="number" min="0.00" (change)="selectMax($event.target.value)" value="{{maxPrice !== '0' ? maxPrice : ''}}">
+            </div>
+            <div class="col-md-2"></div>
+          </div>
+        </div>
+        <div class="hashrate">
+          <div class="row">
+            <p translate [innerHTML]="'Lọc theo Hashrate (' + (minHashrate !== '0' ? abbreviateNumber(minHashrate) : '0') + ' - ' + (maxHashrate !== '0' ? abbreviateNumber(maxHashrate) : '0') + ')'">Lọc theo Hashrate</p>
+            <div class="min col-md-4">
+              <input class="vms-element-input__inner browse-value" placeholder="Nhập hashrate thấp nhất" type="number" min="0" (change)="selectMinH($event.target.value)" value="{{minHashrate !== '0' ? minHashrate : ''}}">
+            </div>
+            <div class="max col-md-4">
+              <input class="vms-element-input__inner browse-value" placeholder="Nhập hashrate cao nhất" type="number" min="0" (change)="selectMaxH($event.target.value)" value="{{maxHashrate !== '0' ? maxHashrate : ''}}">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="item-value">
+            <p translate>Sắp xếp</p>
+            <select class="vms-select-selection vms-select-selection--single browse-value-last" (change)="selectSort($event.target.value)">
+                <option *ngFor="let s of sortBy" [value]="s.value" [selected]="s.value === selectedSort ? true : false">{{ s.display }}</option>
+            </select>
+          </div>
+          <button class="bt-button bt-primary button-lg reset-btn{{ (minPrice === '0' && maxPrice === '0' && minHashrate === '0' && maxHashrate === '0') ? ' inactive' : '' }}" [disabled]="minPrice === '0' && maxPrice === '0' && minHashrate === '0' && maxHashrate === '0'" (click)="resetFilter()">
+            <span translate>
+              Đặt lại bộ lọc
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <section>
+      <div class="header">
+        <h3 class="miner-browse-header" translate>Duyệt máy đào</h3>
+        <div class="pull-right action">
+          <div class="search">
+            <input type="search" placeholder="Tên máy" (change)="onUserChangeSearchString($event)">
+            <button class="bt-button bt-primary button-sm bt-circle" (click)="onUserClickSearch()">
+              <i class="bt-icon"></i>
+            </button>
+          </div>
+          <div class="viewBtn">
+            <span (click)="selectView('grid')">
+              <i class="lnr lnr-layers viewBtn-ic{{ selectedView === 'grid' ? ' active' : '' }}"></i>
+            </span>
+            <span (click)="selectView('bar')">
+              <i class="lnr lnr-menu viewBtn-ic{{ selectedView === 'bar' ? ' active' : '' }}"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <ul class="clearfix" *ngIf="selectedView === 'grid'">
+        <li class="vms-browse{{ product.productInventory.quantity === 0 ? ' soldout' : '' }}" *ngFor="let product of ( browseState | async ).products">
+          <a routerLink="/detail/{{product.id}}" class="">
+            <div class="avatar"><img src="{{ product.productImages.length !== 0 ? product.productImages[0].imageUrl : 'https://cdn.notevn.com/DzPbjDuoi.png' }}" width="140" /></div>
+            <h4>{{product.name}}</h4>
+            <p>{{product.desc}}</p>
+          </a>
+          <div class="appender">
+            <a routerLink="/detail/{{product.id}}" *ngIf="product.productInventory.quantity === 0" translate>Nhận Thông Báo Sản Phẩm</a>
+          </div>
+          <div class="clearfix{{ product.productInventory.quantity === 0 ? ' unuse' : ''}}">
+            <span class="price{{ product.pricePromotion !== 0 ? ' price-promotion' : ' text-blue' }}">
+              {{ product.price * currencyRate | currency: currency }}
+            </span>
+            <span *ngIf="product.pricePromotion !== 0" class="price text-blue">
+              {{ product.pricePromotion * currencyRate | currency: currency }}
+            </span>
+            <button class="bt-button action bt-default" (click)="userClickBuyIcon(product.id)">
+                <i class="bt-icon"></i>
+            </button>
+          </div>
+        </li>
+      </ul>
+      <ng-container  *ngIf="selectedView === 'bar'">
+        <div *ngFor="let n of ( browseState | async ).products" class="component show-type ctype_vms">
+          <a routerLink="/detail/{{n.id}}" class="item">
+            <div class="type">{{ n.productCategory.name }} - {{ n.algorithm.name }}</div>
+            <div class="avatar">
+              <img src="{{ n.productImages.length !== 0 ? n.productImages[0].imageUrl : 'https://cdn.notevn.com/DzPbjDuoi.png' }}">
+            </div>
+            <div class="text">
+              <h3>{{n.name}}</h3>
+              <p class="describe">{{n.productInventory.shippingInfo}}</p>
+              <p class="price text-blue">
+                <span class="{{ n.pricePromotion !== 0 ? 'price-promotion' : '' }}">
+                  {{ n.price * currencyRate | currency: currency }}
+                </span>
+                <span *ngIf="n.pricePromotion !== 0">
+                  {{ n.pricePromotion * currencyRate | currency: currency }}
+                </span>
+              </p>
+              <button class="bt-button action bt-default" tag="button">
+                <i class="bt-icon"></i>
+              </button>
+            </div>
+            <img src="{{ n.productInventory.flag === 'FLAG_FEATURE_ORDER' ? 'https://static.maxmines.com/self/lesongvi/viminershop/order/img/futureOrder.svg' : '' }}" class="status">
+          </a>
+        </div>
+      </ng-container>
+      <table id="orderDetailsTable" *ngIf="( browseState | async ).products.length === 0">
+        <tbody>
+          <tr id="trNoproducts">
+            <p translate=""> Không có máy đào nào phù hợp với tiêu chí tìm kiếm của bạn </p>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="en-address-add">
+    <div class="v-modal" style="z-index: 2000;"></div>
+    <div class="vms-element-dialog__wrapper" style="z-index: 2001;">
+        <div class="vms-element-dialog vms-element-dialog--small" style="top: 15%;">
+            <div class="vms-element-dialog__header">
+                <span class="vms-element-dialog__title" translate>Cắt ảnh đại diện</span><button type="button" aria-label="Close" class="vms-element-dialog__headerbtn" (click)="onUserClickCloseDialog()"><i class="vms-element-dialog__close vms-element-icon vms-element-icon-close"></i></button>
+            </div>
+            <div class="vms-element-dialog__body">
+                <image-cropper
+                    [imageChangedEvent]="imageChangedEvent"
+                    [maintainAspectRatio]="true"
+                    [aspectRatio]="1 / 1"
+                    resizeToWidth="92"
+                    [roundCropper]="true"
+                    format="png"
+                    (imageCropped)="imageCropped($event)"
+                    (imageLoaded)="imageLoaded($event)"
+                    (cropperReady)="cropperReady()"
+                    (loadImageFailed)="loadImageFailed()"
+                ></image-cropper>
+            </div>
+            <div class="vms-element-dialog__footer">
+                <div class="dialog-footer">
+                    <button type="button" class="vms-element-button vms-element-button--default" (click)="onUserClickCloseDialog()">
+                        <span translate>Hủy bỏ</span>
+                    </button>
+                    <button type="button" class="vms-element-button vms-element-button--primary" (click)="onAvatarSubmit()">
+                        <span translate>Lưu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,143 @@
+<div class="vms_apc-main col-lg-8 col-md-8 col-sm-8 clo-xs-12">
+    <h4 class="vms_apc-main-header">
+        <span>Bảng điều khiển</span>
+        <a class="viminer-blue-btn" href="javascript:void(0)" (click)="exportReport()"> Xuất báo cáo </a>
+    </h4>
+
+    <div class="no-gutters row" #reportDashboard>
+        <img src="https://static.maxmines.com/self/lesongvi/viminershop/img/LOGO_FULL_NAME.svg" class="vms-dashboard-img" />
+        <div class="col-sm-6 col-md-4 col-xl-4">
+            <div class="card no-shadow bg-transparent widget-chart text-left">
+                <div class="icon-wrapper rounded-circle">
+                    <div class="icon-wrapper-bg opacity-10 bg-warning"></div>
+                    <i class="lnr-select text-dark opacity-8"></i>
+                </div>
+                <div class="widget-chart-content">
+                    <div class="widget-subheading">Tổng bán</div>
+                    <div class="widget-numbers">
+                        <span *ngIf="dashboardData && dashboardData.totalIncome">
+                            ${{ abbreviateNumber(dashboardData.totalIncome) }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="divider m-0 d-md-none d-sm-block"></div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-4">
+            <div class="card no-shadow bg-transparent widget-chart text-left">
+                <div class="icon-wrapper rounded-circle">
+                    <div class="icon-wrapper-bg opacity-9 bg-danger"></div>
+                    <i class="lnr-layers text-white"></i>
+                </div>
+                <div class="widget-chart-content">
+                    <div class="widget-subheading">Tổng máy bán</div>
+                    <div class="widget-numbers">
+                        <span *ngIf="dashboardData && dashboardData.totalOrder">
+                            {{ dashboardData.totalOrder }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="divider m-0 d-md-none d-sm-block"></div>
+        </div>
+        <div class="col-sm-12 col-md-4 col-xl-4">
+            <div class="card no-shadow bg-transparent widget-chart text-left">
+                <div class="icon-wrapper rounded-circle">
+                    <div class="icon-wrapper-bg opacity-9 bg-success"></div>
+                    <i class="lnr-database text-white"></i>
+                </div>
+                <div class="widget-chart-content">
+                    <div class="widget-subheading">Tổng máy đào</div>
+                    <div class="widget-numbers text-success">
+                        <span *ngIf="dashboardData && dashboardData.totalMiner">
+                            {{ dashboardData.totalMiner }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <highcharts-chart 
+            [Highcharts]="VMSDashboardChart"
+            [options]="lsoOptions"
+            style="width: 100%; height: 500px; display: block;"
+        ></highcharts-chart>
+        <!--<div class="clearfix"></div>
+        <highcharts-chart 
+            [Highcharts]="VMSDashboardChart"
+            [options]="maxminesPrice"
+            style="width: 100%; height: 500px; display: block;"
+        ></highcharts-chart>-->
+        <highcharts-chart
+            [Highcharts]="VMSDashboardChart"
+            [constructorType]="'mapChart'"
+            [options]="cbtm"
+            class="vnMapping"
+            style="width: 100%; height: 800px; display: block;"
+        ></highcharts-chart>
+
+        <div class="map-table" style="overflow-x: auto;width: 100%;max-height: 150px;" #tableMap id="tableMap" data-html2canvas-ignore>
+            <table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <th style="padding: 15px 20px; background: rgba(4,0,0,.03); font-size: 14px; line-height: 20px; font-weight: 500; text-align: left">Khu vực</th>
+                    <th style="padding: 15px 20px; background: rgba(4,0,0,.03); font-size: 14px; line-height: 20px; font-weight: 500; text-align: left">Số sản phẩm</th>
+                    <th style="padding: 15px 20px; background: rgba(4,0,0,.03); font-size: 14px; line-height: 20px; font-weight: 500; text-align: left">Chưa trả</th>
+                    <th style="padding: 15px 20px; background: rgba(4,0,0,.03); font-size: 14px; line-height: 20px; font-weight: 500; text-align: left">Đang chờ</th>
+                    <th style="padding: 15px 20px; background: rgba(4,0,0,.03); font-size: 14px; line-height: 20px; font-weight: 500; text-align: left">Chưa giao</th>
+                    <th style="padding: 15px 20px; background: rgba(4,0,0,.03); font-size: 14px; line-height: 20px; font-weight: 500; text-align: left">Đang giao</th>
+                    <th style="padding: 15px 20px; background: rgba(4,0,0,.03); font-size: 14px; line-height: 20px; font-weight: 500; text-align: left">Đã giao</th>
+                </tr>
+                <ng-container *ngIf="odMapTable && odMapTable.length !== 0">
+                <tr class="provinceRow" *ngFor="let od of odMapTable.slice(1)">
+                    <td style="padding: 10px 20px; font-size: 14px; font-weight: 400">
+                        {{ od.province }}
+                    </td>
+                    <td style="padding: 10px 20px; font-size: 14px; font-weight: 400">
+                        {{ od.productItems }}
+                    </td>
+                    <td style="padding: 10px 20px; font-size: 14px; font-weight: 400">
+                        {{ od.unpaid }}
+                    </td>
+                    <td style="padding: 10px 20px; font-size: 14px; font-weight: 400">
+                        {{ od.pending }}
+                    </td>
+                    <td style="padding: 10px 20px; font-size: 14px; font-weight: 400">
+                        {{ od.unshipped }}
+                    </td>
+                    <td style="padding: 10px 20px; font-size: 14px; font-weight: 400">
+                        {{ od.shipping }}
+                    </td>
+                    <td style="padding: 10px 20px; font-size: 14px; font-weight: 400">
+                        {{ od.shipped }}
+                    </td>
+                </tr>
+                </ng-container>
+                <tr>
+                    <td style="padding: 15px 20px; background: rgba(4,0,0,.03); font-size: 14px; line-height: 20px; font-weight: 500; text-align: left">
+                        Tổng số
+                    </td>
+                    <td style="padding: 15px 20px; background: rgba(4,0,0,.03); font-size: 14px; line-height: 20px; font-weight: 500; text-align: left">
+                        {{ totalOrderSuccess }}
+                    </td>
+                    <td style="padding: 15px 20px; background: rgba(4,0,0,.03); font-size: 14px; line-height: 20px; font-weight: 500; text-align: left">
+                        {{ orderType.unpaid }}
+                    </td>
+                    <td style="padding: 15px 20px; background: rgba(4,0,0,.03); font-size: 14px; line-height: 20px; font-weight: 500; text-align: left">
+                        {{ orderType.pending }}
+                    </td>
+                    <td style="padding: 15px 20px; background: rgba(4,0,0,.03); font-size: 14px; line-height: 20px; font-weight: 500; text-align: left">
+                        {{ orderType.unshipped }}
+                    </td>
+                    <td style="padding: 15px 20px; background: rgba(4,0,0,.03); font-size: 14px; line-height: 20px; font-weight: 500; text-align: left">
+                        {{ orderType.shipping }}
+                    </td>
+                    <td style="padding: 15px 20px; background: rgba(4,0,0,.03); font-size: 14px; line-height: 20px; font-weight: 500; text-align: left">
+                        {{ orderType.shipped }}
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+</div>

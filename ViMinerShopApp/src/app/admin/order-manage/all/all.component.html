@@ -1,0 +1,64 @@
+<div class="vms_apc-main col-lg-8 col-md-8 col-sm-8 clo-xs-12">
+    <h4 class="vms_apc-main-header">
+        <span>Quản lý đơn đặt hàng</span>
+    </h4>
+
+    <div class="vms_apc-main-tabs viminer-tabs">
+        <a class="vms_apc-main-tabs-item viminer-tabs-item{{ activeTab === 0 ? ' active' : '' }}" (click)="onAdminSwitchTab(0)">Tất cả</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item{{ activeTab === 1 ? ' active' : '' }}" (click)="onAdminSwitchTab(1)">Chưa thanh toán</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item{{ activeTab === 2 ? ' active' : '' }}" (click)="onAdminSwitchTab(2)">Đang chờ</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item{{ activeTab === 3 ? ' active' : '' }}" (click)="onAdminSwitchTab(3)">Chưa giao</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item{{ activeTab === 4 ? ' active' : '' }}" (click)="onAdminSwitchTab(4)">Đang giao</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item{{ activeTab === 5 ? ' active' : '' }}" (click)="onAdminSwitchTab(5)">Đã giao</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item{{ activeTab === 6 ? ' active' : '' }}" (click)="onAdminSwitchTab(6)">Hết hạn</a>
+    </div>
+
+    <div class="vms-admin-container">
+        <div class="all-table" style="overflow-x: auto;">
+            <table border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th>Mã đơn</th>
+                        <th>ID Người dùng</th>
+                        <th>Tổng phụ</th>
+                        <th>Coupon</th>
+                        <th>Discount</th>
+                        <th>Chi phí vận chuyển</th>
+                        <th>Tổng</th>
+                        <th>Trạng thái</th>
+                        <!--<th>Thời gian</th>-->
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of orders">
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.user_id }}</td>
+                        <td>{{ order.subTotal | currency: 'USD' }}</td>
+                        <td>{{ order.couponAmount | currency: 'USD' }}</td>
+                        <td>{{ order.discountAmount | currency: 'USD' }}</td>
+                        <td>{{ order.shippingAmount | currency: 'USD' }}</td>
+                        <td>{{ order.total | currency: 'USD' }}</td>
+                        <td>{{ renderOrderStatus(order.paymentDetail.status) }}</td>
+                        <!--<td>{{ order.created_at | date: "dd/MM/yyyy HH:ss" }}</td>-->
+                        <td>
+                            <a href="javascript:" (click)="orderActionManage(order)">Hành động</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="page" *ngIf="orders && orders.length !== 0">
+      <ul class="vms-iv-page">
+          <li title="Trang Trước" class="vms-iv-page-prev{{ disablePrevPageBtn ? ' vms-iv-page-disabled' : '' }}" (click)="userClickPreviousPage()">
+              <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-left"></i></a>
+          </li>
+          <li title="{{ page + 1 }}" class="vms-iv-page-item vms-iv-page-item-active"><a>{{ page + 1 }}</a></li>
+          <li title="Trang Tiếp Theo" class="vms-iv-page-next{{ disableNextPageBtn ? ' vms-iv-page-disabled' : '' }}" (click)="userClickNextPage()">
+              <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-right"></i></a>
+          </li>
+      </ul>
+    </div>
+</div>

@@ -1,0 +1,100 @@
+<div class="vms-dialog-1" *ngIf="initialState">
+    <div class="v-modal" style="z-index: 2000;"></div>
+    <div class="vms-element-dialog__wrapper" style="z-index: 2001;">
+        <div class="vms-element-dialog vms-element-dialog--small" style="top: 15%;">
+            <div class="vms-element-dialog__header">
+                <span class="vms-element-dialog__title">Sửa Slide</span><button type="button" aria-label="Close" class="vms-element-dialog__headerbtn" (click)="onUserClickClose()"><i class="vms-element-dialog__close vms-element-icon vms-element-icon-close"></i></button>
+            </div>
+            <div class="vms-element-dialog__body" *ngIf="initialState">
+                <form class="vms-element-form addrAdd-en" [formGroup]="editHomepageSlide" (ngSubmit)="onEditSubmitted()">
+                    <input type="hidden" formControlName="id" value="{{ initialState.id }}" />
+                    <div class="vms-element-form-item{{editHomepageSlide.get('name').invalid && editHomepageSlide.get('name').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="name" class="vms-element-form-item__label" style="width: 120px;">Tên slide:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                        <div class="vms-element-input">
+                            <input autocomplete="off" type="text" class="vms-element-input__inner" formControlName="name" value="{{ initialState.name }}" />
+                        </div>
+                        <p class="err-info" style="display: none;"></p>
+                        <ng-container *ngIf="editHomepageSlide.get('name').invalid && editHomepageSlide.get('name').touched">
+                            <div class="vms-element-form-item__error" *ngIf="editHomepageSlide.get('name').errors['required']">Tên slide không được để trống</div>
+                        </ng-container>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item{{editHomepageSlide.get('fillColor').invalid && editHomepageSlide.get('fillColor').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="fillColor" class="vms-element-form-item__label" style="width: 120px;">Màu navbar:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <input autocomplete="off" type="text" class="vms-element-input__inner" formControlName="fillColor" value="{{ initialState.fillColor }}" />
+                            </div>
+                            <p class="err-info" style="display: none;"></p>
+                            <ng-container *ngIf="editHomepageSlide.get('fillColor').invalid && editHomepageSlide.get('fillColor').touched">
+                                <div class="vms-element-form-item__error" *ngIf="editHomepageSlide.get('fillColor').errors['required']">Màu navbar không được để trống</div>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item{{editHomepageSlide.get('imgUrl').invalid && editHomepageSlide.get('imgUrl').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="imgUrl" class="vms-element-form-item__label" style="width: 120px;">Hình ảnh slide:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <input autocomplete="off" type="text" class="vms-element-input__inner" formControlName="imgUrl" value="{{ initialState.imgUrl }}" />
+                            </div>
+                            <p class="err-info" style="display: none;"></p>
+                            <ng-container *ngIf="editHomepageSlide.get('imgUrl').invalid && editHomepageSlide.get('imgUrl').touched">
+                                <div class="vms-element-form-item__error" *ngIf="editHomepageSlide.get('imgUrl').errors['required']">Hình ảnh slide không được để trống</div>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <input #processFileInput type='file' style="display: none;" (change)="processFile($event.target)" accept="image/*" />
+                    <div class="vms-element-form-item is-required" style="position: relative;" *ngIf="editHomepageSlide.value.imgUrl.length === 0">
+                        <label for="price" class="vms-element-form-item__label" style="width: 120px;">Tải ảnh lên:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <div class="uploadbox" ngClass="{{dragAreaClass}}" draggable="true" (click)="processFileInput.click();">
+                                    <input
+                                        #imageInput
+                                        type="file"
+                                        name="img"
+                                        accept=".png, .jpg, .jpeg, .gif, .bmp"
+                                        data-size="Max image size 5Mb"
+                                        data-dimensions="Max image dimensions 3000x3000px"
+                                        (change)="processFile(imageInput)"
+                                        style="display: none;"
+                                    />
+                                    <i aria-label="icon: plus" class="vmsicon vmsicon-plus" style="font-size: 32px;">
+                                        <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path><path d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"></path></svg>
+                                    </i>
+                                    <font>Tải ảnh slide lên</font>
+                                    <font class="upload-tips">
+                                        Cloud Notevn không hỗ trợ transparent
+                                    </font>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item{{editHomepageSlide.get('jumpTo').invalid && editHomepageSlide.get('jumpTo').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="jumpTo" class="vms-element-form-item__label" style="width: 120px;">Liên kết chuyển trang:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <input autocomplete="off" type="text" class="vms-element-input__inner" formControlName="jumpTo" value="{{ initialState.jumpTo }}" />
+                            </div>
+                            <p class="err-info" style="display: none;"></p>
+                            <ng-container *ngIf="editHomepageSlide.get('jumpTo').invalid && editHomepageSlide.get('jumpTo').touched">
+                                <div class="vms-element-form-item__error" *ngIf="editHomepageSlide.get('jumpTo').errors['required']">Liên kết chuyển trang không được để trống</div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="vms-element-dialog__footer">
+                <div class="dialog-footer">
+                    <button type="button" class="vms-element-button vms-element-button--default" (click)="onUserClickClose()">
+                        <span>Hủy bỏ</span>
+                    </button>
+                    <button type="button" class="vms-element-button vms-element-button--primary" (click)="onEditSubmitted()">
+                        <span>Lưu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

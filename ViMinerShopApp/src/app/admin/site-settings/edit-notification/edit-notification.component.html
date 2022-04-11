@@ -1,0 +1,56 @@
+<div class="vms_apc-main col-lg-8 col-md-8 col-sm-8 clo-xs-12">
+    <h4 class="vms_apc-main-header">
+        <span>Cài đặt trang web</span>
+    </h4>
+
+    <div class="vms_apc-main-tabs viminer-tabs">
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/settings/slider" routerLinkActive="active">Quản lý slide</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/settings/addSlider" routerLinkActive="active">Thêm slide</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/settings/editNotification" routerLinkActive="active">Sửa thông báo</a>
+    </div>
+
+    <div class="main-content">
+        <div class="form-box">
+            <form [formGroup]="editNotification" (ngSubmit)="FormSubmittedEv()">
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Thông báo 1
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Thông báo 1" type="text" class="vms-input" value="" formControlName="notify1" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Thông báo 2
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Thông báo 2" type="text" class="vms-input" value="" formControlName="notify2" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Thông báo 3
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Thông báo 3" type="text" class="vms-input" value="" formControlName="notify3" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label"></div>
+                    <div class="item-value">
+                        <button type="button" class="vms-btn vms-btn-primary" (click)="FormSubmittedEv()">
+                            <span>Lưu</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,285 @@
+.banner {
+  background: url(https://cdn.notevn.com/Z5K92eivM.png) no-repeat;
+  background-size: 100% auto;
+  height: 200px;
+  position: relative;
+  width: 100%;
+}
+.banner h1 {
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 60px;
+  font-weight: 700;
+  left: 50%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.about-us {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 80px;
+}
+.about-us .p-info {
+  -ms-flex: 1;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+}
+.about-us .p-info h2 {
+  font-size: 36px;
+  font-weight: 700;
+}
+.about-us .p-info .txt {
+  line-height: 30px;
+}
+a {
+  color: #3581ff;
+}
+.banner {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  background-color: #3f4048;
+}
+@media (max-width: 768px) {
+  .banner {
+      height: 120px;
+  }
+}
+.banner h1 {
+  color: #fff;
+  font-size: 48px;
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+}
+@media (max-width: 768px) {
+  .banner h1 {
+      font-size: 32px;
+      font-weight: 400;
+      width: 100%;
+  }
+}
+.main-container {
+  max-width: 1220px;
+  margin: 40px auto 150px;
+  padding: 0 10px;
+}
+.main-container:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+@media (max-width: 768px) {
+  .main-container {
+      text-align: left;
+      margin: 20px 0;
+      padding: 0 20px;
+  }
+}
+.main-container .main-content {
+  width: 80%;
+  text-align: justify;
+  float: left;
+}
+@media (max-width: 768px) {
+  .main-container .main-content {
+      width: 100%;
+  }
+}
+.main-container .main-content h2 {
+  font-size: 30px;
+  margin: 0 0 30px;
+}
+@media (max-width: 768px) {
+  .main-container .main-content h2 {
+      font-size: 24px;
+  }
+}
+.about-us .main-content section h2 {
+  font-size: 24px;
+}
+app-sub-navigation {
+  width: 20%;
+  float: left;
+}
+.banner {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+@media (max-width: 768px) {
+  .banner {
+      height: 120px;
+  }
+}
+.banner h1 {
+  color: #fff;
+  font-size: 48px;
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+}
+@media (max-width: 768px) {
+  .banner h1 {
+      font-size: 32px;
+      font-weight: 400;
+      width: 100%;
+  }
+}
+.main-container {
+  max-width: 1220px;
+  margin: 40px auto 150px;
+  padding: 0 10px
+}
+.sys-content {
+  margin: 10px 0;
+  font-size: 16px;
+  line-height: 30px;
+}
+.main-container:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+@media (max-width: 768px) {
+  .main-container {
+      text-align: left;
+      margin: 20px 0;
+      padding: 0 20px;
+  }
+}
+.main-container .sub-navigation {
+  width: 20%;
+  float: left;
+}
+@media (max-width: 768px) {
+  .main-container .sub-navigation {
+      display: none;
+  }
+}
+.main-container .main-content {
+  width: 80%;
+  float: left;
+}
+@media (max-width: 768px) {
+  .main-container .main-content {
+      width: 100%;
+  }
+}
+.main-container .main-content h2 {
+  font-size: 30px;
+  margin: 0 0 30px;
+}
+@media (max-width: 768px) {
+  .main-container .main-content h2 {
+      font-size: 24px;
+  }
+}
+.main-container .main-content .address-container .address-region {
+  font-size: 0;
+  margin-top: 50px;
+}
+.main-container .main-content .address-container .address-region:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+@media (max-width: 768px) {
+  .main-container .main-content .address-container .address-region {
+      margin-top: 30px;
+  }
+}
+.main-container .main-content .address-container .address-region h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.main-container .main-content .address-container .address-region .address {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+  padding-right: 16px;
+}
+.main-container .main-content .address-container .address-region .address:not(:last-child) {
+  margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+  .main-container .main-content .address-container .address-region .address {
+      width: 100%;
+      padding: 0;
+      text-align: left;
+  }
+  .main-container .main-content .address-container .address-region .address .address-right {
+      margin-top: 10px;
+  }
+}
+.main-container .main-content .address-container .address-region .address .address-inside {
+  background-color: rgba(0, 0, 0, 0.02);
+  border-radius: 4px;
+  padding: 30px;
+}
+@media (max-width: 768px) {
+  .main-container .main-content .address-container .address-region .address .address-inside {
+      padding: 15px;
+  }
+}
+.main-container .main-content .address-container .address-region .address .address-inside h4 {
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+@media (max-width: 768px) {
+  .main-container .main-content .address-container .address-region .address .address-inside h4 {
+      font-size: 18px;
+  }
+}
+.main-container .main-content .address-container .address-region .address .address-inside .address-content {
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+.main-container .main-content .address-container .address-region .address .address-inside .address-email:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+.main-container .main-content .address-container .address-region .address .address-inside .address-email h5 {
+  width: 12%;
+  font-size: 14px;
+  font-weight: 400;
+  float: left;
+  color: #999;
+  position: relative;
+}
+@media (max-width: 768px) {
+  .main-container .main-content .address-container .address-region .address .address-inside .address-email h5 {
+      width: 100%;
+  }
+}
+.main-container .main-content .address-container .address-region .address .address-inside .address-email .address-email-content {
+  width: 88%;
+  float: left;
+}
+@media (max-width: 768px) {
+  .main-container .main-content .address-container .address-region .address .address-inside .address-email .address-email-content {
+      width: 100%;
+  }
+}
+.main-container .main-content .address-container .address-region .address .address-inside .address-email .address-email-content p + p {
+  margin-top: 5px;
+}
+.main-container .main-content .address-container .address-region .address .address-inside .address-email .address-email-content a {
+  color: #3581ff;
+  font-size: 14px;
+}

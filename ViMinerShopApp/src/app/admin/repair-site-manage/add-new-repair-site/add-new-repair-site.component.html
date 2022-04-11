@@ -1,0 +1,78 @@
+<div class="vms_apc-main col-lg-8 col-md-8 col-sm-8 clo-xs-12">
+    <h4 class="vms_apc-main-header">
+        <span>Quản lý đại lý sửa chữa</span>
+    </h4>
+
+    <div class="vms_apc-main-tabs viminer-tabs">
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/repairSites/manage" routerLinkActive="active">Quản lý đại lý sửa chữa</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/repairSites/add" routerLinkActive="active">Thêm đại lý sửa chữa</a>
+    </div>
+
+    <div class="main-content">
+        <div class="form-box">
+            <form [formGroup]="addRepairSite" (ngSubmit)="FormSubmittedEv()">
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Mã đại lý sửa chữa
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Mã đại lý sửa chữa" type="text" class="vms-input" value="" formControlName="code" />
+                            <div class="input-error" *ngIf="addRepairSite.get('code').invalid && addRepairSite.get('code').touched">Mã đại lý sửa chữa là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Tên đại lý sửa chữa
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Tên đại lý sửa chữa" type="text" class="vms-input" value="" formControlName="name" />
+                            <div class="input-error" *ngIf="addRepairSite.get('name').invalid && addRepairSite.get('name').touched">Tên đại lý sửa chữa là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        Ghi chú (hỗ trợ HTML)
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <textarea placeholder="Ghi chú" rows="5" type="text" class="vms-input" value="" formControlName="note"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        Ghi chú thêm (hỗ trợ HTML)
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <textarea placeholder="Ghi chú thêm" rows="5" type="text" class="vms-input" value="" formControlName="extraInfo"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Vị trí đại lý
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Vị trí đại lý" type="text" class="vms-input" value="" formControlName="location" />
+                            <div class="input-error" *ngIf="addRepairSite.get('location').invalid && addRepairSite.get('location').touched">Vị trí đại lý là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label"></div>
+                    <div class="item-value">
+                        <button type="button" class="vms-btn vms-btn-primary" (click)="FormSubmittedEv()">
+                            <span>Thêm đại lý</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

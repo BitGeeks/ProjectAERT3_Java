@@ -1,0 +1,36 @@
+table.modal_table {
+    margin-top: 25px;
+    width: 100%;
+}
+table.modal_table tr td:first-of-type {
+    font-size: 14px;
+    color: #262626;
+    text-align: right;
+    padding-bottom: 20px;
+}
+table.modal_table tr td:nth-child(2) {
+    padding-left: 10px;
+    padding-bottom: 20px;
+    text-align: left;
+}
+table.modal_table tr:last-of-type td {
+    padding-bottom: 0;
+}
+.donate-dialog input.vms-element-input__inner::-webkit-input-placeholder {
+    font-size: 13px;
+}
+.donate-dialog input.vms-element-input__inner::-moz-placeholder {
+    font-size: 13px;
+}
+.donate-dialog input.vms-element-input__inner::-ms-input-placeholder {
+    font-size: 13px;
+}
+.donate-dialog input.vms-element-input__inner::placeholder {
+    font-size: 13px;
+}
+.donate-dialog .vms-element-dialog--small {
+    width: 800px;
+}
+.donate-dialog .vms-element-input {
+    width: 85%;
+}

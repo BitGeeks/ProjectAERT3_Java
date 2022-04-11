@@ -1,0 +1,220 @@
+<div class="vms-dialog-1" *ngIf="initialState">
+    <div class="v-modal" style="z-index: 2000;"></div>
+    <div class="vms-element-dialog__wrapper" style="z-index: 2001;">
+        <div class="vms-element-dialog vms-element-dialog--small" style="top: 15%;">
+            <div class="vms-element-dialog__header">
+                <span class="vms-element-dialog__title">Sửa Sản Phẩm</span><button type="button" aria-label="Close" class="vms-element-dialog__headerbtn" (click)="onUserClickClose()"><i class="vms-element-dialog__close vms-element-icon vms-element-icon-close"></i></button>
+            </div>
+            <div class="vms-element-dialog__body" *ngIf="initialState">
+                <form class="vms-element-form addrAdd-en" [formGroup]="editProduct" (ngSubmit)="onEditSubmitted()">
+                    <input type="hidden" formControlName="id" value="{{ initialState.id }}" />
+                    <div class="vms-element-form-item{{editProduct.get('name').invalid && editProduct.get('name').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="name" class="vms-element-form-item__label" style="width: 120px;">Tên sản phẩm:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                        <div class="vms-element-input">
+                            <input autocomplete="off" type="text" rows="2" class="vms-element-input__inner" formControlName="name" value="{{ initialState.name }}" />
+                        </div>
+                        <p class="err-info" style="display: none;"></p>
+                        <ng-container *ngIf="editProduct.get('name').invalid && editProduct.get('name').touched">
+                            <div class="vms-element-form-item__error" *ngIf="editProduct.get('name').errors['required']">Tên sản phẩm không được để trống</div>
+                        </ng-container>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item" style="position: relative;">
+                        <label for="desc" class="vms-element-form-item__label" style="width: 120px;">Mô tả sản phẩm:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <textarea autocomplete="off" type="text" rows="5" class="vms-element-textarea__inner" formControlName="desc" value="{{ initialState.desc }}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item" style="position: relative;">
+                        <label for="noteDesc" class="vms-element-form-item__label" style="width: 120px;">Ghi chú sản phẩm:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <textarea autocomplete="off" type="text" rows="5" class="vms-element-textarea__inner" formControlName="noteDesc" value="{{ initialState.noteDesc }}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item" style="position: relative;">
+                        <label for="detailDesc" class="vms-element-form-item__label" style="width: 120px;">Mô tả chi tiết:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <textarea autocomplete="off" type="text" rows="5" class="vms-element-textarea__inner" formControlName="detailDesc" value="{{ initialState.detailDesc }}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item" style="position: relative;">
+                        <label for="paymentDesc" class="vms-element-form-item__label" style="width: 120px;">Mô tả thanh toán:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <textarea autocomplete="off" type="text" rows="5" class="vms-element-textarea__inner" formControlName="paymentDesc" value="{{ initialState.paymentDesc }}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item" style="position: relative;">
+                        <label for="warrantyDesc" class="vms-element-form-item__label" style="width: 120px;">Mô tả bảo hành:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <textarea autocomplete="off" type="text" rows="5" class="vms-element-textarea__inner" formControlName="warrantyDesc" value="{{ initialState.warrantyDesc }}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item{{editProduct.get('sku').invalid && editProduct.get('sku').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="sku" class="vms-element-form-item__label" style="width: 120px;">SKU:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <input autocomplete="off" type="text" class="vms-element-input__inner" formControlName="sku" value="{{ initialState.sku }}" />
+                            </div>
+                            <p class="err-info" style="display: none;"></p>
+                            <ng-container *ngIf="editProduct.get('sku').invalid && editProduct.get('sku').touched">
+                                <div class="vms-element-form-item__error" *ngIf="editProduct.get('sku').errors['required']">SKU không được để trống</div>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item{{editProduct.get('category_id').invalid && editProduct.get('category_id').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="category_id" class="vms-element-form-item__label" style="width: 120px;">Danh mục:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <i class="vms-element-input__icon vms-element-icon-caret-top"></i>
+                                <select class="vms-element-input__inner" formControlName="category_id">
+                                    <option value="{{ category.id }}" *ngFor="let category of (browseState | async).categories">{{ category.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item{{editProduct.get('algorithm_id').invalid && editProduct.get('algorithm_id').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="algorithm_id" class="vms-element-form-item__label" style="width: 120px;">Thuật toán:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <i class="vms-element-input__icon vms-element-icon-caret-top"></i>
+                                <select class="vms-element-input__inner" formControlName="algorithm_id">
+                                    <option value="{{ algorithm.id }}" *ngFor="let algorithm of algorithmList">{{ algorithm.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item{{editProduct.get('price').invalid && editProduct.get('price').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="price" class="vms-element-form-item__label" style="width: 120px;">Giá sản phẩm:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <input autocomplete="off" placeholder="Ví dụ: 17500.92" type="number" min="0.00" max="999999999.99" step="0.01" class="vms-element-input__inner" formControlName="price" value="{{ initialState.price }}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item{{editProduct.get('pricePromotion').invalid && editProduct.get('pricePromotion').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="pricePromotion" class="vms-element-form-item__label" style="width: 120px;">Giá sản phẩm (Promotion):</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <input autocomplete="off" placeholder="Ví dụ: 17500.92" type="number" min="-1.00" max="999999999.99" step="0.01" class="vms-element-input__inner" formControlName="pricePromotion" value="{{ initialState.pricePromotion }}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item{{editProduct.get('quantity').invalid && editProduct.get('quantity').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="quantity" class="vms-element-form-item__label" style="width: 120px;">Số lượng:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                        <div class="vms-element-input">
+                            <input autocomplete="off" type="number" class="vms-element-input__inner" formControlName="quantity" value="{{ initialState.quantity }}" />
+                        </div>
+                        <p class="err-info" style="display: none;"></p>
+                        <ng-container *ngIf="editProduct.get('quantity').invalid && editProduct.get('quantity').touched">
+                            <div class="vms-element-form-item__error" *ngIf="editProduct.get('quantity').errors['required']">Số lượng không được để trống</div>
+                        </ng-container>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item is-required" style="position: relative;">
+                        <label for="flag" class="vms-element-form-item__label" style="width: 120px;">Cờ sản phẩm:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <i class="vms-element-input__icon vms-element-icon-caret-top"></i>
+                                <select class="vms-element-input__inner" formControlName="flag">
+                                    <option value="NULL">Không</option>
+                                    <option value="FLAG_SPOT_ORDER">Giao ngay</option>
+                                    <option value="FLAG_FEATURE_ORDER">Đặt trước</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item{{editProduct.get('hps').invalid && editProduct.get('hps').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="hps" class="vms-element-form-item__label" style="width: 120px;">Hps:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <input autocomplete="off" type="number" class="vms-element-input__inner" formControlName="hps" value="{{ initialState.hps }}" />
+                            </div>
+                            <p class="err-info" style="display: none;"></p>
+                            <ng-container *ngIf="editProduct.get('hps').invalid && editProduct.get('hps').touched">
+                                <div class="vms-element-form-item__error" *ngIf="editProduct.get('hps').errors['required']">Hps không được để trống</div>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item{{editProduct.get('weight').invalid && editProduct.get('weight').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="weight" class="vms-element-form-item__label" style="width: 120px;">Trọng lượng sản phẩm:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <input autocomplete="off" type="text" class="vms-element-input__inner" formControlName="weight" value="{{ initialState.weight }}" />
+                            </div>
+                            <p class="err-info" style="display: none;"></p>
+                            <ng-container *ngIf="editProduct.get('weight').invalid && editProduct.get('weight').touched">
+                                <div class="vms-element-form-item__error" *ngIf="editProduct.get('weight').errors['required']">Trọng lượng không được để trống</div>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item" style="position: relative;">
+                        <label for="shippingInfo" class="vms-element-form-item__label" style="width: 120px;">Thông tin ship:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <input autocomplete="off" type="text" rows="5" maxlength="30" class="vms-element-input__inner" formControlName="shippingInfo" value="{{ initialState.shippingInfo }}" />
+                            </div>
+                        </div>
+                    </div>
+                    <input #processFileInput type='file' style="display: none;" (change)="processFile($event.target)" accept="image/*" />
+                    <div class="vms-element-form-item" style="position: relative;">
+                        <label for="price" class="vms-element-form-item__label" style="width: 120px;">Hình ảnh sản phẩm:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <div class="uploadbox" ngClass="{{dragAreaClass}}" draggable="true" (click)="processFileInput.click();">
+                                    <input
+                                        #imageInput
+                                        type="file"
+                                        name="img"
+                                        accept=".png, .jpg, .jpeg, .gif, .bmp"
+                                        data-size="Max image size 5Mb"
+                                        data-dimensions="Max image dimensions 3000x3000px"
+                                        (change)="processFile(imageInput)"
+                                        style="display: none;"
+                                    />
+                                    <i aria-label="icon: plus" class="vmsicon vmsicon-plus" style="font-size: 32px;">
+                                        <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path><path d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"></path></svg>
+                                    </i>
+                                    <font>Tải ảnh sản phẩm lên</font>
+                                    <font class="upload-tips">
+                                        Cloud Notevn không hỗ trợ transparent
+                                    </font>
+                                </div>
+                                <div class="files">
+                                    <div class="file text-muted" *ngFor="let file of productImages;">
+                                        <i class="far fa-file-image icon"></i> <a href="{{ file.imageUrl }}">{{ file.alt_Name }}</a> <a (click)="onAdminClickRemoveImage(file.imageUrl)"><img src="./assets/cross.png" style="width: 10px;"/></a>
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="vms-element-dialog__footer">
+                <div class="dialog-footer">
+                    <button type="button" class="vms-element-button vms-element-button--warning vms-apc-remove-btn" (click)="toggleActive()">
+                        <span>{{ initialState.isActive ? 'Vô hiệu hóa' : 'Kích hoạt' }}</span>
+                    </button>
+                    <button type="button" class="vms-element-button vms-element-button--default" (click)="onUserClickClose()">
+                        <span>Hủy bỏ</span>
+                    </button>
+                    <button type="button" class="vms-element-button vms-element-button--primary" (click)="onEditSubmitted()">
+                        <span>Lưu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,115 @@
+<div class="content" style="min-height: 380px;">
+  <div class="order-details">
+    <div class="steps">
+      <div>
+          <span>
+              <em class="step-done"><i class="vms-iv-icon vms-iv-icon-checkmark"></i></em>
+          </span>
+          <p translate>Giỏ hàng</p>
+      </div>
+      <div>
+          <span>
+              <em class=""><i>2</i></em>
+          </span>
+          <p translate>Thông tin order</p>
+      </div>
+      <div>
+          <span>
+              <em class=""><i>3</i></em>
+          </span>
+          <p translate>Thanh toán</p>
+      </div>
+      <div>
+          <span>
+              <em class=""><i>4</i></em>
+          </span>
+          <p translate>Hoàn thành</p>
+      </div>
+    </div>
+    <ng-container *ngIf="(cartState | async).cart && (cartState | async).cart.cartItems.length > 0">
+    <table class="orderDetailsTable">
+      <thead>
+        <tr>
+          <th class="check">
+            <label class="checkAll vms-iv-checkbox-wrapper{{ !allDisabled ? ' vms-iv-checkbox-wrapper-checked' : ''}}" (click)="onUserClickCheckerHF()" style="font-size: 10px;">
+              <span class="vms-iv-checkbox{{ !allDisabled ? ' vms-iv-checkbox-checked' : ''}}"><span class="vms-iv-checkbox-inner"></span> <input type="checkbox" class="vms-iv-checkbox-input" /></span> {{ 'Chọn tất cả' | translate }}
+            </label>
+          </th>
+          <th class="commodity" translate>Tên hàng</th>
+          <th class="price" translate>Giá</th>
+          <th class="quantity" translate>Số lượng</th>
+          <th class="subtotal" translate>Tổng phụ</th>
+          <th class="operation" translate>Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cartItem of (cartState | async).cart.cartItems">
+          <td class="check">
+            <label class="vms-iv-checkbox-wrapper{{ onSelectItem[cartItem.id] ? ' vms-iv-checkbox-wrapper-checked' : ''}}" (click)="onUserClickCheckerIvu(cartItem.id)">
+              <span class="vms-iv-checkbox{{ onSelectItem[cartItem.id] ? ' vms-iv-checkbox-checked' : ''}}">
+                <span class="vms-iv-checkbox-inner"></span>
+                <input type="checkbox" class="vms-iv-checkbox-input" />
+              </span>
+            </label>
+          </td>
+          <td class="commodity">
+            <img [src]="cartItem.product.productImages.length !== 0 ? cartItem.product.productImages[0].imageUrl : 'https://cdn.notevn.com/DzPbjDuoi.png'" alt="{{ cartItem.product.productImages.length !== 0 ? cartItem.product.productImages[0].alt_name : 'placeholder' }}" class="productImg" />
+            <div>
+              <a routerLink="/detail/{{ cartItem.product.id }}" title="{{ cartItem.product.name }}" class="productLink">{{ cartItem.product.name }}</a>
+              <span class="invalidCondition PREP_SALE" *ngIf="cartItem.product.productInventory.flag === 'FLAG_FEATURE_ORDER'" translate>Đặt Trước</span>
+            </div>
+          </td>
+          <td class="price">{{ (cartItem.product.pricePromotion !== 0 ? cartItem.product.pricePromotion : cartItem.product.price) * currencyRate | currency: currency }}</td>
+          <td class="quantity">
+            <div class="disableLayer"></div>
+            <button class="reduce" (click)="amountDecrement(cartItem.id)">-</button>
+            <input value="{{cartItem.quantity}}" type="number" (change)="onUserProductAmountChange($event, cartItem.id)" />
+            <button class="add" (click)="amountIncrement(cartItem.id)">+</button>
+          </td>
+          <td class="subtotal">
+            <span>{{ cartItem.quantity * (cartItem.product.pricePromotion !== 0 ? cartItem.product.pricePromotion : cartItem.product.price) * currencyRate | currency: currency }}</span>
+          </td>
+          <td class="operation">
+            <span class="delete" (click)="removeFromCart(cartItem.id)" translate>Xóa</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div id="orderDetailsFoot">
+      <div id="buttonSet">
+        <label class="checkAll vms-iv-checkbox-wrapper{{ !allDisabled ? ' vms-iv-checkbox-wrapper-checked' : ''}}" (click)="onUserClickCheckerHF()">
+          <span class="vms-iv-checkbox{{ !allDisabled ? ' vms-iv-checkbox-checked' : ''}}"><span class="vms-iv-checkbox-inner"></span> <input type="checkbox" class="vms-iv-checkbox-input" /></span> {{ 'Chọn tất cả' | translate }}
+        </label>
+        <div id="deleteAndClear">
+            <button type="button" [disabled]="allDisabled" class="vms-iv-btn vms-iv-btn-text" (click)="onUserClickDeleteSelecting()">
+                <span translate>Xóa</span>
+            </button>
+            <div class="vms-iv-poptip">
+                <div class="vms-iv-poptip-rel">
+                    <button type="button" [disabled]="allDisabled" class="vms-iv-btn vms-iv-btn-text" (click)="clearAllTxt()">
+                        <span translate>Hủy tất cả</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div></div>
+      <div>
+        <div id="itemsTotal" translate>
+            Tổng:&nbsp;
+            <span class="base">{{ ((cartState | async).cart.total + totalDisabledPrice) * currencyRate | currency: currency }}</span>
+        </div>
+        <div id="totalMoney">
+            <div id="submitBottonSet">
+                <button class="submitOrderDetails{{ (((cartState | async).cart.total + totalDisabledPrice) === 0 || isLoading) ? ' disabled' : '' }}" (click)="activatePurchase()" [disabled]="(((cartState | async).cart.total + totalDisabledPrice) === 0 || isLoading) ? 'disabled' : false">
+                  <span translate>Checkout</span>
+                </button>
+            </div>
+        </div>
+      </div>
+    </div>
+    </ng-container>
+  </div>
+  <app-empty-cart *ngIf="!(cartState | async).cart || (cartState | async).cart && (cartState | async).cart.cartItems.length === 0"></app-empty-cart>
+</div>
+

@@ -1,0 +1,536 @@
+.property  {
+    -ms-flex-direction: row;
+    -ms-flex-pack: justify;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: justify;
+    -webkit-flex-direction: row;
+    -webkit-justify-content: space-between;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 60px
+}
+
+.property .gallery  {
+    height: 507px;
+    width: 540px
+}
+
+.property .gallery .avatar  {
+    -ms-flex-align: center;
+    -ms-flex-pack: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    height: 405px;
+    justify-content: center;
+    margin: 0 auto;
+    width: 540px
+}
+
+.property .gallery .avatar.image-inactive  {
+    display: none!important
+}
+
+.property .gallery .avatar img  {
+    max-height: 100%;
+    max-width: 100%
+}
+
+.property .gallery .thumbs  {
+    -ms-flex-pack: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px
+}
+
+.property .gallery .thumbs a  {
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    float: left;
+    height: 48px;
+    overflow: hidden;
+    width: 64px
+}
+
+.property .gallery .thumbs a.active  {
+    border-color: #E00;
+    box-shadow: 0 0 0 1px #E00
+}
+
+.property .gallery .thumbs a+a  {
+    margin-left: 10px
+}
+
+.property .gallery .thumbs a img  {
+    margin: auto;
+    max-height: 100%
+}
+
+.property .gallery.fixed  {
+    position: fixed;
+    top: 0
+}
+
+.property .gallery.fixed .avatar  {
+    margin: 0 auto
+}
+
+.property .gallery.fixed.unfixed  {
+    position: static
+}
+
+.property .summary  {
+    width: 540px
+}
+
+.property .summary.fixed  {
+    margin-left: 660px
+}
+
+.property .summary.fixed.unfixed  {
+    margin-left: 0
+}
+
+.property .summary .info h1  {
+    -ms-flex-pack: justify;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 30px;
+    font-weight: 500;
+    justify-content: space-between;
+    line-height: 42px;
+    margin: 0
+}
+
+.property .summary .info h1 span  {
+    display: inline-block;
+    vertical-align: middle
+}
+
+.property .summary .info h1 .sub  {
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+    cursor: pointer;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.property .summary .info h1 .sub img  {
+    height: 36px;
+    width: 36px
+}
+
+.property .summary .info p.text  {
+    font-size: 16px;
+    margin-top: 23px
+}
+
+.property .summary .info .price  {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 20px 0
+}
+
+.property .summary .info div.dimensions  {
+    -ms-flex-direction: row;
+    -ms-flex-wrap: wrap;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 50px
+}
+
+.property .summary .info div.dimensions p.text  {
+    -ms-flex-align: center;
+    -ms-flex-pack: start;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    align-items: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 16px;
+    height: 36px;
+    justify-content: flex-start;
+    margin: 0 0 20px;
+    width: 50%
+}
+
+.property .summary .info div.dimensions p.text img  {
+    margin-right: 20px
+}
+
+.property .summary .info div.dimensions p.onePart ,.property .summary .info div.dimensions p.threeParts  {
+    width: 100%
+}
+
+.property .summary .priceAndValue  {
+    -ms-flex-align: center;
+    -ms-flex-pack: justify;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    align-items: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 40px;
+    padding-top: 40px
+}
+
+.property .summary .priceAndValue p.price  {
+    font-size: 24px;
+    line-height: 33px
+}
+
+.property .parts ul  {
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    list-style: none;
+    user-select: none
+}
+
+.property .parts ul li  {
+    -ms-flex-align: center;
+    -ms-flex-direction: row;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    align-items: center;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    flex-direction: row;
+    height: 120px;
+    overflow: hidden;
+    padding: 0 41px 0 30px;
+    width: 540px
+}
+
+.property .parts ul li+li  {
+    margin-top: 10px
+}
+
+.property .parts ul li.invalid  {
+    cursor: not-allowed
+}
+
+.property .parts ul li.active  {
+    border-color: #E00;
+    box-shadow: 0 0 0 1px #E00;
+    position: relative
+}
+
+.property .parts ul li .avatar  {
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    float: left;
+    height: 118px;
+    width: 118px
+}
+
+.property .parts ul li .avatar img  {
+    margin: auto;
+    width: 100%
+}
+
+.property .parts ul li .text  {
+    padding-left: 27px;
+    width: 100%
+}
+
+.property .parts ul li .text h3  {
+    color: #000;
+    font-size: 20px;
+    font-weight: 500;
+    height: 56px;
+    line-height: 28px;
+    overflow: hidden
+}
+
+.property .parts ul li .text .brief  {
+    -ms-flex-pack: justify;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 12px;
+    justify-content: space-between;
+    line-height: 17px;
+    margin-top: 11px
+}
+
+.property .parts ul li .text .brief .price  {
+    font-weight: 500
+}
+
+.property .parts ul li .text .brief .quantity  {
+    opacity: .4
+}
+
+.property .spec  {
+    border-top: 1px solid #ddd;
+    padding: 30px 0 40px
+}
+
+.property .spec .label  {
+    display: block;
+    font-size: 20px;
+    line-height: 28px;
+    margin-bottom: 30px
+}
+
+.property .total  {
+    padding-top: 30px
+}
+
+.property .total .label  {
+    display: inline-block;
+    font-size: 20px;
+    line-height: 36px;
+    margin-right: 30px
+}
+
+.property .total .value  {
+    color: #E00;
+    font-size: 24px;
+    font-weight: 400
+}
+
+.property .action .buttons  {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding-top: 54px
+}
+
+.property .action .buttons button  {
+    font-size: 16px;
+    height: 70px;
+    width: 260px
+}
+
+.property .action .buttons button+button  {
+    margin-left: 20px
+}
+
+.productDetail  {
+    margin-top: 93px
+}
+
+.productDetail .controllers  {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 16px;
+    height: 92px;
+    line-height: 92px;
+    z-index: 1
+}
+
+.productDetail .controllers.fixed  {
+    -ms-flex-pack: justify;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    background-color: #fff;
+    justify-content: space-between;
+    position: fixed;
+    top: 0
+}
+
+.productDetail .controllers.new  {
+    -ms-flex-direction: row;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    border-bottom: 1px solid #f0f1f2;
+    flex-direction: row;
+    width: 1200px
+}
+
+.productDetail .controllers.new .nameAndPrice  {
+    -ms-flex-direction: column;
+    -ms-flex-pack: center;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: center;
+    -webkit-flex-direction: column;
+    -webkit-justify-content: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 360px
+}
+
+.productDetail .controllers.new .nameAndPrice .name  {
+    border-bottom-width: 0;
+    line-height: 28px;
+    max-height: 56px;
+    overflow: hidden;
+    text-align: left
+}
+
+.productDetail .controllers.new .nameAndPrice .price  {
+    line-height: 20px;
+    margin-top: 5px
+}
+
+.productDetail .controllers.new .spansAndButtons  {
+    -ms-flex-direction: row;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: row
+}
+
+.productDetail .controllers.new .spansAndButtons>.spans span  {
+    border-bottom-width: 0;
+    border-left: 1px solid #f0f1f2;
+    padding: 0 10px
+}
+
+.productDetail .controllers.new .spansAndButtons>.spans span :first-of-type {
+    border-width: 0
+}
+
+.productDetail .controllers.new .spansAndButtons>.buttons  {
+    margin-left: 30px
+}
+
+.productDetail .controllers.new .spansAndButtons>.buttons .bt-button  {
+    height: 50px;
+    width: 120px
+}
+
+.productDetail .controllers.new .spansAndButtons>.buttons .po-button  {
+    width: auto!important
+}
+
+.productDetail .controllers span  {
+    -webkit-transition: color .4s ease;
+    text-align: center;
+    transition: color .4s ease
+}
+
+.productDetail .controllers span.descTab  {
+    border-bottom: 2px solid #f0f1f2;
+    cursor: pointer
+}
+
+.productDetail .controllers span.active  {
+    border-bottom: 2px solid #E00;
+    color: #E00
+}
+
+.productDetail .controllers span :hover {
+    cursor: pointer
+}
+
+.productDetail .article  {
+    margin-bottom: 0;
+    margin-top: 70px;
+    padding: 0
+}
+
+.productDetail .article.fixed  {
+    margin-top: 255px
+}
+
+.productDetail .article .tuple+.tuple  {
+    border-top: 1px solid #ddd
+}
+
+.productDetail .article .tuple .type  {
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: 30px
+}
+
+.productDetail .article .tuple .info  {
+    font-size: 14px!important
+}
+
+.productDetail .article .tuple .info :after {
+    clear: both;
+    content: " ";
+    display: block;
+    height: 0;
+    visibility: hidden
+}
+
+.wrapper {
+  margin: 0 auto;
+  padding: 0 10px;
+  width: 1220px
+}
+
+::ng-deep .ngxImageZoomContainer > img {
+    max-height: 450px!important;
+}

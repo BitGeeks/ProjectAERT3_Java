@@ -1,0 +1,282 @@
+.salesOrder {
+    width: 100%;
+    padding-bottom: 23px;
+}
+table {
+    width: 100%;
+}
+div.table {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    margin-top: 20px;
+    width: 880px;
+    height: 40px;
+    background-color: #f8f8f8;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+div.table p {
+    display: inline-block;
+    line-height: 1.2;
+    text-align: center;
+    color: #757575;
+    font-size: 12px;
+}
+div.order > div:first-of-type {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    margin-top: 20px;
+}
+div.order > div:first-of-type p {
+    display: inline-block;
+    line-height: 37px;
+}
+div.order > div:first-of-type p.amount,
+div.order > div:first-of-type p.id,
+div.order > div:first-of-type p.time,
+div.order > div:first-of-type p.total {
+    font-size: 12px;
+    color: #b0b0b0;
+}
+div.order > div:first-of-type p.id {
+    color: #757575;
+}
+div.order div.products_ope {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    border-bottom: 1px solid hsla(0, 0%, 74%, 0.4);
+    border-bottom-width: 0.5px;
+}
+div.order div.products_ope div.products {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+div.order div.products_ope div.products div.product {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    border-right: 1px solid hsla(0, 0%, 74%, 0.4);
+    border-right-width: 0.5px;
+}
+div.order div.products_ope div.products div.product div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    min-height: 116px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+div.order div.products_ope div.products div.product div.commodity {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+}
+div.order div.products_ope div.products div.product div.commodity div.imgHolder {
+    width: 80px;
+    height: 80px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin-right: 5px;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+div.order div.products_ope div.products div.product div.commodity div.imgHolder img {
+    max-height: 80px;
+    max-width: 80px;
+}
+div.order div.products_ope div.products div.product div.commodity div.worldsHolder {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    width: 140px;
+    min-height: 80px;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+div.order div.products_ope div.products div.product div.commodity div.worldsHolder p {
+    color: #333;
+    line-height: 24px;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+div.order div.products_ope div.products div.product div.commodity:hover div.worldsHolder p {
+    color: #E00;
+}
+div.order div.products_ope div.ope {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+div.order div.products_ope div.ope div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 116px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+}
+div.order div.products_ope div.ope div.operation,
+div.order div.products_ope div.ope div.status {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+div.order div.products_ope div.ope div.operation div.pay {
+    width: 100px;
+    height: 30px;
+    color: #333;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+div.order div.products_ope div.ope div.operation div.pay:hover {
+    cursor: pointer;
+}
+div.order div.products_ope div.ope div.operation div.pay {
+    background: #E00;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 700;
+    font-family: Arial;
+}
+div.order div.products_ope div.ope div.operation div.pay:hover {
+    opacity: 0.8;
+}
+div.order div.paymentMethod,
+div.order div.productAmount,
+div.order div.quantity,
+div.order div.status,
+div.order div.unitPrice {
+    color: #757575;
+}
+div.order,
+div.table {
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+div.order .commodity,
+div.table .commodity {
+    width: 166px;
+}
+div.order .unitPrice,
+div.table .unitPrice {
+    width: 80px;
+    -webkit-box-pack: end !important;
+    -ms-flex-pack: end !important;
+    justify-content: flex-end !important;
+}
+div.order .quantity,
+div.table .quantity {
+    width: 70px;
+    -ms-flex-pack: end !important;
+}
+div.order .productAmount,
+div.table .productAmount {
+    width: 200px;
+    text-align: center;
+    padding-right: 20px;
+    -webkit-box-pack: end !important;
+    -ms-flex-pack: end !important;
+}
+div.order .paymentMethod,
+div.table .paymentMethod {
+    width: 110px;
+}
+div.order .status,
+div.table .status {
+    width: 120px;
+    text-align: center;
+}
+div.order .operation,
+div.table .operation {
+    width: 110px;
+}
+.page {
+    display: block;
+    width: 100%;
+    margin: 20px auto;
+    text-align: center;
+}
+.notice {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-top: 40px;
+}
+h2 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    font-weight: 400;
+    line-height: 1;
+}
+h2 .title {
+    -ms-flex: 1;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    font-size: 20px;
+    font-weight: 700;
+}
+.filter {
+    border-bottom: 1px solid #e5e5e5;
+}
+.filter .item {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    height: 38px;
+    margin-right: 30px;
+    min-width: 60px;
+    text-align: center;
+}
+.filter .item.active {
+    border-bottom: 2px solid #E00;
+    color: #E00;
+}
+
+div.worldsHolder {
+    width: 86px;
+}

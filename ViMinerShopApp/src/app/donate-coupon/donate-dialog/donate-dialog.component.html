@@ -1,0 +1,76 @@
+<div class="donate-dialog">
+    <div class="v-modal" style="z-index: 2000;"></div>
+    <div class="vms-element-dialog__wrapper" style="z-index: 2001;">
+        <div class="vms-element-dialog vms-element-dialog--small" style="top: 15%;">
+            <div class="vms-element-dialog__header">
+                <span class="vms-element-dialog__title">Donate coupon</span><button type="button" aria-label="Close" class="vms-element-dialog__headerbtn" (click)="onUserClickCloseDialog()"><i class="vms-element-dialog__close vms-element-icon vms-element-icon-close"></i></button>
+            </div>
+            <div class="vms-element-dialog__body">
+                <div class="couponDonate" style="width: 626px">
+                    <form [formGroup]="donateDialog" (ngSubmit)="onDonateSubmitted()">
+                        <table class="modal_table" *ngIf="couponState">
+                            <tr>
+                                <td style="width: 145px;">
+                                    Coupon ID
+                                </td>
+                                <td>
+                                    <input class="vms-element-input__inner ng-pristine ng-invalid ng-touched" disabled placeholder="Nhập Coupon ID" value="{{ couponState.id }}" formControlName="id" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 145px;">
+                                    Mã coupon
+                                </td>
+                                <td>
+                                    <input class="vms-element-input__inner ng-pristine ng-invalid ng-touched" disabled placeholder="Mã coupon" value="{{ couponState.code }}" formControlName="code" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 145px;">
+                                    ID người dùng
+                                </td>
+                                <td>
+                                    <input class="vms-element-input__inner ng-pristine ng-invalid ng-touched" disabled placeholder="userID" value="{{ couponState.user_id }}" formControlName="userId" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 145px;">
+                                    Loại
+                                </td>
+                                <td>
+                                    <input class="vms-element-input__inner ng-pristine ng-invalid ng-touched" disabled placeholder="userID" value="{{ couponState.couponType }}" formControlName="couponType" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 145px;">
+                                    Số coupon
+                                </td>
+                                <td>
+                                    <input class="vms-element-input__inner ng-pristine ng-invalid ng-touched" placeholder="Số lượng coupon" value="{{ couponState.couponNumber }}" (change)="onUserCouponNumberChange($event)" formControlName="couponNumber" type="number" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 145px;">
+                                    Email người nhận
+                                </td>
+                                <td>
+                                    <input class="vms-element-input__inner ng-pristine ng-invalid ng-touched" placeholder="Email user nhận" formControlName="receiveMail" type="email" />
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="vms-element-dialog__footer">
+                <div class="dialog-footer">
+                    <button type="button" class="vms-element-button vms-element-button--default" (click)="onUserClickCloseDialog()">
+                        <span>Hủy bỏ</span>
+                    </button>
+                    <button type="button" class="vms-element-button vms-element-button--primary" (click)="onDonateSubmitted()">
+                        <span>Donate</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

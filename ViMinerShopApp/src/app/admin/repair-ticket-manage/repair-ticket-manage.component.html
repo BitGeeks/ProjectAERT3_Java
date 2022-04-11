@@ -1,0 +1,58 @@
+<div class="vms_apc-main col-lg-8 col-md-8 col-sm-8 clo-xs-12">
+    <h4 class="vms_apc-main-header">
+        <span>Quản lý phiếu sửa chữa</span>
+    </h4>
+
+    <div class="vms_apc-main-tabs viminer-tabs">
+        <a class="vms_apc-main-tabs-item viminer-tabs-item{{ activeTab === 0 ? ' active' : '' }}" (click)="onAdminSwitchTab(0)">Tất cả</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item{{ activeTab === 1 ? ' active' : '' }}" (click)="onAdminSwitchTab(1)">Chưa nhận</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item{{ activeTab === 2 ? ' active' : '' }}" (click)="onAdminSwitchTab(2)">Đã nhận</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item{{ activeTab === 3 ? ' active' : '' }}" (click)="onAdminSwitchTab(3)">Đang chờ</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item{{ activeTab === 4 ? ' active' : '' }}" (click)="onAdminSwitchTab(4)">Sẽ nhận sau</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item{{ activeTab === 5 ? ' active' : '' }}" (click)="onAdminSwitchTab(5)">Hoàn thành</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item{{ activeTab === 6 ? ' active' : '' }}" (click)="onAdminSwitchTab(6)">Hủy bỏ</a>
+    </div>
+
+    <div class="vms-admin-container">
+        <div class="repair-table" style="overflow-x: auto;">
+            <table border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>ID người dùng</th>
+                        <th>Trạng thái (vé/đơn)</th>
+                        <th>Lý do</th>
+                        <th>Phí sửa chữa</th>
+                        <th>Thời gian</th>
+                        <th>Cập nhật</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let ticket of ticketList">
+                        <td>{{ ticket.id }}</td>
+                        <td>{{ ticket.user_id }}</td>
+                        <td>{{ renderTicketStatus(ticket.status) }}/{{ renderRepairOrderStatus(ticket.repairOrder !== null ? ticket.repairOrder.status : 0) }}</td>
+                        <td>{{ ticket.ticketReason }}</td>
+                        <td>${{ ticket.repairOrder !== null ? ticket.repairOrder.price : '0' }}</td>
+                        <td>{{ ticket.created_at | date: "dd/MM/yyyy HH:ss" }}</td>
+                        <td>
+                            <a href="javascript:" (click)="updateTicketStatus(ticket)">Phiếu</a> / <a href="javascript:" (click)="editOrderRepair(ticket)">Đơn</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="page" *ngIf="ticketList && ticketList.length !== 0">
+      <ul class="vms-iv-page">
+          <li title="Trang Trước" class="vms-iv-page-prev{{ disablePrevPageBtn ? ' vms-iv-page-disabled' : '' }}" (click)="userClickPreviousPage()">
+              <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-left"></i></a>
+          </li>
+          <li title="{{ page + 1 }}" class="vms-iv-page-item vms-iv-page-item-active"><a>{{ page + 1 }}</a></li>
+          <li title="Trang Tiếp Theo" class="vms-iv-page-next{{ disableNextPageBtn ? ' vms-iv-page-disabled' : '' }}" (click)="userClickNextPage()">
+              <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-right"></i></a>
+          </li>
+      </ul>
+    </div>
+</div>

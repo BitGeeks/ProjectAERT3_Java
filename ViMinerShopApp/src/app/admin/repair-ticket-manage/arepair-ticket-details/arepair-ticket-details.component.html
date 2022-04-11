@@ -1,0 +1,77 @@
+<div class="vms-dialog-1">
+    <div class="v-modal" style="z-index: 2000;"></div>
+    <div class="vms-element-dialog__wrapper" style="z-index: 2001;">
+        <div class="vms-element-dialog vms-element-dialog--small" style="top: 15%;">
+            <div class="vms-element-dialog__header">
+                <span class="vms-element-dialog__title">Chi tiết phiếu sửa</span><button type="button" aria-label="Close" class="vms-element-dialog__headerbtn" (click)="onUserClickClose()"><i class="vms-element-dialog__close vms-element-icon vms-element-icon-close"></i></button>
+            </div>
+            <div class="vms-element-dialog__body" *ngIf="initialState">
+                <p class="vms-element-dialog__paragraph">
+                    ID vé: {{ initialState.id }}
+                </p>
+                <p class="vms-element-dialog__paragraph">
+                    ID người dùng: {{ initialState.user_id }}
+                </p>
+                <p class="vms-element-dialog__paragraph">
+                    Trạng thái vé: {{ initialState.status }}
+                </p>
+                <p class="vms-element-dialog__paragraph">
+                    Lý do yêu cầu: {{ initialState.ticketReason }}
+                </p>
+                <p class="vms-element-dialog__paragraph">
+                    Mã theo dõi: {{ initialState.trackingNo }}
+                </p>
+                <p class="vms-element-dialog__paragraph">
+                    ID đơn vị vận chuyển: {{ initialState.shippingLogisticsId }}
+                </p>
+                <p class="vms-element-dialog__paragraph">
+                    Địa chỉ khách hàng: {{ initialState.customerAddress }}
+                </p>
+                <p class="vms-element-dialog__paragraph">
+                    ID đơn vị sửa chữa: {{ initialState.repairSiteId }}
+                </p>
+                <p class="vms-element-dialog__paragraph">
+                    ID đơn vị trả hàng: {{ initialState.returnLogisticsId }}
+                </p>
+                <p class="vms-element-dialog__paragraph">
+                    Ghi chú: {{ initialState.remark }}
+                </p>
+                <p class="vms-element-dialog__paragraph">
+                    Ngày tạo: {{ initialState.created_at | date: "dd/MM/yyyy HH:ss" }}
+                </p>
+                <p class="vms-element-dialog__paragraph">
+                    Ngày cập nhật: {{ initialState.updated_at | date: "dd/MM/yyyy HH:ss" }}
+                </p>
+                <form [formGroup]="editTicketStatus" (ngSubmit)="onEditSubmitted()">
+                    <input type="hidden" formControlName="id" />
+                    <div class="vms-element-form-item is-required" style="position: relative;">
+                        <label for="ticketStatus" class="vms-element-form-item__label" style="width: 120px;">Trạng thái phiếu sửa:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <i class="vms-element-input__icon vms-element-icon-caret-top"></i>
+                                <select class="vms-element-input__inner" formControlName="ticketStatus">
+                                    <option value="0">Chưa nhận</option>
+                                    <option value="1">Đã nhận</option>
+                                    <option value="2">Đang chờ</option>
+                                    <option value="3">Sẽ nhận sau</option>
+                                    <option value="4">Hoàn thành</option>
+                                    <option value="5">Hủy bỏ</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="vms-element-dialog__footer">
+                <div class="dialog-footer">
+                    <button type="button" class="vms-element-button vms-element-button--default" (click)="onUserClickClose()">
+                        <span>Đóng</span>
+                    </button>
+                    <button type="button" class="vms-element-button vms-element-button--primary" (click)="onEditSubmitted()">
+                        <span>Lưu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

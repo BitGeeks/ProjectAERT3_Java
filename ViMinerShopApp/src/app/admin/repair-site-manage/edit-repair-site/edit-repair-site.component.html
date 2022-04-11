@@ -1,0 +1,83 @@
+<div class="vms-dialog-1" *ngIf="initialState">
+    <div class="v-modal" style="z-index: 2000;"></div>
+    <div class="vms-element-dialog__wrapper" style="z-index: 2001;">
+        <div class="vms-element-dialog vms-element-dialog--small" style="top: 15%;">
+            <div class="vms-element-dialog__header">
+                <span class="vms-element-dialog__title">Sửa Đại Lý</span><button type="button" aria-label="Close" class="vms-element-dialog__headerbtn" (click)="onUserClickClose()"><i class="vms-element-dialog__close vms-element-icon vms-element-icon-close"></i></button>
+            </div>
+            <div class="vms-element-dialog__body" *ngIf="initialState">
+                <form [formGroup]="editRepairSite" (ngSubmit)="FormSubmittedEv()">
+                    <div class="vms-element-form-item is-required" style="position: relative;">
+                        <label for="code" class="vms-element-form-item__label" style="width: 120px;">Mã đại lý sửa chữa:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <input autocomplete="off" type="text" readonly class="vms-element-input__inner" formControlName="code" value="{{ initialState.code }}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item{{editRepairSite.get('name').invalid && editRepairSite.get('name').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="name" class="vms-element-form-item__label" style="width: 120px;">Tên đại lý sửa chữa:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                        <div class="vms-element-input">
+                            <input autocomplete="off" type="text" class="vms-element-input__inner" formControlName="name" value="{{ initialState.name }}" />
+                        </div>
+                        <p class="err-info" style="display: none;"></p>
+                        <ng-container *ngIf="editRepairSite.get('name').invalid && editRepairSite.get('name').touched">
+                            <div class="vms-element-form-item__error" *ngIf="editRepairSite.get('name').errors['required']">Tên đại lý sửa chữa không được để trống</div>
+                        </ng-container>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item" style="position: relative;">
+                        <label for="note" class="vms-element-form-item__label" style="width: 120px;">Ghi chú (hỗ trợ HTML):</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                        <div class="vms-element-input">
+                            <textarea rows="5" class="vms-element-textarea__inner" formControlName="note" value="{{ initialState.note }}"></textarea>
+                        </div>
+                        <p class="err-info" style="display: none;"></p>
+                        <ng-container *ngIf="editRepairSite.get('note').invalid && editRepairSite.get('note').touched">
+                            <div class="vms-element-form-item__error" *ngIf="editRepairSite.get('note').errors['required']">Ghi chú không được để trống</div>
+                        </ng-container>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item" style="position: relative;">
+                        <label for="extraInfo" class="vms-element-form-item__label" style="width: 120px;">Ghi chú thêm (hỗ trợ HTML):</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                        <div class="vms-element-input">
+                            <textarea rows="5" class="vms-element-textarea__inner" formControlName="extraInfo" value="{{ initialState.extraInfo }}"></textarea>
+                        </div>
+                        <p class="err-info" style="display: none;"></p>
+                        <ng-container *ngIf="editRepairSite.get('extraInfo').invalid && editRepairSite.get('extraInfo').touched">
+                            <div class="vms-element-form-item__error" *ngIf="editRepairSite.get('extraInfo').errors['required']">Ghi chú thêm không được để trống</div>
+                        </ng-container>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item{{editRepairSite.get('location').invalid && editRepairSite.get('location').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="location" class="vms-element-form-item__label" style="width: 120px;">Vị trí đại lý:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                        <div class="vms-element-input">
+                            <input autocomplete="off" type="text" class="vms-element-input__inner" formControlName="location" value="{{ initialState.location }}" />
+                        </div>
+                        <p class="err-info" style="display: none;"></p>
+                        <ng-container *ngIf="editRepairSite.get('location').invalid && editRepairSite.get('location').touched">
+                            <div class="vms-element-form-item__error" *ngIf="editRepairSite.get('location').errors['required']">Vị trí đại lý không được để trống</div>
+                        </ng-container>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="vms-element-dialog__footer">
+                <div class="dialog-footer">
+                    <button type="button" class="vms-element-button vms-element-button--warning vms-apc-remove-btn" (click)="toggleActive()">
+                        <span>{{ !initialState.isDisabled ? 'Vô hiệu hóa' : 'Kích hoạt' }}</span>
+                    </button>
+                    <button type="button" class="vms-element-button vms-element-button--default" (click)="onUserClickClose()">
+                        <span>Hủy bỏ</span>
+                    </button>
+                    <button type="button" class="vms-element-button vms-element-button--primary" (click)="onEditSubmitted()">
+                        <span>Lưu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

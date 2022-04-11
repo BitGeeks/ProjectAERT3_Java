@@ -1,0 +1,47 @@
+<div class="referral-box">
+  <div class="clearfix vms_apc-main-header">
+    <h2 class="title pull-left">
+      <span translate>Danh sách giới thiệu</span>
+    </h2>
+  </div>
+    <div *ngIf="!referralCode" class="referralDesc">
+        <p translate>
+            Bạn chưa có mã giới thiệu! Vui lòng click vào nút bên dưới để tạo 1 mã
+        </p>
+        <p>
+            <button class="button primary large block fill{{ buttonLoading ? ' disabled' : ''}}" [disabled]="buttonLoading" type="button" style="margin-bottom:'10px';margin-top:'10px';width:'365px'" (click)="createReferralCode()" translate>Tạo mã giới thiệu</button>
+        </p>
+    </div>
+    <div *ngIf="referralCode" class="referralDesc" translate>
+        Mã giới thiệu của bạn là: <code>{{ referralCode }}</code>
+    </div>
+    <div class="record-table" style="overflow-x: auto;">
+        <table border="0" cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+                    <th translate>STT</th>
+                    <th translate>Họ</th>
+                    <th translate>Tên</th>
+                    <th translate>Tên người dùng</th>
+                    <th translate>Số điện thoại</th>
+                    <th translate>Đăng ký ngày</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ref of refData;let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ ref.firstname }}</td>
+                    <td>{{ ref.lastname }}</td>
+                    <td>{{ ref.username }}</td>
+                    <td>{{ ref.telephone }}</td>
+                    <td>{{ record.created_at | date: "dd/MM/yyyy HH:ss" }}</td>
+                </tr>
+                <tr *ngIf="refData && refData.length === 0">
+                    <td colspan="6" translate>
+                        Bạn chưa giới thiệu ai cả!
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

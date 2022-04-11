@@ -1,0 +1,188 @@
+.vms_apc-main {
+    padding: 0;
+    background-color: #fff;
+    box-shadow: 0 1px 4px 0 rgb(35 35 35 / 16%);
+    margin-left: 32px;
+}
+@media (min-width: 1200px) {
+    .col-lg-9 {
+        width: 75%;
+    }
+    .col-lg-1,
+    .col-lg-10,
+    .col-lg-11,
+    .col-lg-12,
+    .col-lg-2,
+    .col-lg-3,
+    .col-lg-4,
+    .col-lg-5,
+    .col-lg-6,
+    .col-lg-7,
+    .col-lg-8,
+    .col-lg-9 {
+        float: left;
+    }
+    .col-lg-8 {
+        width: 66.66666667%;
+    }
+}
+.vms_apc-main-header {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 30px;
+    font-size: 18px;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
+    padding: 0;
+}
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+a {
+    color: #E00;
+    text-decoration: none;
+}
+.vms_apc-main-tabs {
+    padding: 0 30px;
+    margin-bottom: 30px;
+}
+.viminer-tabs {
+    padding: 20px 30px;
+}
+.viminer-tabs-item.active {
+    color: #E00;
+    border: 2px solid #E00;
+}
+.vms_apc-main-tabs-item {
+    padding: 8px 30px;
+}
+.viminer-tabs-item {
+    padding: 5px 20px;
+    border-radius: 18px;
+    border: 2px solid #fff;
+    transition: all 0.1s ease;
+}
+.viminer-tabs-item:not(:first-child) {
+    margin-left: 10px;
+}
+[class*=" lnr-"],
+[class^="lnr-"] {
+    font-family: Linearicons-Free;
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.m-0 {
+    margin: 0 !important;
+}
+.vms-admin-container {
+    border-top: 1px solid #ddd;
+    overflow: hidden;
+    min-height: 200px;
+}
+.thread-list-item-container {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 18px 30px;
+}
+.thread-list-item-container:hover {
+    background: rgba(241, 241, 241, 0.3);
+}
+@media (max-width: 767px) {
+    .thread-list-item-container {
+        padding: 15px;
+    }
+}
+body {
+    font-family: Helvetica Neue, PingFang SC, Helvetica, Arial, Hiragino Sans GB, Microsoft Yahei, \\5fae\8f6f\96c5\9ed1, STHeiti, \\534e\6587\7ec6\9ed1, sans-serif;
+    font-size: 14px;
+}
+a {
+    color: #000;
+}
+a:active,
+a:focus,
+a:hover {
+    color: #971e1e;
+    text-decoration: none;
+    outline: 0;
+}
+::-webkit-input-placeholder {
+    color: #b8b9c1;
+    font-weight: 200;
+}
+::-moz-placeholder {
+    color: #b8b9c1;
+    font-weight: 200;
+}
+:-ms-input-placeholder {
+    color: #b8b9c1;
+    font-weight: 200;
+}
+:-moz-placeholder {
+    color: #b8b9c1;
+    font-weight: 200;
+}
+#container {
+    margin: 68px auto 0;
+    background-color: #f1f1f1;
+    min-height: 990px;
+}
+.category-table table {
+    width: 100%;
+}
+.category-table table thead tr th {
+    padding: 15px 20px;
+    background: rgba(4, 0, 0, 0.03);
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    text-align: left;
+}
+.category-table table thead tr th:first-child {
+    border-radius: 6px 0 0 6px;
+}
+.category-table table thead tr th:last-child {
+    border-radius: 0 6px 6px 0;
+}
+.category-table table tbody tr td {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.page {
+    margin-bottom: 5px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align:center
+}

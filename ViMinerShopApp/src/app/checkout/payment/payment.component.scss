@@ -1,0 +1,295 @@
+.content {
+  width: 1180px;
+  margin: 0 auto;
+}
+.steps {
+  text-align: center;
+  margin-top: 24px;
+  margin-bottom: 50px;
+}
+.steps div {
+  position: relative;
+  display: inline-block;
+  width: 140px;
+}
+.steps div span {
+  display: inline-block;
+  text-align: center;
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  border-radius: 50%;
+  background-color: #e8e8e8;
+}
+.steps div span:after,
+.steps div span:before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  width: 62px;
+  height: 8px;
+  background-color: #e8e8e8;
+}
+.steps div span:before {
+  left: -3px;
+}
+.steps div span em {
+  display: inline-block;
+  font-weight: 700;
+  color: #fff;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  border-radius: 50%;
+  background-color: #e8e8e8;
+}
+.steps div p {
+  position: absolute;
+  font-size: 12px;
+  padding-top: 2px;
+  color: #888;
+  width: 100%;
+}
+.steps div:first-child span:before,
+.steps div:last-child span:after {
+  width: 0;
+}
+.steps .step-done {
+  background-color: #78c25a !important;
+}
+.order-confirm .content {
+  margin-top: 20px;
+}
+.title {
+  font-weight: 700;
+  font-size: 16px;
+}
+.order-confirm .content {
+  margin-top: 20px;
+}
+.order-confirm .content .item {
+  margin: 20px 0;
+}
+.order-confirm .foot {
+  text-align: right;
+}
+.order-confirm .foot table {
+  float: right;
+  text-align: right;
+  margin: 20px 15px 20px 0;
+}
+.order-confirm .foot table td {
+  padding: 7px 15px;
+}
+.order-confirm .foot table tr td:nth-child(2) {
+  color: #E00;
+}
+.order-confirm .foot .submit {
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+.order-confirm .foot .submit .button {
+  width: 160px;
+  height: 50px;
+  font-size: 16px;
+  background: #E00;
+  color: #fff;
+}
+.order-confirm .foot .submit .button:hover {
+  border: none;
+}
+.order-confirm .foot .clear-float {
+  border: 1px solid rgba(219, 223, 227, 0.3);
+  margin-bottom: 15px;
+}
+.order-confirm .foot .clear-float:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.user-addr {
+  border: 1px solid rgba(219, 223, 227, 0.3);
+  border-radius: 4px;
+}
+.user-addr .title {
+  line-height: 2;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 5px 0 5px 20px;
+  border-bottom: 1px solid rgba(219, 223, 227, 0.3);
+  border-top: 1px solid rgba(219, 223, 227, 0.3);
+}
+.user-addr .content {
+  margin: 20px 0 20px 20px;
+}
+.user-addr .content > table {
+  color: #888;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+}
+.user-addr .content > table tr td {
+  height: 40px;
+  vertical-align: middle;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  cursor: default;
+}
+.user-addr .content > table tr .td1 {
+  overflow: hidden;
+  width: 140px;
+  text-align: center;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+}
+.user-addr .content > table tr .td2 {
+  width: 690px;
+  max-width: 690px;
+  padding-left: 15px;
+}
+.user-addr .content > table tr .td3 {
+  width: 328px;
+  padding-right: 15px;
+  text-align: right;
+}
+.user-addr .content > table tr .active {
+  border: 2px solid #E00;
+  border-radius: 2px;
+  background: url(https://static.maxmines.com/self/lesongvi/viminershop/icon/ic_ticklist.png)
+      no-repeat right -494px;
+}
+.user-addr .content > table tr:hover .td1 {
+  border: 2px solid #E00;
+  background-color: #f9fafc;
+}
+.user-addr .content > table tr:hover {
+  background-color: rgba(82, 155, 215, 0.1);
+}
+.coupons {
+  border: 1px solid #f2f2f2;
+  border-radius: 4px;
+}
+.coupons .title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  line-height: 2;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 5px 0 5px 20px;
+  border-bottom: 1px solid #f2f2f2;
+}
+.coupons .content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  padding: 30px 0;
+}
+.title {
+  font-weight: 700;
+  font-size: 16px;
+}
+.order-confirm .content {
+  margin-top: 20px;
+}
+.order-confirm .content .item {
+  margin: 20px 0;
+}
+.order-confirm .foot {
+  text-align: right;
+}
+.order-confirm .foot table {
+  float: right;
+  text-align: right;
+  margin: 20px 15px 20px 0;
+}
+.order-confirm .foot table td {
+  padding: 7px 15px;
+}
+.order-confirm .foot table tr td:nth-child(2) {
+  color: #E00;
+}
+.order-confirm .foot .submit {
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+.order-confirm .foot .submit .button {
+  width: 160px;
+  height: 50px;
+  font-size: 16px;
+  background: #E00;
+  color: #fff;
+}
+.order-confirm .foot .submit .button:hover {
+  border: none;
+}
+.order-confirm .foot .clear-float {
+  border: 1px solid rgba(219, 223, 227, 0.3);
+  margin-bottom: 15px;
+}
+.order-confirm .foot .clear-float:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.shopping-method {
+  border: 1px solid rgba(219, 223, 227, 0.3);
+  border-radius: 4px;
+}
+.shopping-method > .title {
+  line-height: 2;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 5px 0 5px 20px;
+  border-bottom: 1px solid rgba(219, 223, 227, 0.3);
+}
+.shopping-method > .title a {
+  color: red;
+  font-size: 14px;
+  font-weight: 400;
+}
+.shopping-method > .title a:hover {
+  text-decoration: underline;
+}
+.shopping-method .content {
+  margin: 30px 20px;
+}
+.shopping-method .content .item {
+  position: relative;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: inline-block;
+  color: #888;
+  border: 1px solid #e8e8e8;
+  height: 40px;
+  min-width: 140px;
+  line-height: 38px;
+  text-align: center;
+  margin: 5px 30px 5px 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: hidden;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 2px;
+}
+.shopping-method .content .item:last-child {
+  margin-right: 0;
+}
+.shopping-method .content .item:hover {
+  color: #E00;
+  overflow: unset;
+}
+.shopping-method .content .item.active {
+  color: #E00;
+  line-height: 36px;
+  border: 2px solid #E00;
+  background: url(https://static.maxmines.com/self/lesongvi/viminershop/icon/ic_ticklist.png)
+      no-repeat right -494px;
+}

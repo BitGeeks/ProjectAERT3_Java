@@ -1,0 +1,38 @@
+<div class="vms_apc-main col-lg-8 col-md-8 col-sm-8 clo-xs-12">
+    <h4 class="vms_apc-main-header">
+        <span>Cài đặt trang web</span>
+    </h4>
+
+    <div class="vms_apc-main-tabs viminer-tabs">
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/settings/slider" routerLinkActive="active">Quản lý slide</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/settings/addSlider" routerLinkActive="active">Thêm slide</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/settings/editNotification" routerLinkActive="active">Sửa thông báo</a>
+    </div>
+
+    <div class="vms-admin-container">
+        <div class="shipping-method-table" style="overflow-x: auto;">
+            <table border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th>Tên slide</th>
+                        <th>Màu</th>
+                        <th>Hình ảnh</th>
+                        <th>Liên kết</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let slide of homePageSlide">
+                        <td>{{ slide.name }}</td>
+                        <td>{{ slide.fillColor }}</td>
+                        <td>{{ slide.imgUrl }}</td>
+                        <td><a [href]="slide.jumpTo">{{ slide.jumpTo }}</a></td>
+                        <td>
+                            <a href="javascript:" (click)="editHomePageSlide(slide)">Chỉnh sửa</a> / <a href="javascript:" (click)="removeSlide(slide)">Xóa</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

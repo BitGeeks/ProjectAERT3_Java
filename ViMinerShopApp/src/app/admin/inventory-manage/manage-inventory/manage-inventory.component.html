@@ -1,0 +1,59 @@
+<div class="vms_apc-main col-lg-8 col-md-8 col-sm-8 clo-xs-12">
+    <h4 class="vms_apc-main-header">
+        <span>Quản lý kho hàng</span>
+    </h4>
+
+    <div class="vms_apc-main-tabs viminer-tabs">
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/inventories/manage" routerLinkActive="active">Quản lý kho hàng</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/inventories/add" routerLinkActive="active">Thêm kho hàng</a>
+    </div>
+
+    <div class="vms-admin-container">
+        <ul class="subscription-list thread-list">
+            <li class="thread-list-item-container row relative" *ngFor="let inventory of inventoryList">
+                <div class="thread-list-item-content col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                    <div class="thread-list-item-content-title">
+                        Kho #{{ inventory.id }}
+                    </div>
+                    <div class="thread-list-item-content-info">
+                        <span class="thread-list-item-content-info-user"> {{ inventory.quantity }} </span>
+            
+                        <div class="thread-list-item-content-info-publish">
+                            <span class="thread-list-item-content-info-publish-icon glyphicon glyphicon-time"></span>
+                            <span class="thread-list-item-content-info-publish-time"> {{ inventory.flag }} </span>
+                        </div>
+            
+                        <div class="thread-list-item-content-info-posts">
+                            <span class="thread-list-item-content-info-posts-icon glyphicon glyphicon-post"></span>
+                            <span class="thread-list-item-content-info-posts-time"> {{ abbreviateNumber(inventory.hps) }}H/s </span>
+                        </div>
+            
+                        <div class="thread-list-item-content-info-views">
+                            <span class="thread-list-item-content-info-views-icon glyphicon glyphicon-view"></span>
+                            <span class="thread-list-item-content-info-views-time"> {{ inventory.weight }}kg </span>
+                        </div>
+            
+                        <div class="thread-list-item-content-info-latest">
+                            <span class="thread-list-item-content-info-latest-icon glyphicon glyphicon-time"></span>
+                            <span class="thread-list-item-content-info-latest-time"> {{ inventory.shippingInfo }} </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="thread-list-item-content-info-track">
+                    <a class="thread-action-track viminer-gray-btn" href="javascript:" (click)="editInventory(inventory)">Chỉnh sửa</a>
+                </div>
+            </li>
+        </ul>
+        <div class="page" *ngIf="inventoryList.length !== 0 || currentPage !== 0">
+            <ul class="vms-iv-page">
+                <li title="Trang Trước" class="vms-iv-page-prev{{ currentPage === 0 ? ' vms-iv-page-disabled' : '' }}" (click)="userClickPreviousPage()">
+                    <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-left"></i></a>
+                </li>
+                <li title="{{ currentPage + 1 }}" class="vms-iv-page-item vms-iv-page-item-active"><a>{{ currentPage + 1 }}</a></li>
+                <li title="Trang Tiếp Theo" class="vms-iv-page-next{{ inventoryList.length === 0 ? ' vms-iv-page-disabled' : '' }}" (click)="userClickNextPage()">
+                    <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-right"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

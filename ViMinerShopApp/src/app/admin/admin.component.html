@@ -1,0 +1,78 @@
+<div class="container-fluid main-container" id="container">
+    <div class="main-container-inside" id="container-inside">
+        <div class="member-container row">
+            <div class="member-sidebar col-lg-3 col-md-3 col-sm-3 clo-xs-12">
+                <nav class="member-sidebar-navigation">
+                    <ul class="member-sidebar-list clearfix">
+                        <li class="member-sidebar-list-item relative">
+                            <a class="member-sidebar-list-item-link" routerLinkActive="active" routerLink="/admin/dashboard">
+                                Bảng điều khiển
+                            </a>
+                        </li>
+                        <li class="member-sidebar-list-item relative">
+                            <a class="member-sidebar-list-item-link" routerLinkActive="active" routerLink="/admin/products">
+                                Sản phẩm
+                            </a>
+                        </li>
+                        <li class="member-sidebar-list-item relative">
+                            <a class="member-sidebar-list-item-link" routerLinkActive="active" routerLink="/admin/categories">
+                                Danh mục
+                            </a>
+                        </li>
+                        <li class="member-sidebar-list-item relative">
+                            <a class="member-sidebar-list-item-link" routerLinkActive="active" routerLink="/admin/algorithms">
+                                Thuật toán
+                            </a>
+                        </li>
+                        <li class="member-sidebar-list-item relative">
+                            <a class="member-sidebar-list-item-link" routerLinkActive="active" routerLink="/admin/orders">
+                                Đơn đặt hàng
+                            </a>
+                        </li>
+                        <li class="member-sidebar-list-item relative">
+                            <a class="member-sidebar-list-item-link" routerLinkActive="active" routerLink="/admin/transactions">
+                                Giao dịch tự động
+                            </a>
+                        </li>
+                        <!--<li class="member-sidebar-list-item relative">
+                            <a class="member-sidebar-list-item-link" routerLinkActive="active" routerLink="/admin/coupons">
+                                Quản lý Coupon
+                            </a>
+                        </li>-->
+                        <li class="member-sidebar-list-item relative">
+                            <a class="member-sidebar-list-item-link" routerLinkActive="active" routerLink="/admin/repairs">
+                                Phiếu sửa chữa
+                            </a>
+                        </li>
+                        <li class="member-sidebar-list-item relative">
+                            <a class="member-sidebar-list-item-link" routerLinkActive="active" routerLink="/admin/repairSites">
+                                Đại lý sửa chữa
+                            </a>
+                        </li>
+                        <!--<li class="member-sidebar-list-item relative">
+                            <a class="member-sidebar-list-item-link" routerLinkActive="active" routerLink="/admin/discounts">
+                                Quản lý Discount
+                            </a>
+                        </li>-->
+                        <li class="member-sidebar-list-item relative">
+                            <a class="member-sidebar-list-item-link" routerLinkActive="active" routerLink="/admin/users">
+                                Người dùng
+                            </a>
+                        </li>
+                        <li class="member-sidebar-list-item relative">
+                            <a class="member-sidebar-list-item-link" routerLinkActive="active" routerLink="/admin/shipping">
+                                Vận chuyển
+                            </a>
+                        </li>
+                        <li class="member-sidebar-list-item relative">
+                            <a class="member-sidebar-list-item-link" routerLinkActive="active" routerLink="/admin/settings">
+                                Cài đặt trang web
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

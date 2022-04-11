@@ -1,0 +1,90 @@
+<div class="vms_apc-main col-lg-8 col-md-8 col-sm-8 clo-xs-12">
+    <h4 class="vms_apc-main-header">
+        <span>Cài đặt trang web</span>
+    </h4>
+
+    <div class="vms_apc-main-tabs viminer-tabs">
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/settings/slider" routerLinkActive="active">Quản lý slide</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/settings/addSlider" routerLinkActive="active">Thêm slide</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/settings/editNotification" routerLinkActive="active">Sửa thông báo</a>
+    </div>
+
+    <div class="main-content">
+        <div class="form-box">
+            <form [formGroup]="addNewHomepageSlide" (ngSubmit)="FormSubmittedEv()">
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Tên slide
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Tên slide" type="text" class="vms-input" value="" formControlName="name" />
+                            <div class="input-error" *ngIf="addNewHomepageSlide.get('name').invalid && addNewHomepageSlide.get('name').touched">Tên slide là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Màu navbar
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Màu navbar" type="text" class="vms-input" value="" formControlName="fillColor" />
+                            <div class="input-error" *ngIf="addNewHomepageSlide.get('fillColor').invalid && addNewHomepageSlide.get('fillColor').touched">Màu navbar là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <input #processFileInput type='file' style="display: none;" (change)="processFile($event.target)" accept="image/*" />
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Hình ảnh slide
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline" *ngIf="imageUrl">
+                            <input placeholder="Hình ảnh slide" type="text" readonly class="vms-input" value="" formControlName="imgUrl" />
+                            <div class="input-error" *ngIf="addNewHomepageSlide.get('imgUrl').invalid && addNewHomepageSlide.get('imgUrl').touched">Hình ảnh slide là bắt buộc</div>
+                        </div>
+                        <div class="uploadbox" ngClass="{{dragAreaClass}}" draggable="true" *ngIf="!imageUrl" (click)="processFileInput.click();">
+                            <input
+                                #imageInput
+                                type="file"
+                                name="img"
+                                accept=".png, .jpg, .jpeg, .gif, .bmp"
+                                data-size="Max image size 5Mb"
+                                data-dimensions="Max image dimensions 3000x3000px"
+                                (change)="processFile(imageInput)"
+                                style="display: none;"
+                            />
+                            <i aria-label="icon: plus" class="vmsicon vmsicon-plus" style="font-size: 32px;">
+                                <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path><path d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"></path></svg>
+                            </i>
+                            <font>Tải ảnh slide lên</font>
+                            <font class="upload-tips">
+                                Cloud Notevn không hỗ trợ transparent
+                            </font>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Liên kết chuyển trang
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Liên kết chuyển trang" type="text" class="vms-input" value="" formControlName="jumpTo" />
+                            <div class="input-error" *ngIf="addNewHomepageSlide.get('jumpTo').invalid && addNewHomepageSlide.get('jumpTo').touched">Liên kết chuyển trang là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label"></div>
+                    <div class="item-value">
+                        <button type="button" class="vms-btn vms-btn-primary" (click)="FormSubmittedEv()">
+                            <span>Thêm slide mới</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

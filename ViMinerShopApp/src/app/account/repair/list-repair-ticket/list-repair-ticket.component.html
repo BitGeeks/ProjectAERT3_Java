@@ -1,0 +1,106 @@
+<div class="panel">
+  <div class="clearfix">
+    <h2 class="title pull-left" translate>Phiếu sửa của tôi</h2>
+    <div class="pull-right action">
+      <a routerLink="/account/repair/create" class="">
+        <button class="bt-button bt-primary button-sm">
+          <span translate>Tạo phiếu sửa chữa</span>
+        </button>
+      </a>
+      <div class="search">
+        <input type="search" placeholder="Mã Phiếu Sửa Chữa / Mã Theo Dõi" [(ngModel)]="searchTxt" />
+        <button class="bt-button bt-primary button-sm bt-circle" (click)="onUserClickSearch(searchTxt)">
+            <i class="bt-icon"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="bt-space filter" style="margin: 40px 0px 15px;">
+    <div class="item {{ activeTab === 1 ? 'active' : '' }}" (click)="onUserClickTab(1, true)">
+      <span translate>Tất cả</span>
+    </div>
+    <div class="item {{ activeTab === 2 ? 'active' : '' }}" (click)="onUserClickTab(2, true)">
+      <span translate>Chưa nhận</span>
+    </div>
+    <div class="item {{ activeTab === 3 ? 'active' : '' }}" (click)="onUserClickTab(3, true)">
+      <span translate>Đã nhận</span>
+    </div>
+    <div class="item {{ activeTab === 4 ? 'active' : '' }}" (click)="onUserClickTab(4, true)">
+      <span translate>Đang chờ</span>
+    </div>
+    <div class="item {{ activeTab === 5 ? 'active' : '' }}" (click)="onUserClickTab(5, true)">
+      <span translate>Sẽ nhận sau</span>
+    </div>
+    <div class="item {{ activeTab === 6 ? 'active' : '' }}" (click)="onUserClickTab(6, true)">
+      <span translate>Hoàn thành</span>
+    </div>
+    <div class="item {{ activeTab === 7 ? 'active' : '' }}" (click)="onUserClickTab(7, true)">
+      <span translate>Hủy bỏ</span>
+    </div>
+  </div>
+  
+    <div *ngIf="fetchError" class="row">
+      <div class="col-md-12">
+        <div class="alert-warning" translate>Đã có lỗi xảy ra, vui lòng thử lại sau!</div>
+      </div>
+    </div>
+  
+    <p *ngIf="!innerLoading && (noOrders || rOrders && rOrders.length === 0)" class="bt-space text-center text-gray" style="margin: 0px;" translate>Không có dữ liệu</p>
+
+    <div class="geer-loading" *ngIf="innerLoading">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <ng-container *ngIf="!innerLoading && !noOrders">
+      <table class="table borderd text-sm" *ngFor="let ticket of rOrders">
+        <tr>
+            <td class="noborder">
+                <a routerLink="/account/repair/ticket/{{ ticket.id }}" class="clearfix">
+                    <div class="text-strong pull-left" translate>Mã phiếu: <span class="repair-id">{{ ticket.id }}</span></div>
+                    <div class="pull-right"><span class="text-gray{{ 
+                      (ticket.status === 0 || ticket.status === 1 || ticket.status === 2) ? ' text-driving' :
+                      (ticket.status === 3 || ticket.status === 4) ? ' text-success' : ''
+                    }}">{{ renderStatus(ticket.status) }}</span> <i class="bt-icon text-gray delicon" (click)="onUserClickDelete(ticket)" *ngIf="ticket.status === 0"></i></div>
+                </a>
+            </td>
+        </tr>
+        <tr class="text-xs">
+            <td class="text-gray dashed">
+                <div class="info pull-left"><span>{{ ticket.created_at | date: "dd/MM/yyyy HH:ss" }}</span> <span translate>Mã theo dõi: {{ ticket.trackingNo }}</span> <span translate>Phiếu Sửa Chữa</span></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="devices">
+                <div class="pull-left" *ngFor="let product of ((ticket.repairItems.length > 2 && !isExpand[ticket.id]) ? ticket.repairItems.slice(0, 2) : ticket.repairItems)">
+                    <p><span>{{ product.product.name }}</span> <span class="pull-right num">x {{ product.quantity }}</span></p>
+                </div>
+                <div class="device pull-right" (click)="isExpand[ticket.id] = !isExpand[ticket.id]" *ngIf="ticket.repairItems.length > 2">
+                  <span class="{{ (ticket.repairItems.length > 2 && !isExpand[ticket.id]) ? 'more' : ''}}" *ngIf="ticket.repairItems.length > 2 && !isExpand[ticket.id]" (click)="isExpand[ticket.id] = true" translate>
+                    Mở rộng
+                  </span>
+                  <span *ngIf="ticket.repairItems.length > 2 && isExpand[ticket.id]" (click)="isExpand[ticket.id] = true" translate>
+                    Đóng gọn
+                  </span>
+                  <i *ngIf="ticket.repairItems.length > 2" class="bt-icon text-gray{{ ticket.repairItems.length > 2 && isExpand[ticket.id] ? ' reverse' : '' }}"></i>
+                </div>
+            </td>
+        </tr>
+      </table>
+    </ng-container>
+    <div class="page" *ngIf="!innerLoading && !noOrders && rOrders && rOrders.length !== 0">
+      <ul class="vms-iv-page">
+          <li title="Trang Trước" class="vms-iv-page-prev{{ disablePrevPageBtn ? ' vms-iv-page-disabled' : '' }}" (click)="userClickPreviousPage()">
+              <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-left"></i></a>
+          </li>
+          <li title="{{ page + 1 }}" class="vms-iv-page-item vms-iv-page-item-active"><a style="color: white;">{{ page + 1 }}</a></li>
+          <li title="Trang Tiếp Theo" class="vms-iv-page-next{{ disableNextPageBtn ? ' vms-iv-page-disabled' : '' }}" (click)="userClickNextPage()">
+              <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-right"></i></a>
+          </li>
+      </ul>
+    </div>
+  
+  </div>
+  

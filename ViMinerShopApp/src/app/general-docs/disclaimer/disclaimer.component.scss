@@ -1,0 +1,192 @@
+.banner {
+  background: url(https://cdn.notevn.com/Lc1dZ5slz.png) no-repeat;
+  background-size: 100% auto;
+  height: 200px;
+  position: relative;
+  width: 100%
+}
+
+.banner h1 {
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  color: #fff;
+  font-size: 60px;
+  font-weight: 700;
+  left: 50%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%,-50%)
+}
+
+.disclaimer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex
+}
+
+.disclaimer .p-logo {
+  width: 470px
+}
+
+.disclaimer .p-info {
+  -ms-flex: 1;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1
+}
+
+.disclaimer .p-info h2 {
+  font-size: 36px;
+  font-weight: 700
+}
+
+.disclaimer .p-info .area {
+  padding: 5px 0 20px
+}
+
+.disclaimer .p-info .foucs {
+  padding: 8px 0
+}
+
+.disclaimer .p-info .desc {
+  padding: 20px 0 6px
+}
+
+.disclaimer .p-info .txt {
+  line-height: 30px
+}
+
+.notes-wrap {
+  color: #666;
+  padding-bottom: 90px
+}
+
+.notes-wrap .primary {
+  color: #f90
+}
+
+a {
+  color: #3581ff
+}
+
+.wrapper {
+  margin: 0 auto;
+  padding: 0 10px;
+  width: 1220px;
+}
+
+.banner {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  background-color: #3f4048
+}
+
+@media (max-width: 768px) {
+  .banner {
+      height:120px
+  }
+}
+
+.banner img {
+  height: 200px;
+  width: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%)
+}
+
+@media (max-width: 768px) {
+  .banner img {
+      height:120px
+  }
+}
+
+.banner h1 {
+  color: #fff;
+  font-size: 48px;
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 999
+}
+
+@media (max-width: 768px) {
+  .banner h1 {
+      font-size:32px;
+      font-weight: 400;
+      width: 100%
+  }
+}
+
+.main-container {
+  max-width: 1220px;
+  margin: 40px auto 150px;
+  padding: 0 10px
+}
+
+.main-container:after {
+  display: block;
+  content: "";
+  clear: both
+}
+
+@media (max-width: 768px) {
+  .main-container {
+      text-align:left;
+      margin: 20px 0;
+      padding: 0 20px
+  }
+}
+
+.main-container .main-content {
+  width: 80%;
+  text-align: justify;
+  float: left
+}
+
+@media (max-width: 768px) {
+  .main-container .main-content {
+      width:100%
+  }
+}
+
+.main-container .main-content h2 {
+  font-size: 30px;
+  margin: 0 0 30px
+}
+
+@media (max-width: 768px) {
+  .main-container .main-content h2 {
+      font-size:24px
+  }
+}
+
+.main-container .main-content p {
+  margin: 10px 0;
+  font-size: 16px;
+  line-height: 30px
+}
+
+.main-container .main-content ul {
+  padding-left: 20px
+}
+
+.disclaimer .main-content section h2 {
+  font-size: 24px
+}
+
+.disclaimer .main-content section em {
+  font-style: italic
+}
+
+app-sub-navigation {
+  width: 20%;
+  float: left
+}

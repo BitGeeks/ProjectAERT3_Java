@@ -1,0 +1,190 @@
+<div class="wrapper">
+  <div class="property" *ngIf="innerLoading === false">
+    <div class="gallery">
+      <div class="avatar{{ currentImage.imageUrl === image.imageUrl ? ' image-active' : ' image-inactive'}}" *ngFor="let image of product.productImages">
+        <lib-ngx-image-zoom
+          [thumbImage]="image.imageUrl"
+          [fullImage]="image.imageUrl"
+          [lensWidth]="450"
+          [enableScrollZoom]="true"
+        ></lib-ngx-image-zoom>
+      </div>
+      <div class="avatar image-active" *ngIf="product.productImages.length === 0">
+        <img src="https://cdn.notevn.com/DzPbjDuoi.png" />
+      </div>
+      <div class="thumbs clearfix">
+        <ng-container *ngFor="let image of product.productImages">
+          <a class="{{ currentImage.imageUrl === image.imageUrl ? 'active' : ''}}" (mouseenter)="onImageHover($event, image)">
+            <img src="{{ image.imageUrl }}">
+          </a>
+        </ng-container>
+        
+      </div>
+    </div>
+    <div class="summary">
+      <div class="info">
+        <h1>
+          <p>
+            <span>{{ product.name}}</span>
+            <span class="futures" *ngIf="product.productInventory.flag !== null">{{ convertFeature(product.productInventory.flag) }}</span>
+          </p>
+        </h1>
+        <div class="dimensions">
+          <p class="text">
+            <img src="https://static.maxmines.com/self/lesongvi/viminershop/icon/algorithm.svg" />
+            <span>{{ product.algorithm.name }}</span>
+          </p>
+          <p class="text" *ngIf="product.productInventory.hps">
+            <img src="https://static.maxmines.com/self/lesongvi/viminershop/icon/power.svg" />
+            <span translate>Hashrate: {{ abbreviateNumber(product.productInventory.hps) }}H/s</span>
+          </p>
+          <p class="text">
+            <img src="https://static.maxmines.com/self/lesongvi/viminershop/icon/weight.svg" />
+            <span translate>Trọng lượng: {{ product.productInventory.weight }}kg</span>
+          </p>
+          <p class="text" *ngIf="product.productInventory.shippingInfo !== null && product.productInventory.shippingInfo.trim() !== ''">
+            <img src="https://static.maxmines.com/self/lesongvi/viminershop/icon/truck.svg" />
+            <span>{{ product.productInventory.shippingInfo }}</span>
+          </p>
+        </div>
+      </div>
+      <div class="priceAndValue">
+        <p class="price{{ product.productInventory.quantity === 0 ? ' text-gray' : ' text-blue' }}">
+          <span class="{{ product.pricePromotion !== 0 ? 'price-promotion' : '' }}">
+            {{ product.price * currencyRate | currency: currency }}
+          </span>
+          <span *ngIf="product.pricePromotion !== 0">
+            {{ product.pricePromotion * currencyRate | currency: currency }}
+          </span>
+        </p>
+        <div class="stepper radio">
+          <button type="button" [disabled]="amount <= 1" (click)="onUserClickBtn(-1)"><i class="bt-icon"></i></button>
+          <input name="amount" value="{{ amount }}" type="number" placeholder="-" min="1" value="1" (change)="handleInputAmount($event)" />
+          <button type="button" [disabled]="amount >= product.productInventory.quantity" (click)="onUserClickBtn(1)"><i class="bt-icon"></i></button>
+        </div>
+      </div>
+      <div class="action">
+        <div class="buttons">
+          <button class="bt-button bt-primary"
+            *ngIf="product.productInventory.quantity > 0"
+            (click)="addToCart()"
+            [disabled]="(cartState | async).loading">
+            <span translate>Thêm vào giỏ</span>
+          </button>
+          <button class="bt-button bt-driving"
+            *ngIf="product.productInventory.quantity > 0"
+            (click)="buyNow()"
+            [disabled]="(cartState | async).loading">
+            <span translate>Mua ngay</span>
+          </button>
+          <button class="bt-button bt-default"
+            *ngIf="product.productInventory.quantity === 0"
+            disabled="disabled">
+            <span translate>Hết hàng</span>
+          </button>
+          <button class="bt-button bt-driving"
+            *ngIf="product.productInventory.quantity === 0"
+            (click)="onUserClickShowDialog()">
+            <span translate>Nhận Thông Báo Sản Phẩm</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="pin" id="pin"></div>
+    <div class="productDetail" *ngIf="innerLoading === false">
+      <div class="controllers" *ngIf="!showActiveController">
+        <span *ngIf="product.noteDesc !== null" class="descTab{{activeTab === 0 ? ' active': ''}}" [style.width.%]="tabWidthPercent" (click)="setActiveTab(0)" translate>Ghi chú</span>
+        <span *ngIf="product.detailDesc !== null" class="descTab{{activeTab === 1 ? ' active': ''}}" [style.width.%]="tabWidthPercent" (click)="setActiveTab(1)" translate>Tổng quan</span>
+        <span *ngIf="product.paymentDesc !== null" class="descTab{{activeTab === 2 ? ' active': ''}}" [style.width.%]="tabWidthPercent" (click)="setActiveTab(2)" translate>Thanh toán</span>
+        <span *ngIf="product.warrantyDesc !== null" class="descTab{{activeTab === 3 ? ' active': ''}}" [style.width.%]="tabWidthPercent" (click)="setActiveTab(3)" translate>Bảo hành</span>
+      </div>
+      <div class="controllers new fixed" *ngIf="showActiveController">
+        <div class="nameAndPrice">
+          <span class="name">
+            {{ product.name }}
+          </span>
+          <p class="price{{ product.productInventory.quantity === 0 ? ' text-gray' : ' text-blue' }}{{ product.pricePromotion !== 0 ? ' price-promotion' : '' }}">
+            {{ product.price * currencyRate | currency: currency }}
+          </p>
+          <p *ngIf="product.pricePromotion !== 0" class="price">
+            {{ product.pricePromotion * currencyRate | currency: currency }}
+          </p>
+        </div>
+        <div class="spansAndButtons">
+          <div class="spans">
+            <span *ngIf="product.noteDesc !== null" class="{{activeTab === 0 ? 'active': ''}}" [style.width.%]="tabWidthPercent" [style.cursor]="'pointer'" (click)="setActiveTab(0)" translate>Ghi chú</span>
+            <span *ngIf="product.detailDesc !== null" class="{{activeTab === 1 ? 'active': ''}}" [style.width.%]="tabWidthPercent" [style.cursor]="'pointer'" (click)="setActiveTab(1)" translate>Tổng quan</span>
+            <span *ngIf="product.paymentDesc !== null" class="{{activeTab === 2 ? 'active': ''}}" [style.width.%]="tabWidthPercent" [style.cursor]="'pointer'" (click)="setActiveTab(2)" translate>Thanh toán</span>
+            <span *ngIf="product.warrantyDesc !== null" class="{{activeTab === 3 ? 'active': ''}}" [style.width.%]="tabWidthPercent" [style.cursor]="'pointer'" (click)="setActiveTab(3)" translate>Bảo hành</span>
+          </div>
+          <div class="buttons">
+            <div class="buttons">
+              <button class="bt-button bt-primary"
+                *ngIf="product.productInventory.quantity > 0"
+                (click)="addToCart()"
+                [disabled]="(cartState | async).loading">
+                <span translate>Thêm vào giỏ</span>
+              </button>
+              <button class="bt-button bt-driving"
+                *ngIf="product.productInventory.quantity > 0"
+                (click)="buyNow()"
+                [disabled]="(cartState | async).loading">
+                <span translate>Mua ngay</span>
+              </button>
+              <button class="bt-button bt-default"
+                *ngIf="product.productInventory.quantity === 0"
+                disabled="disabled">
+                <span translate>Hết hàng</span>
+              </button>
+              <button class="bt-button po-button bt-driving"
+                *ngIf="product.productInventory.quantity === 0"
+                (click)="onUserClickShowDialog()">
+                <span translate>Nhận thông báo nhập kho</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="article{{ showActiveController ? ' fixed' : ''}}">
+        <div class="tuple">
+          <div class="info" *ngIf="activeTab === 0 && product.noteDesc !== null && product.noteDesc.trim().length !== 0" [innerHTML]="product.noteDesc"></div>
+          <div class="info" *ngIf="activeTab === 1 && product.detailDesc !== null && product.detailDesc.trim().length !== 0" [innerHTML]="product.detailDesc"></div>
+          <div class="info" *ngIf="activeTab === 2 && product.paymentDesc !== null && product.paymentDesc.trim().length !== 0" [innerHTML]="product.paymentDesc"></div>
+          <div class="info" *ngIf="activeTab === 3 && product.warrantyDesc !== null && product.warrantyDesc.trim().length !== 0" [innerHTML]="product.warrantyDesc"></div>
+        </div>
+      </div>
+    </div>
+    <div class="bt-widget-layer remind-modal" *ngIf="isNotifyShowing && innerLoading === false">
+      <div class="bt-modal">
+          <div class="bt-title" translate>Đăng ký nhận thông báo sản phẩm</div>
+          <div class="bt-content">
+              <div class="bt-space notice" style="margin: 10px 0px 30px;" translate>
+                Hiện tại sản phẩm trên trang này đã được bán hết. Bạn có thể điền vào thông tin bên dưới và chúng tôi sẽ gửi thông báo cho bạn khi sản phẩm được đã sẵn sàng để bán.
+              </div>
+              <div class="bt-space text-justify" style="margin: 30px 0px;">
+                  <div class="label" translate>Sản phẩm:</div>
+                  <div class="value text-right">{{ product.name }}</div>
+              </div>
+              <div class="bt-space text-justify" style="margin: 30px 0px 10px;">
+                  <div class="label" translate>Số lượng:</div>
+                  <div class="value text-right">
+                      <div class="stepper radio">
+                          <button type="button" [disabled]="notifyNumber <= 1 ? 'disabled' : false" (click)="onUserClickNotifyNumber(-1)"><i class="bt-icon"></i></button>
+                          <input type="number" value="{{ notifyNumber }}" (change)="onUserChangeNotifyNumber($event)" />
+                          <button type="button" (click)="onUserClickNotifyNumber(1)"><i class="bt-icon"></i></button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <footer class="bt-footer">
+              <button class="bt-button bt-primary" (click)="onUserSubmitGetNotify()">
+                  <span translate>Gửi</span>
+              </button>
+          </footer>
+          <i class="bt-icon close" (click)="onUserClickShowDialog()"></i>
+      </div>
+    </div>
+
+  <app-related></app-related>
+</div>

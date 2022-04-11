@@ -1,0 +1,140 @@
+<div class="salesOrder">
+  <div class="clearfix">
+    <h2 class="title pull-left">
+      <span translate>Tất cả các lệnh mua</span>
+    </h2>
+  </div>
+  <div class="bt-space filter" style="margin: 40px 0px 15px;">
+    <div class="item {{ activeTab === 1 ? 'active' : '' }}" (click)="onUserClickTab(1)">
+      <span translate>Tất cả</span>
+    </div>
+    <div class="item {{ activeTab === 2 ? 'active' : '' }}" (click)="onUserClickTab(2)">
+      <span translate>Chưa thanh toán</span>
+    </div>
+    <div class="item {{ activeTab === 3 ? 'active' : '' }}" (click)="onUserClickTab(3)">
+      <span translate>Đang chờ</span>
+    </div>
+    <div class="item {{ activeTab === 4 ? 'active' : '' }}" (click)="onUserClickTab(4)">
+      <span translate>Chưa giao</span>
+    </div>
+    <div class="item {{ activeTab === 5 ? 'active' : '' }}" (click)="onUserClickTab(5)">
+      <span translate>Đang giao</span>
+    </div>
+    <div class="item {{ activeTab === 6 ? 'active' : '' }}" (click)="onUserClickTab(6)">
+      <span translate>Đã giao</span>
+    </div>
+    <div class="item {{ activeTab === 7 ? 'active' : '' }}" (click)="onUserClickTab(7)">
+      <span translate>Hết hạn</span>
+    </div>
+  </div>
+  <div *ngIf="!innerLoading && fetchError" class="row">
+    <div class="col-md-12">
+      <div class="alert-warning" translate>Đã có lỗi xảy ra, vui lòng thử lại sau!</div>
+    </div>
+  </div>
+
+  <div class="geer-loading" *ngIf="innerLoading">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <p *ngIf="!innerLoading && noOrders" class="notice" translate>Bạn chưa mua máy đào nào cả. <a routerLink="/browse" translate>Xem các máy đào khác ngay!</a></p>
+
+  <div *ngIf="!innerLoading && !fetchError && !noOrders && orders && orders.length !== 0" class="table tableTitle">
+    <p class="commodity" translate>
+      Hàng
+    </p>
+    <p class="unitPrice" translate>
+      Đơn giá
+    </p>
+    <p class="quantity" translate>
+      Số lượng
+    </p>
+    <p class="productAmount" translate>
+      Giá sản phẩm
+    </p>
+    <p class="paymentMethod" translate>
+      Phương thức thanh toán
+    </p>
+    <p class="status" translate>
+      Trạng thái
+    </p>
+    <p class="operation" translate>
+      Hành động
+    </p>
+    </div>
+    <ng-container *ngIf="!innerLoading && orders && !fetchError && !noOrders && providerList">
+      <div *ngIf="orders.length === 0" class="notice" translate>
+        Không có lần đặt nào ở đây cả!.
+      </div>
+    <div class="order" *ngFor="let order of orders">
+      <div>
+    <div>
+      <p class="time">
+        {{convertDate(order.created_at) }} 
+      </p>
+      <p class="id">
+        #{{ order.id }}
+      </p>
+      <div>
+        <p class="total">{{ order.total * currencyRate | currency: currency }}</p>&nbsp;<p class="amount">x {{ order.orderItems.length }}</p>
+      </div>
+      <div class="products_ope">
+        <div class="products">
+          <div class="product" *ngFor="let orderItem of order.orderItems">
+            <div class="commodity-product" routerLink="/detail/{{ orderItem.product_id }}">
+              <div class="imgHolder">
+                <img src="{{ orderItem.product.productImages.length !== 0 ? orderItem.product.productImages[0].imageUrl : 'https://cdn.notevn.com/DzPbjDuoi.png' }}" width="80"/>
+              </div>
+              <div class="worldsHolder">
+                <p>
+                  {{ orderItem.product.name }}
+                </p>
+              </div>
+              <div class="unitPrice">
+                {{ (orderItem.product.pricePromotion !== 0 ? orderItem.product.pricePromotion : orderItem.product.price) * orderItem.quantity * currencyRate | currency: currency }}
+              </div>
+              <div class="quantity">
+                {{ orderItem.quantity }}
+              </div>
+              <div class="productAmount">
+                {{ (orderItem.product.pricePromotion !== 0 ? orderItem.product.pricePromotion : orderItem.product.price) * currencyRate | currency: currency }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ope">
+          <div class="paymentMethod" *ngIf="providerList">
+            {{ getPaymentProvider(order.paymentDetail.provider) }}
+          </div>
+          <div class="status">
+            <p>
+              {{ renderStatus(order.paymentDetail.status) }}
+            </p>
+          </div>
+          <div class="operation">
+            <div class="pay" (click)="handlePaybtnType(order.id)" *ngIf="order.paymentDetail.status === 0" translate>
+              Thanh toán
+            </div>
+            <p *ngIf="order.paymentDetail.status !== 0" translate>Đã thanh toán</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</ng-container>
+  <div class="page" *ngIf="!innerLoading && !noOrders && orders && orders.length !== 0">
+    <ul class="vms-iv-page">
+        <li title="Trang Trước" class="vms-iv-page-prev{{ disablePrevPageBtn ? ' vms-iv-page-disabled' : '' }}" [disabled]="disablePrevPageBtn" (click)="userClickPreviousPage()">
+            <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-left"></i></a>
+        </li>
+        <li title="{{ page + 1 }}" class="vms-iv-page-item vms-iv-page-item-active"><a>{{ page + 1 }}</a></li>
+        <li title="Trang Tiếp Theo" class="vms-iv-page-next{{ disableNextPageBtn ? ' vms-iv-page-disabled' : '' }}" [disabled]="disableNextPageBtn" (click)="userClickNextPage()">
+            <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-right"></i></a>
+        </li>
+    </ul>
+  </div>
+</div>

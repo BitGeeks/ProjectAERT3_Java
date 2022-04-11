@@ -1,0 +1,31 @@
+.panel .filter {
+    border-bottom: 1px solid #ebebeb;
+}
+.panel .filter .item {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    height: 38px;
+    margin-right: 30px;
+    min-width: 60px;
+    text-align: center;
+}
+.panel .filter .item.active {
+    border-bottom: 2px solid #E00;
+    color: #E00;
+}
+.table thead {
+    background-color: #f8f8f8;
+}
+.table td,
+.table th {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 7px;
+    vertical-align: middle;
+}
+.table thead th {
+    border-bottom: none;
+}
+.table {
+    margin: 15px 0;
+}

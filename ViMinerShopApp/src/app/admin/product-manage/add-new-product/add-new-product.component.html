@@ -1,0 +1,229 @@
+<div class="vms_apc-main col-lg-8 col-md-8 col-sm-8 clo-xs-12">
+    <h4 class="vms_apc-main-header">
+        <span>Quản lý sản phẩm</span>
+    </h4>
+
+    <div class="vms_apc-main-tabs viminer-tabs">
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/products/manage" routerLinkActive="active">Quản lý sản phẩm</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/products/add" routerLinkActive="active">Thêm sản phẩm</a>
+    </div>
+
+    <div class="main-content">
+        <div class="form-box">
+            <form [formGroup]="addProductForm" (ngSubmit)="FormSubmittedEv()">
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Tên sản phẩm
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Tên sản phẩm" type="text" class="vms-input" value="" formControlName="name" />
+                            <div class="input-error" *ngIf="addProductForm.get('name').invalid && addProductForm.get('name').touched">Tên sản phẩm là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        Mô tả ngắn của sản phẩm
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <textarea placeholder="Mô tả ngắn của sản phẩm" rows="5" type="text" class="vms-input" value="" formControlName="desc"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        Ghi chú sản phẩm (hỗ trợ HTML)
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <textarea placeholder="Ghi chú của sản phẩm" rows="5" type="text" class="vms-input" value="" formControlName="noteDesc"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        Chi tiết sản phẩm (hỗ trợ HTML)
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <textarea placeholder="Chi tiết sản phẩm" rows="5" type="text" class="vms-input" value="" formControlName="detailDesc"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        Chi tiết thanh toán (hỗ trợ HTML)
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <textarea placeholder="Chi tiết thanh toán" rows="5" type="text" class="vms-input" value="" formControlName="paymentDesc"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        Chi tiết bảo hành (hỗ trợ HTML)
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <textarea placeholder="Chi tiết bảo hành" rows="5" type="text" class="vms-input" value="" formControlName="warrantyDesc"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> SKU sản phẩm
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="SKU sản phẩm" type="text" class="vms-input" value="" formControlName="sku" />
+                            <div class="input-error" *ngIf="addProductForm.get('sku').invalid && addProductForm.get('sku').touched">SKU sản phẩm là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Danh mục
+                    </div>
+                    <div class="item-value">
+                        <select class="vms-select-selection vms-select-selection--single" formControlName="category_id" [(ngModel)]="selectedCategory">
+                            <option value="{{ category.id }}" *ngFor="let category of (browseState | async).categories">{{ category.name }}</option>
+                        </select>
+                        <div class="input-error" *ngIf="addProductForm.get('category_id').invalid && addProductForm.get('category_id').touched">SKU sản phẩm là bắt buộc</div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Thuật toán
+                    </div>
+                    <div class="item-value">
+                        <select class="vms-select-selection vms-select-selection--single" formControlName="algorithm_id" [(ngModel)]="selectedAlgorithm">
+                            <option value="{{ algorithm.id }}" *ngFor="let algorithm of algorithmList">{{ algorithm.name }}</option>
+                        </select>
+                        <div class="input-error" *ngIf="addProductForm.get('algorithm_id').invalid && addProductForm.get('algorithm_id').touched">Thuật toán sản phẩm là bắt buộc</div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Giá sản phẩm
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Ví dụ: 17500.92" type="number" min="0.00" max="999999999.99" step="0.01" class="vms-input" value="" formControlName="price" />
+                            <div class="input-error" *ngIf="addProductForm.get('price').invalid && addProductForm.get('price').touched">Giá sản phẩm là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Giá sản phẩm (Promotion)
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Ví dụ: 17500.92, giá trị 0 tức là không giảm" type="number" min="-1.00" max="999999999.99" step="0.01" class="vms-input" value="" formControlName="pricePromotion" />
+                            <div class="input-error" *ngIf="addProductForm.get('pricePromotion').invalid && addProductForm.get('pricePromotion').touched">Giá sản phẩm (Promotion) là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Số lượng
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Số lượng" type="number" class="vms-input" value="" formControlName="quantity" />
+                            <div class="input-error" *ngIf="addProductForm.get('quantity').invalid && addProductForm.get('quantity').touched">Số lượng là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Cờ sản phẩm
+                    </div>
+                    <div class="item-value">
+                        <select class="vms-select-selection vms-select-selection--single" formControlName="flag">
+                            <option value="NULL">Không</option>
+                            <option value="FLAG_SPOT_ORDER">Giao ngay</option>
+                            <option value="FLAG_FEATURE_ORDER">Đặt trước</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> H/s
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Hashrate trên giây" type="number" class="vms-input" value="" formControlName="hps" />
+                            <div class="input-error" *ngIf="addProductForm.get('hps').invalid && addProductForm.get('hps').touched">Hashrate là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Trọng lượng máy
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Trọng lượng máy" type="number" class="vms-input" value="" formControlName="weight" />
+                            <div class="input-error" *ngIf="addProductForm.get('weight').invalid && addProductForm.get('weight').touched">Trọng lượng là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        Thông tin ship
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Thông tin ship" type="text" class="vms-input" value="" formControlName="shippingInfo" />
+                        </div>
+                    </div>
+                </div>
+                <input #processFileInput type='file' style="display: none;" (change)="processFile($event.target)" accept="image/*" />
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Hình ảnh sản phẩm
+                    </div>
+                    <div class="item-value">
+                        <div class="uploadbox" ngClass="{{dragAreaClass}}" draggable="true" (click)="processFileInput.click();">
+                            <input
+                                #imageInput
+                                type="file"
+                                name="img"
+                                accept=".png, .jpg, .jpeg, .gif, .bmp"
+                                data-size="Max image size 5Mb"
+                                data-dimensions="Max image dimensions 3000x3000px"
+                                (change)="processFile(imageInput)"
+                                style="display: none;"
+                            />
+                            <i aria-label="icon: plus" class="vmsicon vmsicon-plus" style="font-size: 32px;">
+                                <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path><path d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"></path></svg>
+                            </i>
+                            <font>Tải ảnh sản phẩm lên</font>
+                            <font class="upload-tips">
+                                Cloud Notevn không hỗ trợ transparent
+                            </font>
+                        </div>
+                        <div class="files">
+                            <div class="file text-muted" *ngFor="let file of productImages;">
+                                <i class="far fa-file-image icon"></i> <a href="{{ file.imageUrl }}">{{ file.alt_Name }}</a> <a (click)="onAdminClickRemoveImage(file.imageUrl)"><img src="./assets/cross.png" style="width: 10px;"/></a>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label"></div>
+                    <div class="item-value">
+                        <button type="button" class="vms-btn vms-btn-primary" (click)="FormSubmittedEv()">
+                            <span>Thêm sản phẩm</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="vms_apc-main col-lg-8 col-md-8 col-sm-8 clo-xs-12">
+    <h4 class="vms_apc-main-header">
+        <span>Quản lý thuật toán</span>
+    </h4>
+
+    <div class="vms_apc-main-tabs viminer-tabs">
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/algorithms/manage" routerLinkActive="active">Quản lý thuật toán</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/algorithms/add" routerLinkActive="active">Thêm thuật toán</a>
+    </div>
+
+    <div class="main-content">
+        <div class="form-box">
+            <form [formGroup]="addAlgorithmForm" (ngSubmit)="FormSubmittedEv()">
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Tên thuật toán
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Tên thuật toán" type="text" class="vms-input" value="" formControlName="name" />
+                            <div class="input-error" *ngIf="addAlgorithmForm.get('name').invalid && addAlgorithmForm.get('name').touched">Tên thuật toán là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        Mô tả thuật toán
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <textarea placeholder="Mô tả của thuật toán" rows="5" type="text" class="vms-input" value="" formControlName="desc"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Liên kết thuật toán
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Liên kết thuật toán" type="text" class="vms-input" value="" formControlName="slug" />
+                            <div class="input-error" *ngIf="addAlgorithmForm.get('slug').invalid && addAlgorithmForm.get('slug').touched">Liên kết thuật toán là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label"></div>
+                    <div class="item-value">
+                        <button type="button" class="vms-btn vms-btn-primary" (click)="FormSubmittedEv()">
+                            <span>Thêm thuật toán</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

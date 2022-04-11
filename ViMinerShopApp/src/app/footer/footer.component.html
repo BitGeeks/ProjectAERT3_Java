@@ -1,0 +1,55 @@
+<footer id="footer">
+  <div class="wrapper">
+      <div class="navigator">
+          <div class="navbar">
+              <a routerLink="/" class="logo">
+                <img width="120" src="https://static.maxmines.com/self/lesongvi/viminershop/img/LOADINGLOGO.png" alt="Vĩ Miner Shop" />
+              </a>
+              <div class="nav_vms">
+                  <a routerLink="/info/about" translate>Về chúng tôi</a>
+                  <a routerLink="/info/contact" translate>Liên hệ</a>
+                  <a routerLink="/info/join" translate>Tham gia</a>
+                  <a routerLink="/info/disclaimer" translate>Tuyên bố từ chối trách nhiệm</a>
+                  <a routerLink="/info/privacy" translate>Chính sách bảo mật</a>
+              </div>
+          </div>
+          <div class="contact">
+              <div class="social text-ts text-right">
+                  <a href="https://www.facebook.com">
+                      <img
+                          src="https://static.maxmines.com/self/lesongvi/viminershop/icon/facebook_ft_ic.png"
+                          alt="Vĩ Miner Shop - Facebook"
+                      />
+                  </a>
+                  <a href="https://twitter.com">
+                    <img src="https://static.maxmines.com/self/lesongvi/viminershop/icon/twitter_ft_ic.png" alt="Vĩ Miner Shop - Twitter" />
+                  </a>
+                  <a routerLink="/account/subscription" alt="Theo dõi">
+                      <img
+                          src="https://static.maxmines.com/self/lesongvi/viminershop/icon/subscription_ft_ic.png"
+                      />
+                  </a>
+              </div>
+              <div class="tel text-ts">
+                  <img
+                      src="https://static.maxmines.com/self/lesongvi/viminershop/icon/phone_ft_ic.png"
+                      alt="tel"
+                  />
+                  <span translate>ĐƯỜNG DÂY NÓNG +911-018-157</span>
+              </div>
+              <div class="currency">
+                <div class="item-value">
+                    <select class="vms-select-selection vms-select-selection--single" *ngIf="listOfCurrency && listOfCurrency.length !== 0" (change)="onUserChangeCurrency($event)">
+                        <option [value]="currency" *ngFor="let currency of listOfCurrency" [selected]="currentCurrency === currency">{{ currency }}</option>
+                    </select>
+                </div>
+              </div>
+          </div>
+      </div>
+      <div class="copyright">
+          <p translate>
+              Copyright © 2021 Vĩ Miner Shop. All Rights Reserved.
+          </p>
+      </div>
+  </div>
+</footer>

@@ -1,0 +1,213 @@
+<div class="content" style="min-height: 380px;">
+  <div class="order-confirm" *ngIf="(cartState | async).cart">
+    <div class="steps">
+      <div>
+          <span>
+              <em class="step-done"><i class="vms-iv-icon vms-iv-icon-checkmark"></i></em>
+          </span>
+          <p translate>Giỏ hàng</p>
+      </div>
+      <div>
+          <span>
+              <em class="step-done"><i class="vms-iv-icon vms-iv-icon-checkmark"></i></em>
+          </span>
+          <p translate>Thông tin order</p>
+      </div>
+      <div>
+          <span>
+              <em class=""><i>3</i></em>
+          </span>
+          <p translate>Thanh toán</p>
+      </div>
+      <div>
+          <span>
+              <em class=""><i>4</i></em>
+          </span>
+          <p translate>Hoàn thành</p>
+      </div>
+    </div>
+    <div class="content">
+      <div class="user-addr item">
+        <div class="title">
+            <span translate>Địa chỉ thả hàng</span>
+            <div class="add-new-addr"><button (click)="userClickAddNewAddress()" translate>+ Thêm địa chỉ</button></div>
+        </div>
+        <div class="content" *ngIf="userData">
+            <table *ngIf="userData.userAddresss.length !== 0">
+              <tr class="addr-item" *ngFor="let uaddress of userData.userAddresss">
+                <td title="{{ uaddress.telephone }}" class="td1{{ shippingAddressSelected === uaddress.id ? ' active' : ''}}" (click)="onUserSelectAddressForShip(uaddress.id)"><span class="username">{{ uaddress.telephone }}</span></td>
+                <td title='{{ uaddress.address + ", " + uaddress.street_name + ", " + uaddress.city + ", " + uaddress.country + ", " + uaddress.postal_code + ", " + uaddress.telephone + ", " + uaddress.mobile }}'
+                    class="td2">
+                    <span class="td2-li1">
+                      {{ uaddress.address + ", " + uaddress.street_name + ", " + uaddress.city + ", " + uaddress.country + ", " + uaddress.postal_code + ", " + uaddress.telephone + ", " + uaddress.mobile }}
+                    </span>
+                </td>
+                <td class="td3">
+                    <div class="td2-default" *ngIf="uaddress.isDefault" translate><span>Mặc định</span></div>
+                    <span class="operating" *ngIf="!uaddress.isDefault" (click)="onUserClickDefault(uaddress.id)" translate>Mặc định</span>
+                    <span class="operating" (click)="onUserClickAddrEdit(uaddress)" translate>Sửa</span>
+                    <span class="operating" (click)="onUserClickAddrDelete(uaddress)" *ngIf="!uaddress.isDefault" translate>Xóa</span>
+                </td>
+              </tr>
+            </table>
+            <div *ngIf="userData.userAddresss.length === 0" class="bt-space text-center text-gray" style="margin-bottom: 20px;" translate>Không có địa chỉ nào</div>
+        </div>
+      </div>
+      <div class="shopping-method item">
+        <div class="title" translate>
+            Đơn vị vận chuyển
+        </div>
+        <div class="content">
+          <span class="item{{ shippingMethodSelected === method.id ? ' active' : '' }}" *ngFor="let method of shippingMethods" (click)="onUserClickShippingMethod(method.id)">
+            {{ method.shortName }}
+          </span>
+        </div>
+      </div>
+      <div class="shopping-list item">
+        <div class="title">
+            <span translate>Danh sách máy</span>
+            <a routerLink="/cart" class="">
+              <span class="back-shop-cart" translate>Quay lại giỏ hàng</span>
+            </a>
+        </div>
+        <div class="content" style="overflow-x: auto;">
+            <table>
+                <tr *ngFor="let cartItem of (cartState | async).cart.cartItems">
+                    <td class="product">
+                        <ng-container *ngIf="cartItem.productImages && cartItem.productImages.length !== 0">
+                          <img
+                            sizes="240"
+                            data-src="{{ cartItem.productImages[0].imageUrl }}"
+                            src="{{ cartItem.productImages[0].imageUrl }}"
+                            lazy="loaded"
+                          />
+                        </ng-container>
+                        <span title="{{ cartItem.product.name }}">
+                          <a routerLink="/detail/{{ cartItem.product.id }}">{{ cartItem.product.name }}</a>
+                        </span>
+                    </td>
+                    <td class="price">{{ (cartItem.product.pricePromotion !== 0 ? cartItem.product.pricePromotion : cartItem.product.price) * currencyRate | currency: currency }}</td>
+                    <td class="weight"><span>{{ cartItem.product.productInventory.weight }} kg * {{ cartItem.quantity }}</span></td>
+                    <td class="totalPrice">
+                        <p>
+                            {{ cartItem.quantity * (cartItem.product.pricePromotion !== 0 ? cartItem.product.pricePromotion : cartItem.product.price) * currencyRate | currency: currency }}
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+      </div>
+      <div class="coupons item">
+        <div class="title">
+          <span translate>Mã khuyến mãi</span>
+        </div>
+        <div class="coupons-child">
+          <div class="coupon" *ngFor="let coupon of couponList" [style.cursor]="(cartState | async).cart.total >= coupon.minPrice ? 'pointer' : 'auto'" (click)="selectCoupon(coupon)">
+            <div class="couponImg checked{{ (((cartState | async).cart.total < coupon.minPrice) || ((cartState | async).cart.coupon_id !== null && (cartState | async).cart.coupon_id === coupon.id)) ? ' disabled' : '' }}">
+              <div class="couponInfo">
+                <div class="countAndMoney">
+                  <div class="couponCount" *ngIf="!((cartState | async).cart.coupon_id !== null && (cartState | async).cart.coupon_id === coupon.id)">
+                    x{{ coupon.couponLeft }}
+                  </div>
+                  <div class="couponCount" *ngIf="((cartState | async).cart.coupon_id !== null && (cartState | async).cart.coupon_id === coupon.id)">
+                    x{{ coupon.couponLeft - 1 }}
+                  </div>
+                  <div class="money">
+                    <span>
+                      <span class="price" style="font-size: 12px;">
+                        {{ (((cartState | async).cart.total * (coupon.couponPercent/100)).toFixed(2)) * currencyRate | currency: currency }}
+                      </span>
+                    </span>
+                  </div>
+                  <div class="couponType" *ngIf="coupon.couponType === 'sales'" translate>
+                    Bán hàng
+                  </div>
+                  <div class="couponType" *ngIf="coupon.couponType === 'after_sales'" translate>
+                    Sau khi bán
+                  </div>
+                  <div class="couponType" *ngIf="coupon.couponType === 'orders'" translate>
+                    Order
+                  </div>
+                </div>
+                <div class="infoAndRules">
+                  <div class="moreInfo">
+                    <div class="names">
+                      <span class="couponName" *ngIf="coupon.couponCode !== null">
+                        {{ coupon.couponCode }}
+                      </span>
+                    </div>
+                    <div class="limitMoney" translate>
+                      Đơn hàng tối thiểu {{ coupon.minPrice * currencyRate | currency: currency }}
+                    </div>
+                    <div class="couponIdAndDonate">
+                      <div class="couponId" translate>
+                        Hết hạn: {{ coupon.expired_at | date: "dd/MM/yyyy HH:ss" }}
+                      </div>
+                      <div class="btn-pane">
+                        <div class="donateButton" (click)="onUserClickDonate(coupon)" translate>
+                            Donate
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="padding: 20px;" *ngIf="!couponList || couponList.length === 0" translate>Không có coupon nào dành cho bạn</div>
+        <div class="conclution" *ngIf="couponList && couponList.length !== 0">
+            <span translate>Phần trăm coupon&nbsp;</span> <span class="number">{{ countTotalCoupon(couponList) }}%</span> <span>,&nbsp;</span> <span class="number">{{ couponList.length }}</span>
+            <span translate>&nbsp;phiếu giảm giá</span>
+        </div>
+      </div>
+      <div class="order-note item" style="display: none;">
+        <div class="title"><span translate>Ghi chú đặt hàng</span></div>
+        <textarea [placeholder]="'Ghi chú về đơn đặt hàng của bạn, ví dụ: những lưu ý đặc biệt khi giao hàng.' | translate" maxlength="241" class="order-text-area"></textarea>
+      </div>
+    </div>
+    <div class="foot">
+      <table>
+          <tr>
+              <td translate>Tiền hàng:</td>
+              <td>{{ (cartState | async).cart.total.toFixed(2) * currencyRate | currency: currency }}</td>
+          </tr>
+          <tr>
+              <td translate>Phí vận chuyển:</td>
+              <td>{{ (orderState | async).shippingCost.toFixed(2) * currencyRate | currency: currency }}</td>
+          </tr>
+          <tr>
+              <td translate>Coupon:</td>
+              <td *ngIf="(cartState | async).cart.coupon_id !== null && (cartState | async).cart.coupon !== null">
+                {{ ((cartState | async).cart.total * ((cartState | async).cart.coupon.couponPercent/100)).toFixed(2) * currencyRate | currency: currency }}
+              </td>
+              <td *ngIf="(cartState | async).cart.coupon_id === null">-{{  0 * currencyRate | currency: currency }}</td>
+          </tr>
+          <tr>
+              <td translate>Discount:</td>
+              <td>-{{  0 * currencyRate | currency: currency }}</td>
+          </tr>
+          <tr>
+              <td translate>Tổng tiền:</td>
+              <td class="text-strong text-nm">{{ (totalAmountCalc((cartState | async).cart) + (orderState | async).shippingCost).toFixed(2) * currencyRate | currency: currency }}</td>
+          </tr>
+      </table>
+      <div class="clear-float"></div>
+      <div class="protocol">
+          <p>
+              <span class="checkbox{{ termsAccepted ? ' checked' : '' }}" (click)="onUserAcceptTermAndPolicy()">
+                <i class="vms-iv-icon vms-iv-icon-checkmark"></i>
+              </span>
+              <span translate>
+                  Tôi đã đọc và chấp nhận với <a routerLink="/info/disclaimer" class="text-primary" translate>Tuyên bố từ chối trách nhiệm</a> {{ 'của Vĩ Miner Shop trước khi mua hàng.' | translate }}
+              </span>
+          </p>
+      </div>
+      <div class="submit">
+          <button type="button" class="button vms-iv-btn{{ (!termsAccepted || isLoading) ? ' disabled' : ''}}" [disabled]="!termsAccepted || isLoading" (click)="onCartSubmit()">
+              <span translate>Chấp nhận</span>
+          </button>
+      </div>
+    </div>
+  </div>
+</div>

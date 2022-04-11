@@ -1,0 +1,135 @@
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
+    padding: 0;
+}
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+a {
+    color: #E00;
+    text-decoration: none;
+}
+.icon-wrapper {
+    width: 54px;
+    height: 54px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+.icon-wrapper {
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+.icon-wrapper i {
+    margin: 0 auto;
+    font-size: 1.7rem;
+    position: relative;
+    z-index: 5;
+}
+[class*=" lnr-"],
+[class^="lnr-"] {
+    font-family: Linearicons-Free;
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-varivms: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: vmsialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icon-wrapper i:before {
+    margin-top: -3px;
+}
+.m-0 {
+    margin: 0 !important;
+}
+.vms-input:placeholder-shown {
+    text-overflow: ellipsis;
+}
+[role="button"],
+a,
+button,
+input:not([type="range"]),
+label,
+textarea {
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+}
+input[type="number"],
+input[type="password"],
+input[type="text"],
+textarea {
+    -webkit-appearance: none;
+}
+.vms-input {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-varivms: tabular-nums;
+    list-style: none;
+    -webkit-font-feature-settings: "tnum";
+    font-feature-settings: "tnum";
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 32px;
+    padding: 4px 11px;
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 14px;
+    line-height: 1.5;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+button,
+input {
+    overflow: visible;
+}
+.input-error {
+    padding: 5px 0;
+    font-size: 13px;
+}
+button {
+    text-transform: none;
+}
+textarea.vms-input {
+    max-width: 100%;
+    height: auto;
+    min-height: 32px;
+    line-height: 1.5;
+    vertical-align: bottom;
+    -webkit-transition: all 0.3s, height 0s;
+    transition: all 0.3s, height 0s;
+}
+.input-error {
+    color: #f5222d;
+}

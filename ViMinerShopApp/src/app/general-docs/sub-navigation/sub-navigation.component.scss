@@ -1,0 +1,24 @@
+@media (max-width: 768px) {
+    .sub-navigation {
+        display:none
+    }
+  }
+  
+  .sub-navigation ul {
+    list-style-type: none;
+    padding-top: 8px
+  }
+  
+  .sub-navigation ul li {
+    margin-bottom: 30px
+  }
+  
+  .sub-navigation ul li a {
+    font-size: 18px;
+    font-weight: 600;
+    color: #999
+  }
+  
+  .sub-navigation ul li a.active,.sub-navigation ul li a:hover {
+    color: #000
+  }

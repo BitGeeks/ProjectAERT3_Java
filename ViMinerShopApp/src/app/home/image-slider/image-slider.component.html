@@ -1,0 +1,28 @@
+<div class="banner banner" *ngIf="slideImage && slideImage.length !== 0">
+  <div class="swipe" style="height: 540px;">
+    <div class="roller" [style.transition]="'all 300ms ease 0s'" [style.transform]="'translate3d(' + currentSlide * -currentSlideOffset + '%, 0px, 0px)'">
+        <div class="slider" [style.backgroundColor]="'#' + image.fillColor" [style.transform]="'translate3d(' + (idx * currentSlideOffset) + '%, 0px, 0px)'" *ngFor="let image of slideImage; let idx = index" (click)="onUserClickToJump(image.jumpTo)">
+            <div class="frame"><img [src]="image.imgUrl" /></div>
+        </div>
+    </div>
+    <ul class="decorators">
+        <li class="item{{ idx === currentSlide ? ' active' : ''}}" *ngFor="let image of slideImage; let idx = index" (click)="onUserClickSlideNode(idx)"></li>
+    </ul>
+    <div class="controls">
+      <a class="prev" (click)="onSlidePrevClick()"><i class="bt-icon"></i></a>
+      <a class="next" (click)="onSlideNextClick()"><i class="bt-icon"></i></a>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="notice">
+        <i class="bt-icon"></i>
+        <div class="bt-marquee" data-guid="95cb7beb-fa94-4ef6-aa27-aa16dffcbe9c">
+            <p class="is-marquee">
+                <i *ngFor="let notice of noticetext">
+                    {{ notice.content }}
+                </i>
+            </p>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,49 @@
+<div class="vms_apc-main col-lg-8 col-md-8 col-sm-8 clo-xs-12">
+    <h4 class="vms_apc-main-header">
+        <span>Quản lý thuật toán</span>
+    </h4>
+
+    <div class="vms_apc-main-tabs viminer-tabs">
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/algorithms/manage" routerLinkActive="active">Quản lý thuật toán</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/algorithms/add" routerLinkActive="active">Thêm thuật toán</a>
+    </div>
+
+    <div class="vms-admin-container">
+        <div class="category-table" style="overflow-x: auto;">
+            <table border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th>Tên thuật toán</th>
+                        <th>Mô tả</th>
+                        <th>Liên kết</th>
+                        <th>Thời gian</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let algorithm of algorithmList">
+                        <td>{{ algorithm.name }}</td>
+                        <td>{{ ( algorithm.desc !== null && algorithm.desc.trim().length !== 0 ) ? algorithm.desc : 'Chưa đặt' }}</td>
+                        <td>{{ algorithm.slug }}</td>
+                        <td>{{ algorithm.created_at | date: "dd/MM/yyyy HH:ss" }}</td>
+                        <td>
+                            <a href="javascript:" (click)="editAlgorithm(algorithm)">Chỉnh sửa</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="page" *ngIf="algorithmList && algorithmList.length !== 0">
+      <ul class="vms-iv-page">
+          <li title="Trang Trước" class="vms-iv-page-prev{{ disablePrevPageBtn ? ' vms-iv-page-disabled' : '' }}" (click)="userClickPreviousPage()">
+              <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-left"></i></a>
+          </li>
+          <li title="{{ page + 1 }}" class="vms-iv-page-item vms-iv-page-item-active"><a>{{ page + 1 }}</a></li>
+          <li title="Trang Tiếp Theo" class="vms-iv-page-next{{ disableNextPageBtn ? ' vms-iv-page-disabled' : '' }}" (click)="userClickNextPage()">
+              <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-right"></i></a>
+          </li>
+      </ul>
+    </div>
+</div>

@@ -1,0 +1,153 @@
+<div class="view {{currentRoute === '/' ? 'vms-xss' : 'vms-svl'}} hollow">
+  <header *ngIf="currentRoute !== ''" class="vms-header" [style.backgroundColor]="currentRoute === '/' ? headerStyle : 'black'">
+    <div class="swing">
+        <div class="wrapper">
+            <div class="logo">
+                <a class="cell" routerLink="/">
+                  <!--<img width="112" src="https://static.maxmines.com/self/lesongvi/viminershop/img/LOGO_FULL_NAME.svg" />-->
+                  <img width="67" src="https://static.maxmines.com/self/lesongvi/viminershop/img/LOADINGLOGO.png" />
+                </a>
+            </div>
+            <div class="navigator">
+                <a class="products" routerLinkActive="active" href="javascript:void(0)"
+                [routerLinkActiveOptions]="{exact: true}" (click)="onUserClickTab(0)"><span translate>Máy đào</span> <i class="bt-icon"></i></a>
+                <a routerLink="/browse"><span translate>Duyệt</span></a>
+                <!--<a class="search" href="javascript:void(0)" (click)="onUserClickTab(3)"><span translate>Tìm kiếm</span> <i class="bt-icon"></i></a>-->
+                <a href="https://maxmines.com/profit-calculator" target="_blank"><span translate>Tính thu nhập</span></a>
+                <a href="https://app.maxmines.com" target="_blank"><span translate>Ứng dụng</span></a>
+            </div>
+            <div class="actions">
+                    <div class="item cart" ngbDropdown display="dynamic" placement="bottom"
+                      autoClose="true">
+
+                      <div id="dropdownCart nav-link" class="trigger" (click)="onUserClickTab(2)">
+                        <i class="bt-icon"></i>
+                        <span>
+                            {{ 'Giỏ hàng' | translate }} ({{ cartItemCount }})
+                        </span>
+                      </div>
+
+                      <div class="glance" *ngIf="onShowingTab[2]">
+                          <div class="aux">
+                            <div *ngIf="(cartState | async).cart && (cartState | async).cart.cartItems.length">
+                              <ul>
+                                <li *ngFor="let cartItem of (cartState | async).cart.cartItems" class="row">
+                                  <a routerLink="/detail/{{cartItem.product.id}}">
+                                    <div class="avatar">
+                                      <img [src]="cartItem.product.productImages.length !== 0 ? cartItem.product.productImages[0].imageUrl : 'https://cdn.notevn.com/DzPbjDuoi.png'" alt="{{ cartItem.product.productImages.length !== 0 ? cartItem.product.productImages[0].alt_name : 'placeholder' }}" />
+                                    </div>
+                                    <div class="text">
+                                      <h4 class="text-ellipsis">
+                                        {{ cartItem.product.name }}
+                                      </h4>
+                                      <p class="price">
+                                        {{ (cartItem.product.pricePromotion !== 0 ? cartItem.product.pricePromotion : cartItem.product.price) * currencyRate | currency: currency }} <span class="text-gray">x {{cartItem.quantity}}</span>
+                                      </p>
+                                    </div>
+                                  </a>
+                                </li>
+                              </ul>
+                              <div class="summary clearfix">
+                                <div class="pull-left">
+                                    <p class="text-gray">{{ 'Tổng' | translate }} {{ cartItemCount }} {{ 'sản phẩm' | translate }}</p>
+                                    <p class="text-primary">{{ (cartState | async).cart.total * currencyRate | currency: currency }}</p>
+                                </div>
+                                <div class="pull-right">
+                                    <a (click)="activatePurchase()">
+                                        <button class="bt-button bt-primary">
+                                            <span translate>Giỏ hàng</span>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                          </div>
+                            <div *ngIf="!(cartState | async).cart || !(cartState | async).cart.cartItems.length" class="blank text-center text-gray">
+                              <p><i class="bt-icon"></i></p>
+                              <div class="text-xs">
+                                <p translate>Bạn chưa chọn máy đào nào.</p>
+                                <p translate>
+                                    Vui lòng truy cập <a routerLink="/" class="link" (click)="onUserClickTab(2)" translate>viminer.2cll.com</a> {{ 'để chọn mua.' | translate }}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                <div class="item user">
+                  <ng-container *ngIf="!(authState | async).authenticated">
+                    <div class="signin"><a routerLink="/login" translate>Đăng nhập</a> <i class="split">/</i> <a routerLink="/signup" translate>Đăng ký</a></div>
+                  </ng-container>
+                  <ng-container *ngIf="(authState | async).authenticated">
+                    <div class="trigger" (click)="onUserClickTab(1)">
+                      <img width="30" src="https://static.maxmines.com/self/lesongvi/viminershop/icon/account_ic.svg" /> <span translate>Tài khoản</span>
+                    </div>
+                    <ul class="menus" *ngIf="onShowingTab[1]">
+                      <li *ngIf="userData && (authState | async).isActive"><a routerLink="/account/info" (click)="onUserClickTab(1)" class="text-ellipsis">{{ userData.email }}</a></li>
+                      <li *ngIf="(authState | async).isAdmin"><a routerLink="/admin" (click)="onUserClickTab(1)" translate>Quản trị viên</a></li>
+                      <li *ngIf="(authState | async).isActive"><a routerLink="/account/info" (click)="onUserClickTab(1)" translate>Tài khoản</a></li>
+                      <li><a (click)="userSignOut()" translate>Đăng xuất</a></li>
+                    </ul>
+                  </ng-container>
+                </div>
+                <div class="item lang">
+                  <div class="trigger" (click)="onUserClickTab(4)">
+                    <img [src]="currentLanguage === 'vi-VN' ? 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAHZJREFUSEtjZKAxYKSx+QzDwIJbqrL/aRlMjKMWEArewRVEqrcegx18W02WkMPh8iT5gGYWwAxGdzYxPiHaB+iWEGM4yEGDywKYq0G+oaoPVG8+ZritjppysIlhS1pEBxHR6RJN4agFBENuGNRoBP1IoQKaBxEAsfU8yVs+xDgAAAAASUVORK5CYII=' : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAURJREFUSEtjZKAxYKSx+QyjFhAMYdoHkY113hcREX7u0DB7hunTNjHExrky7NxxhuHVq/cMS5dVM8REtzH8//+foez5MYKuxVDwn+ErI8gCBgYGbpAkIyMDw///EGXc3BwMX7/+gOs5fGQi6RYwoFkAMsTWJh9s0L79vQxOjsVwQ8nxASOyBWzsrAxGRqoM58/dZvj16w8DExMjAxsbK8P37z/BlpDlg///IUHExcXBbWury7Bz52kGKytthosX74KDZ8LEbIaC/KlgC2p+XCU5iBgZmVDjAN0ERkZGcASDwNq2CJItYPj37yvjg/vPvjAyMIIjGR8Q/v+LkBJMeVAQbVYx/fL/33+CFpBuOgMDIxPjV8b////Dkyk5hhDQ85Vxk5IJbS2gvQ8UTb4wMEJyMtUBqKiguqFoBo5aQDCEh34QAQD/w3P1yEnaKAAAAABJRU5ErkJggg=='" [alt]="currentLanguage === 'vi-VN' ? 'VN' : 'EN'" />
+                    <span class="text-sm">{{ currentLanguage === 'vi-VN' ? 'VN' : 'EN' }}</span> <i class="bt-icon"></i>
+                  </div>
+                  <ul class="menus" *ngIf="onShowingTab[4]">
+                    <li>
+                      <a (click)="setLanguage('vi-VN')">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAHZJREFUSEtjZKAxYKSx+QzDwIJbqrL/aRlMjKMWEArewRVEqrcegx18W02WkMPh8iT5gGYWwAxGdzYxPiHaB+iWEGM4yEGDywKYq0G+oaoPVG8+ZritjppysIlhS1pEBxHR6RJN4agFBENuGNRoBP1IoQKaBxEAsfU8yVs+xDgAAAAASUVORK5CYII=" alt="Tiếng Việt" />
+                        <span>Tiếng Việt</span>
+                      </a>
+                    </li> 
+                    <li>
+                      <a (click)="setLanguage('en-US')">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAURJREFUSEtjZKAxYKSx+QyjFhAMYdoHkY113hcREX7u0DB7hunTNjHExrky7NxxhuHVq/cMS5dVM8REtzH8//+foez5MYKuxVDwn+ErI8gCBgYGbpAkIyMDw///EGXc3BwMX7/+gOs5fGQi6RYwoFkAMsTWJh9s0L79vQxOjsVwQ8nxASOyBWzsrAxGRqoM58/dZvj16w8DExMjAxsbK8P37z/BlpDlg///IUHExcXBbWury7Bz52kGKytthosX74KDZ8LEbIaC/KlgC2p+XCU5iBgZmVDjAN0ERkZGcASDwNq2CJItYPj37yvjg/vPvjAyMIIjGR8Q/v+LkBJMeVAQbVYx/fL/33+CFpBuOgMDIxPjV8b////Dkyk5hhDQ85Vxk5IJbS2gvQ8UTb4wMEJyMtUBqKiguqFoBo5aQDCEh34QAQD/w3P1yEnaKAAAAABJRU5ErkJggg==" alt="English" />
+                        <span>English</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+            </div>
+        </div>
+        <div class="allpro" *ngIf="onShowingTab[0]">
+          <div class="inner clearfix">
+              <div class="categories">
+                  <div class="item{{ currentCategory === c.id ? ' active' : ''}}" *ngFor="let c of (browseState | async).categories" (mouseenter)="onUserHoverCategory(c)"><span>{{c.name}}</span> <i class="bt-icon"></i></div>
+              </div>
+              <div class="items">
+                  <div class="flex">
+                      <div class="group" *ngFor="let product of ( browseState | async ).products.slice(0, 15)">
+                          <a routerLink="/detail/{{ product.id }}" (click)="onUserClickTab(0)" class="item">
+                              <div class="avatar"><img [src]="product.productImages.length !== 0 ? product.productImages[0].imageUrl : 'https://cdn.notevn.com/DzPbjDuoi.png'" /></div>
+                              <div class="text">
+                                  <h4 title="{{ product.name }}">{{ product.name }}</h4>
+                                  <div class="state">
+                                      <p class="price"><span>{{ product.price * currencyRate | currency: currency }}</span></p>
+                                      <p class="condition">
+                                        <span>
+                                          {{ product.algorithm.name }}
+                                        </span>
+                                      </p>
+                                  </div>
+                              </div>
+                          </a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!--<div class="searchpro" *ngIf="onShowingTab[3]">
+        <div class="inner clearfix">
+          <div class="row">
+            <div class="min col-md-4">
+              <p translate>Tìm kiếm</p>
+              <input #search class="vms-element-input__inner ng-pristine ng-invalid ng-touched" type="search" (keyup.enter)="searchProduct(search)" aria-label="Search">
+            </div>
+          </div>
+        </div>
+    </div>-->
+    </div>
+  </header>
+</div>

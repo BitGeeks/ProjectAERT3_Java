@@ -1,0 +1,145 @@
+<div class="myAccount">
+    <div class="clearfix vms_apc-main-header">
+      <h2 class="title pull-left">
+        <span translate>Thông tin tài khoản</span>
+      </h2>
+    </div>
+  <div class="vms-iv-row" id="userInfo">
+    <form [formGroup]="userInfo" (ngSubmit)="onUserClickSaveInformation()" *ngIf="userData">
+    <div class="vms-iv-col vms-iv-col-span-15">
+        <div class="content">
+            <input id="processFileInput" type='file' style="display: none;" (change)="processFile($event)" accept="image/*" />
+            <img
+                [style.cursor]="isInfoChanging ? 'pointer' : 'auto'"
+                style="border-radius: 75px"
+                [src]="userData.userImage === null ? 'https://static.maxmines.com/self/lesongvi/viminershop/icon/unknown-user.svg' : userData.userImage"
+                (click)="onUserClickChangeAvatar()"
+                width="92"
+                height="92"
+            />
+              <div class="userIdNameContactMail">
+                <p class="user"><span *ngIf="!isInfoChanging">{{ userData.firstName }} {{ userData.lastName }}</span><input *ngIf="isInfoChanging" value="{{ userData.firstName }}" formControlName="fname" /> <input *ngIf="isInfoChanging" value="{{ userData.lastName }}" formControlName="lname"/></p>
+                <p class="name" *ngIf="userData.username !== null">
+                    <span translate>Tên tài khoản: </span> <span *ngIf="!isInfoChanging" style="margin-right: 124px;">{{ userData.username }}</span>
+                    <input *ngIf="isInfoChanging" value="{{ userData.username }}" disabled="disabled" class="disabled" formControlName="username" />
+                </p>
+                <p class="name" *ngIf="userData.username === null && userData.socialID !== null">
+                    <span translate>ID mạng: </span> <span *ngIf="!isInfoChanging" style="margin-right: 124px;">{{ userData.socialID }}</span>
+                    <input *ngIf="isInfoChanging" value="{{ userData.socialID }}" disabled="disabled" class="disabled" formControlName="username" />
+                </p>
+                <p class="contactMail">
+                    <span translate>Địa chỉ mail: </span> <span *ngIf="!isInfoChanging">{{ userData.email }}</span>
+                    <input *ngIf="isInfoChanging" disabled="disabled" class="disabled" value="{{ userData.email }}" />
+                </p>
+                <p class="phoneNumber">
+                    <span translate>Số điện thoại: </span>
+                    <span *ngIf="!isInfoChanging">{{ userData.telephone === null ? ('Chưa đặt' | translate) : userData.telephone }}</span>
+                    <input *ngIf="isInfoChanging" value="{{ userData.telephone }}" formControlName="telephone" />
+                </p>
+              </div>
+
+        </div>
+    </div>
+    <div class="detail vms-iv-col vms-iv-col-span-9">
+        <p *ngIf="isInfoChanging">
+          <span translate>Mật khẩu: </span>
+          <input formControlName="password" type="password" />
+        </p>
+        <p *ngIf="!isInfoChanging"><span translate>Địa chỉ ship: </span> <span class="securityStrength{{ userData.userAddresss.length !== 0 ? '' : ' bad' }}">{{ userData.userAddresss.length !== 0 ? ('đã đặt' | translate) : ('chưa đặt' | translate) }}</span></p>
+        <p *ngIf="!isInfoChanging"><span translate>Session: </span> <span>{{ userData.shoppingSessions.length }}</span></p>
+        <p *ngIf="!isInfoChanging"><span translate>Xác minh email: </span> <span class="text-success" translate>đã xác minh</span></p>
+        <p *ngIf="!isInfoChanging"><span translate>Phương thức ủy quyền：</span> <span class="text-primary" translate>Bearer ViMiner</span></p>
+        <button (click)="onUserClickSetInformation()" *ngIf="isInfoChanging" type="button" class="vms-iv-btn vms-iv-btn-ghost" style="width: 100px; height: 30px; font-size: 16px; line-height: 16px; margin-right:5px;">
+            <span translate>Hủy</span>
+        </button>
+        <button (click)="onUserClickSaveInformation()" *ngIf="isInfoChanging" type="button" class="vms-iv-btn vms-iv-btn-primary" style="width: 100px; height: 30px; font-size: 16px; line-height: 16px;">
+            <span translate>Lưu</span>
+        </button>
+        <button (click)="onUserClickSetInformation()" *ngIf="!isInfoChanging" type="button" class="vms-iv-btn vms-iv-btn-primary" style="width: 100px; height: 30px; font-size: 16px; line-height: 16px; margin-right:5px;">
+            <span translate>Sửa</span>
+        </button>
+        <button (click)="onUserClickSecurityBtn()" *ngIf="!isInfoChanging" type="button" class="vms-iv-btn vms-iv-btn-ghost" style="width: 100px; height: 30px; font-size: 16px; line-height: 16px;">
+            <span translate>Hoạt động</span>
+        </button>
+    </div>
+  </form>
+  </div>
+  <section class="nums" *ngIf="userPoint">
+    <div>
+        <p>{{ userPoint.balance * currencyRate | currency: currency }}</p>
+        <div class="title">
+            <span translate>Số dư</span>&nbsp;
+            <div class="img">
+                <img
+                    src="https://static.maxmines.com/self/lesongvi/viminershop/icon/info_ic.svg"
+                    alt=""
+                />
+                <p class="mmbtips" translate>
+                    Số dư này là tiền từ các lượt giới thiệu của bạn và số tiền được hoàn trả. Chúng tôi sẽ không hoàn trả vào ví của bạn mà sẽ được cộng thêm vào số dư này.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div>
+        <p>{{ userPoint.point }}</p>
+        <div class="title">
+            <span translate>Điểm</span>&nbsp;
+            <div class="img">
+                <img
+                    src="https://static.maxmines.com/self/lesongvi/viminershop/icon/info_ic.svg"
+                    alt=""
+                />
+                <p class="mmbtips point-en" translate>
+                    Điểm Vĩ Miner Shop được tính dựa trên số tiền mua lịch sử trong một năm. Còn về các quy tắc sử dụng cụ thể, vui lòng chờ thông báo thêm.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div>
+        <p>{{ couponCount }}</p>
+        <p class="title" translate>Số coupon</p>
+    </div>
+  </section>
+  <div class="vms-iv-row" id="orderInfo">
+    <div class="vms-iv-col vms-iv-col-span-12">
+        <div class="sub_info">
+            <img
+                src="https://static.maxmines.com/self/lesongvi/viminershop/icon/unpaid_order.svg"
+            />
+            <div>
+                <p translate>Số đơn chưa thanh toán: <span class="blue">{{ unpaidOrderNum }}</span></p>
+                <a class="view" routerLink="/account/orders" translate>xem &gt;</a>
+            </div>
+        </div>
+        <div class="sub_info">
+            <img
+                src="https://static.maxmines.com/self/lesongvi/viminershop/icon/uncollected_repair.svg"
+            />
+            <div>
+                <p translate>Số phiếu sửa chưa nhận: <span class="blue">{{ uncollectedTicketNum }}</span></p>
+                <a class="view" routerLink="/account/repair/tickets" translate>xem &gt;</a>
+            </div>
+        </div>
+    </div>
+    <div class="vms-iv-col vms-iv-col-span-12">
+        <div class="sub_info">
+            <img
+                src="https://static.maxmines.com/self/lesongvi/viminershop/icon/unshipped_order.svg"
+            />
+            <div>
+                <p translate>Số đơn chưa giao: <span class="blue">{{ unshippedOrderNum }}</span></p>
+                <a class="view" routerLink="/account/orders" translate>xem &gt;</a>
+            </div>
+        </div>
+        <div class="sub_info">
+            <img
+                src="https://static.maxmines.com/self/lesongvi/viminershop/icon/unpaid_repair_order.svg"
+            />
+            <div>
+                <p translate>Số đơn sửa chưa thanh toán: <span class="blue">{{ unpaidRepairOrder }}</span></p>
+                <a class="view" routerLink="/account/repair/orders" translate>xem &gt;</a>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

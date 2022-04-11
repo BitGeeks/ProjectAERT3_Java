@@ -1,0 +1,49 @@
+<div class="vms_apc-main col-lg-8 col-md-8 col-sm-8 clo-xs-12">
+    <h4 class="vms_apc-main-header">
+        <span>Quản lý đại lý sửa chữa</span>
+    </h4>
+
+    <div class="vms_apc-main-tabs viminer-tabs">
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/repairSites/manage" routerLinkActive="active">Quản lý đại lý sửa chữa</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/repairSites/add" routerLinkActive="active">Thêm đại lý sửa chữa</a>
+    </div>
+
+    <div class="vms-admin-container">
+        <div class="repairsite-table" style="overflow-x: auto;">
+            <table border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th>Mã đại lý</th>
+                        <th>Tên đại lý</th>
+                        <th>Thông tin thêm</th>
+                        <th>Ghi chú</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let site of repairSiteList">
+                        <td>{{ site.code }}{{ site.isDisabled ? ' (Đã vô hiệu hóa)' : '' }}</td>
+                        <td>{{ site.name }}</td>
+                        <td>{{ (site.extraInfo !== null && site.extraInfo.trim().length === 0) ? site.extraInfo : 'Chưa đặt' }}</td>
+                        <td>{{ (site.note !== null && site.note.trim().length === 0) ? site.note : 'Chưa đặt' }}</td>
+                        <td>
+                            <a href="javascript:" (click)="editRepairSite(site)">Chỉnh sửa</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="page" *ngIf="repairSiteList && repairSiteList.length !== 0">
+      <ul class="vms-iv-page">
+          <li title="Trang Trước" class="vms-iv-page-prev{{ disablePrevPageBtn ? ' vms-iv-page-disabled' : '' }}" (click)="userClickPreviousPage()">
+              <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-left"></i></a>
+          </li>
+          <li title="{{ page + 1 }}" class="vms-iv-page-item vms-iv-page-item-active"><a>{{ page + 1 }}</a></li>
+          <li title="Trang Tiếp Theo" class="vms-iv-page-next{{ disableNextPageBtn ? ' vms-iv-page-disabled' : '' }}" (click)="userClickNextPage()">
+              <a><i class="vms-iv-icon vms-iv-icon-ios-arrow-right"></i></a>
+          </li>
+      </ul>
+    </div>
+</div>

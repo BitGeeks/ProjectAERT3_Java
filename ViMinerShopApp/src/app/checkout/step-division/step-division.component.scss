@@ -1,0 +1,56 @@
+.steps {
+  text-align: center;
+  margin-top: 24px;
+  margin-bottom: 50px;
+}
+.steps div {
+  position: relative;
+  display: inline-block;
+  width: 140px;
+}
+.steps div span {
+  display: inline-block;
+  text-align: center;
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  border-radius: 50%;
+  background-color: #e8e8e8;
+}
+.steps div span:after,
+.steps div span:before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  width: 62px;
+  height: 8px;
+  background-color: #e8e8e8;
+}
+.steps div span:before {
+  left: -3px;
+}
+.steps div span em {
+  display: inline-block;
+  font-weight: 700;
+  color: #fff;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  border-radius: 50%;
+  background-color: #e8e8e8;
+}
+.steps div p {
+  position: absolute;
+  font-size: 12px;
+  padding-top: 2px;
+  color: #888;
+  width: 100%;
+}
+.steps div:first-child span:before,
+.steps div:last-child span:after {
+  width: 0;
+}
+.steps .step-done {
+  background-color: #78c25a !important;
+}

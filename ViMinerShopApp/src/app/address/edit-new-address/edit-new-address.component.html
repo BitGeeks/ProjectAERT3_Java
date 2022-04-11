@@ -1,0 +1,114 @@
+<div class="vms-dialog-1" *ngIf="initialState">
+    <div class="v-modal" style="z-index: 2000;"></div>
+    <div class="vms-element-dialog__wrapper" style="z-index: 2001;">
+        <div class="vms-element-dialog vms-element-dialog--small" style="top: 15%;">
+            <div class="vms-element-dialog__header">
+                <span class="vms-element-dialog__title" translate>Sửa Địa Chỉ</span><button type="button" aria-label="Close" class="vms-element-dialog__headerbtn" (click)="onUserClickClose()"><i class="vms-element-dialog__close vms-element-icon vms-element-icon-close"></i></button>
+            </div>
+            <div class="vms-element-dialog__body" *ngIf="initialState">
+                <form class="vms-element-form addrAdd-en" [formGroup]="editAddress" (ngSubmit)="onEditSubmitted()">
+                    <input type="hidden" formControlName="id" value="{{ initialState.id }}" />
+                    <div class="vms-element-form-item{{editAddress.get('address').invalid && editAddress.get('address').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="userName" class="vms-element-form-item__label" style="width: 120px;" translate>Địa chỉ:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                        <div class="vms-element-input">
+                            <input autocomplete="off" type="text" class="vms-element-input__inner" formControlName="address" value="{{ initialState.address }}" />
+                        </div>
+                        <p class="err-info" style="display: none;"></p>
+                        <ng-container *ngIf="editAddress.get('address').invalid && editAddress.get('address').touched">
+                            <div class="vms-element-form-item__error" *ngIf="editAddress.get('address').errors['required']" translate>Địa chỉ không được để trống</div>
+                        </ng-container>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item{{editAddress.get('streetName').invalid && editAddress.get('streetName').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="userName" class="vms-element-form-item__label" style="width: 120px;" translate>Tên đường:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                        <div class="vms-element-input">
+                            <input autocomplete="off" type="text" class="vms-element-input__inner" formControlName="streetName" value="{{ initialState.street_name }}" />
+                        </div>
+                        <p class="err-info" style="display: none;"></p>
+                        <ng-container *ngIf="editAddress.get('streetName').invalid && editAddress.get('streetName').touched">
+                            <div class="vms-element-form-item__error" *ngIf="editAddress.get('streetName').errors['required']" translate>Tên đường không được để trống</div>
+                        </ng-container>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item{{editAddress.get('cityName').invalid && editAddress.get('cityName').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="userName" class="vms-element-form-item__label" style="width: 120px;" translate>Thành phố:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                        <div class="vms-element-input">
+                            <input autocomplete="off" type="text" class="vms-element-input__inner" formControlName="cityName" value="{{ initialState.city }}" />
+                        </div>
+                        <p class="err-info" style="display: none;"></p>
+                        <ng-container *ngIf="editAddress.get('cityName').invalid && editAddress.get('cityName').touched">
+                            <div class="vms-element-form-item__error" *ngIf="editAddress.get('cityName').errors['required']" translate>Thành phố không được để trống</div>
+                        </ng-container>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item{{editAddress.get('postalCode').invalid && editAddress.get('postalCode').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="userName" class="vms-element-form-item__label" style="width: 120px;" translate>Mã bưu chính:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                        <div class="vms-element-input">
+                            <input autocomplete="off" type="text" class="vms-element-input__inner" formControlName="postalCode" value="{{ initialState.postal_code }}" />
+                        </div>
+                        <p class="err-info" style="display: none;"></p>
+                        <ng-container *ngIf="editAddress.get('postalCode').invalid && editAddress.get('postalCode').touched">
+                            <div class="vms-element-form-item__error" *ngIf="editAddress.get('postalCode').errors['required']" translate>Mã bưu chính không được để trống</div>
+                        </ng-container>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item is-required" style="position: relative;">
+                        <label for="userName" class="vms-element-form-item__label" style="width: 120px;" translate>Quốc gia:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                        <div class="vms-element-input">
+                            <i class="vms-element-input__icon vms-element-icon-caret-top"></i>
+                            <select class="vms-element-input__inner" formControlName="countryCode">
+                                <option value="{{ nation.code }}" *ngFor="let nation of nationListSelector">{{ nation.name }}</option>
+                            </select>
+                        </div>
+                        <p class="err-info" style="display: none;"></p>
+                        <ng-container *ngIf="editAddress.get('countryCode').invalid && editAddress.get('countryCode').touched">
+                            <div class="vms-element-form-item__error" *ngIf="editAddress.get('countryCode').errors['required']" translate>Quốc gia không được để trống</div>
+                        </ng-container>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item{{editAddress.get('telephone').invalid && editAddress.get('telephone').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="userName" class="vms-element-form-item__label" style="width: 120px;" translate>Số điện thoại (cố định):</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                        <div class="vms-element-input">
+                            <input autocomplete="off" type="text" class="vms-element-input__inner" formControlName="telephone" value="{{ initialState.telephone }}" />
+                        </div>
+                        <p class="err-info" style="display: none;"></p>
+                        <ng-container *ngIf="editAddress.get('telephone').invalid && editAddress.get('telephone').touched">
+                            <div class="vms-element-form-item__error" *ngIf="editAddress.get('telephone').errors['required']" translate>Số điện thoại không được để trống</div>
+                            <div class="vms-element-form-item__error" *ngIf="editAddress.get('telephone').errors['pattern']" translate>Số điện thoại bạn nhập không hợp lệ</div>
+                        </ng-container>
+                        </div>
+                    </div>
+                    <div class="vms-element-form-item{{editAddress.get('mobile').invalid && editAddress.get('mobile').touched ? ' is-error' : ''}} is-required" style="position: relative;">
+                        <label for="userName" class="vms-element-form-item__label" style="width: 120px;" translate>Số điện thoại (di động):</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                        <div class="vms-element-input">
+                            <input autocomplete="off" type="text" class="vms-element-input__inner" formControlName="mobile" value="{{ initialState.mobile }}" />
+                        </div>
+                        <p class="err-info" style="display: none;"></p>
+                        <ng-container *ngIf="editAddress.get('mobile').invalid && editAddress.get('mobile').touched">
+                            <div class="vms-element-form-item__error" *ngIf="editAddress.get('mobile').errors['required']" translate>Số điện thoại không được để trống</div>
+                            <div class="vms-element-form-item__error" *ngIf="editAddress.get('mobile').errors['pattern']" translate>Số điện thoại bạn nhập không hợp lệ</div>
+                        </ng-container>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="vms-element-dialog__footer">
+                <div class="dialog-footer">
+                    <button type="button" class="vms-element-button vms-element-button--default" (click)="onUserClickClose()">
+                        <span translate>Hủy bỏ</span>
+                    </button>
+                    <button type="button" class="vms-element-button vms-element-button--primary" (click)="onEditSubmitted()">
+                        <span translate>Lưu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

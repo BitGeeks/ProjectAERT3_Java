@@ -1,0 +1,113 @@
+<div class="vms_apc-main col-lg-8 col-md-8 col-sm-8 clo-xs-12">
+    <h4 class="vms_apc-main-header">
+        <span>Quản lý đơn vị vận chuyển</span>
+    </h4>
+
+    <div class="vms_apc-main-tabs viminer-tabs">
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/shipping/manage" routerLinkActive="active">Quản lý đơn vị vận chuyển</a>
+        <a class="vms_apc-main-tabs-item viminer-tabs-item" routerLink="/admin/shipping/add" routerLinkActive="active">Thêm đơn vị vận chuyển</a>
+    </div>
+
+    <div class="main-content">
+        <div class="form-box">
+            <form [formGroup]="addShippingForm" (ngSubmit)="FormSubmittedEv()">
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Tên đơn vị
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Tên đơn vị" type="text" class="vms-input" value="" formControlName="name" />
+                            <div class="input-error" *ngIf="addShippingForm.get('name').invalid && addShippingForm.get('name').touched">Tên đơn vị là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Tên ngắn
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Tên ngắn" type="text" class="vms-input" value="" formControlName="shortName" />
+                            <div class="input-error" *ngIf="addShippingForm.get('shortName').invalid && addShippingForm.get('shortName').touched">Tên ngắn là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Nhận hàng sửa chữa
+                    </div>
+                    <div class="item-value">
+                        <select class="vms-select-selection vms-select-selection--single" formControlName="repairFlag">
+                            <option value="0">Không</option>
+                            <option value="1">Có</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Nhận hàng đặt
+                    </div>
+                    <div class="item-value">
+                        <select class="vms-select-selection vms-select-selection--single" formControlName="salesFlag">
+                            <option value="0">Không</option>
+                            <option value="1">Có</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Chuyển hàng miễn phí
+                    </div>
+                    <div class="item-value">
+                        <select class="vms-select-selection vms-select-selection--single" formControlName="supportFreeShip">
+                            <option value="0">Không</option>
+                            <option value="1">Có</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Mã ERP
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Mã ERP" type="text" class="vms-input" value="" formControlName="erpCode" />
+                            <div class="input-error" *ngIf="addShippingForm.get('erpCode').invalid && addShippingForm.get('erpCode').touched">Mã ERP là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Liên kết logo
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Liên kết logo. Bắt đầu bằng https hoặc http..." type="text" class="vms-input" value="" formControlName="logoUrl" />
+                            <div class="input-error" *ngIf="addShippingForm.get('logoUrl').invalid && addShippingForm.get('logoUrl').touched">Liên kết logo là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label">
+                        <font class="required">*</font> Phí ship mỗi 1 km (trung bình)
+                    </div>
+                    <div class="item-value">
+                        <div class="vms-radio-group vms-radio-group-outline">
+                            <input placeholder="Ví dụ: 0.55" type="number" min="0.00" max="10000.00" step="0.01" class="vms-input" value="" formControlName="avgfeeperkm" />
+                            <div class="input-error" *ngIf="addShippingForm.get('avgfeeperkm').invalid && addShippingForm.get('avgfeeperkm').touched">Phí ship mỗi 1 km là bắt buộc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-viminer">
+                    <div class="item-label"></div>
+                    <div class="item-value">
+                        <button type="button" class="vms-btn vms-btn-primary" (click)="FormSubmittedEv()">
+                            <span>Thêm kho hàng</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

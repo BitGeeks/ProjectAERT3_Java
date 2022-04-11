@@ -1,0 +1,83 @@
+<div class="vms-dialog-1" *ngIf="initialState">
+    <div class="v-modal" style="z-index: 2000;"></div>
+    <div class="vms-element-dialog__wrapper" style="z-index: 2001;">
+        <div class="vms-element-dialog vms-element-dialog--small" style="top: 15%;">
+            <div class="vms-element-dialog__header">
+                <span class="vms-element-dialog__title">Chi tiết đơn đặt hàng</span><button type="button" aria-label="Close" class="vms-element-dialog__headerbtn" (click)="onUserClickClose()"><i class="vms-element-dialog__close vms-element-icon vms-element-icon-close"></i></button>
+            </div>
+            <div class="vms-element-dialog__body" *ngIf="initialState">
+                <p class="vms-element-dialog__paragraph">
+                    ID đơn: #<strong>{{ initialState.id }}</strong>
+                </p>
+                <p class="vms-element-dialog__paragraph">
+                    ID người dùng: {{ initialState.user_id }}
+                </p>
+                <p class="vms-element-dialog__paragraph">
+                    Trạng thái đơn: {{ renderOrderStatus(initialState.paymentDetail.status) }}
+                </p>
+                <p class="vms-element-dialog__paragraph">
+                    Tổng phụ: ${{ initialState.subTotal.toFixed(2) }}
+                </p>
+                <p class="vms-element-dialog__paragraph">
+                    Coupon giảm giá: ${{ initialState.couponAmount.toFixed(2) }}
+                </p>
+                <p class="vms-element-dialog__paragraph">
+                    Discount giảm giá: ${{ initialState.discountAmount.toFixed(2) }}
+                </p>
+                <p class="vms-element-dialog__paragraph">
+                    Chi phí vận chuyển: ${{ initialState.shippingAmount.toFixed(2) }}
+                </p>
+                <p class="vms-element-dialog__paragraph">
+                    Tổng giá trị đơn hàng: ${{ initialState.total.toFixed(2) }}
+                </p>
+                <!--START Payment section-->
+                <p class="vms-element-dialog__paragraph" *ngIf="paymentProviderList && paymentProviderList.length !== 0">
+                    Phương thức thanh toán: {{ renderPaymentProvider(initialState.paymentDetail.provider).name }}
+                </p>
+                <!--END Payment section-->
+                <!--START Shipping Method section-->
+                <p class="vms-element-dialog__paragraph" *ngIf="shippingMethods && shippingMethods.length !== 0">
+                    ID đơn vị giao hàng: {{ renderShippingUnit(initialState.shippingMethod_id).shortName }} - {{ renderShippingUnit(initialState.shippingMethod_id).name }}
+                </p>
+                <p class="vms-element-dialog__paragraph">
+                    Địa chỉ giao hàng (người dùng đặt): {{ initialState.shippingAddress }}
+                </p>
+                <!--END Shipping Method section-->
+                <p class="vms-element-dialog__paragraph">
+                    Ngày tạo: {{ initialState.created_at | date: "dd/MM/yyyy HH:ss" }}
+                </p>
+                <p class="vms-element-dialog__paragraph">
+                    Ngày cập nhật: {{ initialState.updated_at | date: "dd/MM/yyyy HH:ss" }}
+                </p>
+                <form [formGroup]="editOrderStatus" (ngSubmit)="onEditSubmitted()">
+                    <input type="hidden" formControlName="id" />
+                    <div class="vms-element-form-item is-required" style="position: relative;">
+                        <label for="orderStatus" class="vms-element-form-item__label" style="width: 120px;">Trạng thái đơn hàng:</label>
+                        <div class="vms-element-form-item__content" style="margin-left: 120px;">
+                            <div class="vms-element-input">
+                                <i class="vms-element-input__icon vms-element-icon-caret-top"></i>
+                                <select class="vms-element-input__inner" formControlName="orderStatus">
+                                    <option value="0">Chưa thanh toán</option>
+                                    <option value="1">Đang chờ</option>
+                                    <option value="2">Chưa giao</option>
+                                    <option value="3">Đang giao</option>
+                                    <option value="4">Đã giao</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="vms-element-dialog__footer">
+                <div class="dialog-footer">
+                    <button type="button" class="vms-element-button vms-element-button--default" (click)="onUserClickClose()">
+                        <span>Đóng</span>
+                    </button>
+                    <button type="button" class="vms-element-button vms-element-button--primary" (click)="onEditSubmitted()">
+                        <span>Lưu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

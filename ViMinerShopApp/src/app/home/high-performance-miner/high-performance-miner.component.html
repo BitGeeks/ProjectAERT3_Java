@@ -1,0 +1,31 @@
+<section class="component" *ngIf="!(showcaseState | async).errors.includes('FETCH_NEW_MINER')">
+  <h3 class="title">
+    <a target="_blank" translate>Máy đào mạnh</a>
+  </h3>
+</section>
+<section>
+  <div *ngIf="!(showcaseState | async).loading.includes('FETCH_NEW_MINER')" class="component show-type ctype_vms">
+    <a routerLink="/detail/{{n.id}}" *ngFor="let n of (showcaseState | async).bestMiner.slice(0, 2)" class="item">
+      <div class="type">{{ n.productCategory.name }} - {{ n.algorithm.name }}</div>
+      <div class="avatar">
+        <img src="{{ n.productImages.length !== 0 ? n.productImages[0].imageUrl : 'https://cdn.notevn.com/DzPbjDuoi.png' }}">
+      </div>
+      <div class="text">
+        <h3>{{n.name}}</h3>
+        <p class="describe">{{(showcaseState | async).newMiner[0].productInventory.shippingInfo}}</p>
+        <p class="price text-blue">
+          <span class="{{ n.pricePromotion !== 0 ? 'price-promotion' : '' }}">
+            {{ n.price * currencyRate | currency: currency }}
+          </span>
+          <span *ngIf="n.pricePromotion !== 0">
+            {{ n.pricePromotion * currencyRate | currency: currency }}
+          </span>
+        </p>
+        <button class="bt-button action bt-default" tag="button">
+            <i class="bt-icon"></i>
+        </button>
+      </div>
+      <img src="{{ n.productInventory.flag === 'FLAG_FEATURE_ORDER' ? 'https://static.maxmines.com/self/lesongvi/viminershop/order/img/futureOrder.svg' : '' }}" class="status">
+    </a>
+  </div>
+</section>
