@@ -1,5 +1,6 @@
 package viminershopapi.repository;
 
+import io.swagger.annotations.ApiParam;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,5 +14,6 @@ public interface CouponRepository extends JpaRepository<Coupon, Integer> {
     @Query("SELECT s FROM Coupon s WHERE Id = ?1")
     public Coupon findByID(int Id);
 
-    public Coupon findByUserIdAndExpired_atAndCouponCode (int UserId, LocalDate ExpireAt, String couponcode);
+    @Query(value="SELECT 1 * FROM 'coupon' WHERE 'user_id' = :UserID AND 'expired_at' > :ExpireAt AND 'coupon_code' = :CouponCode LIMIT 1", nativeQuery = true)
+    public Coupon findByUserIdAndExpired_atAndCouponCode (@ApiParam("UserID") int UserID, @ApiParam("ExpireAt") LocalDate ExpireAt, @ApiParam("CouponCode") String CouponCode);
 }

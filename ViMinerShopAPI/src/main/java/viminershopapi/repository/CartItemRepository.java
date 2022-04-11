@@ -1,5 +1,6 @@
 package viminershopapi.repository;
 
+import io.swagger.annotations.ApiParam;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,11 +16,14 @@ public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
     CartItem FindCartItemToUpdateBySessionAndId (int SessionId, int Id);
 
     @Modifying
-    @Query("DELETE FROM CartItem c WHERE c.Session.id = ?1 AND c.Id = ?2")
+    @Query("DELETE FROM CartItem c WHERE c.ShoppingSession.Id = ?1 AND c.Id = ?2")
     void deleteBySessionIdAndId (int SessionId, int Id);
 
     @Query("SELECT c FROM CartItem c WHERE c.Id = ?1")
     CartItem findById(int Id);
 
-    CartItem findFirstByShoppingSessionIdAndProductId (int SessionId, int ProductId);
+    @Query(value="SELECT 1 * FROM 'cartitems' WHERE 'Session_id' = :SessionID AND 'Product_id' = :ProductID LIMIT 1", nativeQuery = true)
+    CartItem findFirstByShoppingSessionIdAndProductId (@ApiParam("SessionID") int SessionID, @ApiParam("ProductID") int ProductID);
+
+//    CartItem findFirstByShoppingSessionIdAndProductId (int SessionId, int ProductId);
 }

@@ -6,12 +6,13 @@ import viminershopapi.helper.responseHelper;
 import viminershopapi.model.ProductCategory;
 import viminershopapi.repository.ProductCategoryRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class ProductCategoryService {
-    private ProductCategoryRepository productCategoryRepository;
+    private final ProductCategoryRepository productCategoryRepository;
 
     public Object getAll () {
         return productCategoryRepository.findAll();

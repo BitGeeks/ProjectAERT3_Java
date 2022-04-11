@@ -10,7 +10,6 @@ import java.util.List;
 
 @Entity
 @Data
-@NoArgsConstructor
 @Table(name="shoppingsessions")
 public class ShoppingSession {
     public ShoppingSession () { }
