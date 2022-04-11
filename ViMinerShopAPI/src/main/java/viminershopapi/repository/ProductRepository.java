@@ -4,15 +4,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 import viminershopapi.model.Product;
 import viminershopapi.model.UserRecord;
 
 import java.util.List;
 
+@Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("SELECT p FROM Product p WHERE p.Id = ?1")
     Product findById (int Id);
 
+    @Query("SELECT p FROM Product p WHERE p.isActive = ?1")
     List<Product> findAllByActive (boolean isActive);
 
     @Query("SELECT p FROM Product p WHERE p.Name LIKE %?1% AND p.isActive = true")

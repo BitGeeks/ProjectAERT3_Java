@@ -142,15 +142,6 @@ public class OrderController {
         return orderService.PutOrderDetail(jud.getUsername(), model);
     }
 
-    @GetMapping("/couponCount/{type}")
-    @ApiResponses(value = {
-            @ApiResponse(code = 400, message = "Có lỗi đã xảy ra")})
-    public Object GetUnpaidOrder(@ApiParam("type") @PathVariable int type) {
-        UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
-        return orderService.GetUnpaidOrder(jud.getUsername(), type);
-    }
-
     @GetMapping("/availableCoupon")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Có lỗi đã xảy ra")})

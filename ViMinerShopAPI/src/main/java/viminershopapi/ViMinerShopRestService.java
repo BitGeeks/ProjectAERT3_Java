@@ -11,11 +11,12 @@ import org.springframework.context.annotation.Bean;
 
 import viminershopapi.service.UserService;
 
+
 @SpringBootApplication(exclude = {ErrorMvcAutoConfiguration.class, SecurityAutoConfiguration.class})
 @RequiredArgsConstructor
 public class ViMinerShopRestService implements CommandLineRunner {
 
-  final UserService userService;
+//  final UserService userService;
 
   public static void main(String[] args) {
     SpringApplication.run(ViMinerShopRestService.class, args);

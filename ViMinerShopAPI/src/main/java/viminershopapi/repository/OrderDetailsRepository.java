@@ -22,7 +22,7 @@ public interface OrderDetailsRepository extends JpaRepository<OrderDetail, Integ
     @Query("SELECT o FROM OrderDetail o WHERE o.User.id = ?1 AND o.PaymentDetail.Status = ?2")
     List<OrderDetail> findByUserIdAndPaymentStatus (int userId, int paymentStatus);
 
-    @Query("SELECT o FROM OrderDetail o WHERE o.User.id = ?1 AND o.created_at >= ?2")
+    @Query("SELECT o FROM OrderDetail o WHERE o.User.id = ?1 AND o.Created_at >= ?2")
     List<OrderDetail> findByUserIdAndGreaterDay (int userId, LocalDate greaterDay);
 
     @Query("SELECT o FROM OrderDetail o WHERE o.User.id = ?1")
@@ -31,10 +31,10 @@ public interface OrderDetailsRepository extends JpaRepository<OrderDetail, Integ
     @Query("SELECT o FROM OrderDetail o WHERE o.User.id = ?1 AND o.PaymentDetail.Status = ?2")
     Page<OrderDetail> findByUserIdAndPaymentStatusWithPaginate (int userId, int paymentstatus, Pageable pageable);
 
-    @Query("SELECT o FROM OrderDetail o WHERE o.User.id = ?1 AND o.created_at >= ?2")
+    @Query("SELECT o FROM OrderDetail o WHERE o.User.id = ?1 AND o.Created_at >= ?2")
     Page<OrderDetail> findByUserIdAndGreaterDayWithPaginate (int userId, LocalDate greaterDay, Pageable pageable);
 
-    @Query("SELECT o FROM OrderDetail o WHERE o.User.id = ?1 AND o.Coupon_id IS NOT NULL")
+    @Query("SELECT o FROM OrderDetail o WHERE o.User.id = ?1 AND o.Coupon.Id IS NOT NULL")
     List<OrderDetail> findAllByUserIdAndCouponIdIsNotNull (int userId);
 
     @Query("SELECT o.Coupon FROM OrderDetail o WHERE o.User.id = ?1")
