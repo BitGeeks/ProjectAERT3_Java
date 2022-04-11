@@ -1,11 +1,17 @@
 package viminershopapi.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import viminershopapi.dto.products.ProductQueryModel;
+import viminershopapi.dto.products.ProductSearchQueryModel;
 import viminershopapi.model.Algorithm;
 import viminershopapi.model.Product;
 import viminershopapi.model.ProductCategory;
+import viminershopapi.model.UserRecord;
 import viminershopapi.repository.AlgorithmRepository;
 import viminershopapi.repository.ProductCategoryRepository;
 import viminershopapi.repository.ProductRepository;
@@ -90,6 +96,45 @@ public class ProductService {
             return productList;
         }
         return productList;
+    }
+
+    public Object SearchProduct (ProductSearchQueryModel model) {
+        if (model.page != 0 || model.size != 0) {
+            Pageable pageableWithSortDirection = PageRequest.of(model.page, model.size, Sort.by("Id").descending());
+            Page<Product> productData = productRepository.findByNameContainingAndActive(model.keyword, pageableWithSortDirection);
+
+            return productData.getContent();
+        } else {
+            return productRepository.findByNameContaining(model.keyword);
+        }
+    }
+
+    public Object GetProduct (int id) {
+        return productRepository
+                .findAllByActive(true);
+    }
+
+    public Object GetProductRelated (int id) {
+        Product productTarget = productRepository.findById(id);
+
+        List<Product> products = productRepository.findAllByRelated(productTarget.getProductCategory().getId(), productTarget.getAlgorithm().getId(), productTarget.getId());
+
+        return products;
+    }
+
+    public Object GetProductsCount (ProductQueryModel model) {
+        // Under development
+        return false;
+    }
+
+    public Object GetRecentProducts () {
+        return productRepository
+                .findAllByNewMiner();
+    }
+
+    public Object GetBestMiner () {
+        return productRepository
+                .findAllByBestMiner();
     }
 
 }

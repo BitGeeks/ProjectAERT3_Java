@@ -13,12 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name="products")
 public class Product {
-    // Test comment in a line
-
-    /**
-     * @author Nguyen Mau Chanh, Nguyen Huu Minh, Le Song Vi
-     */
-
     public int getId() {
         return Id;
     }
