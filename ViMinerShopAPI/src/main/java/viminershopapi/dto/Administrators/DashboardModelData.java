@@ -1,0 +1,1 @@
+package ViMinerShopAPI.src.main.java.viminershopapi.dto.Administrators;import java.util.List;public class DashboardModelData {    public List<viminershopapi.model.OrderDetail> OrderHistory;    public double totalIncome;    public int totalOrder;    public int totalMiner;}

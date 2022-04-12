@@ -1,0 +1,1 @@
+package ViMinerShopAPI.src.main.java.viminershopapi.dto.Administrators;public class InventoryCreateModel {    public int quantity;    public String flag;    public double hps;    public double weight;    public String shippingInfo;}

@@ -1,0 +1,1 @@
+package ViMinerShopAPI.src.main.java.viminershopapi.dto.Administrators;public class GetAllProduct {    public int size;    public int page;}

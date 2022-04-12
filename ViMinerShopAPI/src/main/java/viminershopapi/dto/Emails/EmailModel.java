@@ -1,0 +1,1 @@
+package ViMinerShopAPI.src.main.java.viminershopapi.dto.Emails;public class EmailModel {    public String emailFrom;    public String emailTo;    public String subject;    public String body;    public String customerUsername;}

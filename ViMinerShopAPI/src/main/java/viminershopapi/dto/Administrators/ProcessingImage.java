@@ -1,0 +1,1 @@
+package ViMinerShopAPI.src.main.java.viminershopapi.dto.Administrators;public class ProcessingImage {    public String imageUrl;    public String atl_Name;}

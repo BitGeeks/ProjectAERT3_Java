@@ -1,0 +1,1 @@
+package ViMinerShopAPI.src.main.java.viminershopapi.dto.Categories;public class CategoryCreateModel {    public String name;    public String desc;    public String image;    public String slug;}

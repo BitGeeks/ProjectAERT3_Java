@@ -1,0 +1,1 @@
+package ViMinerShopAPI.src.main.java.viminershopapi.dto.Administrators;public class UserPermissionUpdateModel {    public int role_id;}

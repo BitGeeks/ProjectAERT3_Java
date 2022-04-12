@@ -1,6 +1,7 @@
 package viminershopapi.dto.orders;
 
 public class UserPaymentPaypalRequestModel {
+
     public int orderId;
     public String idPayment;
     public String status;

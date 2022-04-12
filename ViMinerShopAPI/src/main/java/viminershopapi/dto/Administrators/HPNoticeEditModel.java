@@ -1,0 +1,1 @@
+package ViMinerShopAPI.src.main.java.viminershopapi.dto.Administrators;public class HPNoticeEditModel {    public String notify1;    public String notify2;    public String notify3;}

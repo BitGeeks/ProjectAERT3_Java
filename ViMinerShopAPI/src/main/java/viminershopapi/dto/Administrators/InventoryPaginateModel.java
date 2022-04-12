@@ -1,0 +1,1 @@
+package ViMinerShopAPI.src.main.java.viminershopapi.dto.Administrators;public class InventoryPaginateModel {    public int page;    public int size;}

@@ -1,0 +1,1 @@
+package ViMinerShopAPI.src.main.java.viminershopapi.dto.Administrators;public class RepairSiteCreateModel {    public String code;    public String name;    public String extraInfo;    public String note;    public String location;}

@@ -1,0 +1,1 @@
+package ViMinerShopAPI.src.main.java.viminershopapi.dto.Coupons;public class TransactionStartModel {    public int couponId;    public String receiverMail;    public int couponNumber;}

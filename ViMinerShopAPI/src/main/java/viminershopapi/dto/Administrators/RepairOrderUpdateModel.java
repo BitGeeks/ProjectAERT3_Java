@@ -1,0 +1,1 @@
+package ViMinerShopAPI.src.main.java.viminershopapi.dto.Administrators;public class RepairOrderUpdateModel {    public int repairOrderStatus;    public double price;}

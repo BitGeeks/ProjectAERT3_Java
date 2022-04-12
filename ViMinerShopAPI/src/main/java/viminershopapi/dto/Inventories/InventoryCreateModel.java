@@ -1,0 +1,1 @@
+package ViMinerShopAPI.src.main.java.viminershopapi.dto.Inventories;public class InventoryCreateModel {    public int quantity;}

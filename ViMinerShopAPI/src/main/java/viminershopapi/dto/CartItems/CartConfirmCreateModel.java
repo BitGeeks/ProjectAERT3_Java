@@ -1,5 +1,6 @@
 package viminershopapi.dto.cartitems;
 
+import org.jetbrains.annotations.Nullable;
 import org.springframework.lang.Nullable;
 import viminershopapi.model.CartItem;
 

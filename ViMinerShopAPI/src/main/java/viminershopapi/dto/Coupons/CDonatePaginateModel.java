@@ -1,0 +1,1 @@
+package ViMinerShopAPI.src.main.java.viminershopapi.dto.Coupons;public class CDonatePaginateModel {    public int size;    public int page;}

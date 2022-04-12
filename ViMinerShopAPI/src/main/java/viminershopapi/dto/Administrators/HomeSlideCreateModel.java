@@ -1,0 +1,1 @@
+package ViMinerShopAPI.src.main.java.viminershopapi.dto.Administrators;public class HomeSlideCreateModel {    public String name;    public String fillColor;    public String imgUrl;    public String jumpTo;}
