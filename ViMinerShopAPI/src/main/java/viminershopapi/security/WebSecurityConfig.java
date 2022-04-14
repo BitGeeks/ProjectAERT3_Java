@@ -42,6 +42,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
         .antMatchers("/users/authenticate").permitAll()//
         .antMatchers("/users/socialauthenticate").permitAll()//
         .antMatchers("/productcategories/**").permitAll()//
+        .antMatchers("/products/**").permitAll()//
+        .antMatchers("/slideimages/**").permitAll()//
+        .antMatchers("/hpnotices/**").permitAll()//
         .antMatchers("/users/register").permitAll()//
         .antMatchers("/h2-console/**/**").permitAll()
         // Disallow everything else..

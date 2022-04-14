@@ -7,7 +7,7 @@ spring:
             allowedOrigins: "http://localhost:4200"
   datasource:
 #    url: jdbc:h2:mem:test_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    url: jdbc:mysql://localhost:3307/java_vms1
+    url: jdbc:mysql://localhost:8889/java_vms1
     username: root
     password: 123123
   tomcat:
@@ -17,7 +17,7 @@ spring:
     min-idle: 15
   jpa:
     hibernate:
-      ddl-auto: create-update
+      ddl-auto: update
     properties:
       hibernate:
 #        dialect: org.hibernate.dialect.H2Dialect

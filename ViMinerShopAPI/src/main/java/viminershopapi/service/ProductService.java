@@ -28,15 +28,11 @@ public class ProductService {
     private final ProductCategoryRepository productCategoryRepository;
     private final AlgorithmRepository algorithmRepository;
 
-    private Predicate<Product> isContains (String query) {
-        return c -> c.getName().toLowerCase().contains(query);
-    }
-
     public Object getProducts (ProductQueryModel model) {
         List<Product> productList = productRepository.findAllByActive (true);
 
         // Predicate
-        if (model.size != 0 || model.page != 0) {
+        if (false && (model.size != 0 || model.page != 0)) {
             if (model.category != null) {
                 ProductCategory category = productCategoryRepository.findByName(model.category);
                 productList = productList.stream().filter(product -> product.getProductCategory().getId() == category.getId()).collect(Collectors.toList());
@@ -111,7 +107,7 @@ public class ProductService {
 
     public Object GetProduct (int id) {
         return productRepository
-                .findAllByActive(true);
+                .findById(id);
     }
 
     public Object GetProductRelated (int id) {

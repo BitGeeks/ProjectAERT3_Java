@@ -20,7 +20,7 @@ public class HPNoticesController {
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Có lỗi đã xảy ra")})
     public Object GetHPNotice() {
-        return hpNoticeService.GetHPNotice();
+        return hpNoticeService.GetHPNotices();
     }
 
     @GetMapping("/{id}")

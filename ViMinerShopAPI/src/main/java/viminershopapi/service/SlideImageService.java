@@ -7,7 +7,7 @@ import viminershopapi.repository.SlideImageRepository;
 @Service
 @RequiredArgsConstructor
 public class SlideImageService {
-    SlideImageRepository slideImageRepository;
+    private final SlideImageRepository slideImageRepository;
 
     public Object GetSlideImage () {
         return slideImageRepository.findAll();

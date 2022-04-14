@@ -7,9 +7,9 @@ import viminershopapi.repository.HPNoticeRepository;
 @Service
 @RequiredArgsConstructor
 public class HPNoticeService {
-    HPNoticeRepository hpNoticeRepository;
+    private final HPNoticeRepository hpNoticeRepository;
 
-    public Object GetHPNotice () {
+    public Object GetHPNotices () {
         return hpNoticeRepository.findAll();
     }
 

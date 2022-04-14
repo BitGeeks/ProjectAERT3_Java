@@ -2,7 +2,7 @@ import { Configuration } from './model';
 
 
 export const config: Configuration = {
-  apiUrl: 'http://vms-aert-5.test:82',
+  apiUrl: 'http://localhost:8080',
   authUrl: 'http://localhost:8081',
   clientId: 'test',
   clientSecret: 'test',

@@ -25,9 +25,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class OrderService {
-    UserRepository userRepository;
-    OrderDetailsRepository orderDetailsRepository;
-    CouponRepository couponRepository;
+    private final UserRepository userRepository;
+    private final OrderDetailsRepository orderDetailsRepository;
+    private final CouponRepository couponRepository;
 
     public Object GetAllOrderByType (String username, int type) {
         User user = userRepository.findByUsername(username);

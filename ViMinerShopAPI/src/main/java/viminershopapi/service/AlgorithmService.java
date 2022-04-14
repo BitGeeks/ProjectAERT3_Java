@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class AlgorithmService {
-    AlgorithmRepository algorithmRepository;
+    private final AlgorithmRepository algorithmRepository;
 
     public Object GetAlgorithms() {
         List<Algorithm> algorithmList = algorithmRepository.findAll();

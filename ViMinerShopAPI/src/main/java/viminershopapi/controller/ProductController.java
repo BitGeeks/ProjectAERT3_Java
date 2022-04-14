@@ -22,7 +22,7 @@ public class ProductController {
     @GetMapping("/all")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Có lỗi đã xảy ra")})
-    public Object getProducts(@RequestBody ProductQueryModel model) {
+    public Object getProducts(@RequestParam(required = false) ProductQueryModel model) {
         return productService.getProducts(model);
     }
 

@@ -167,7 +167,7 @@ public class CartService {
     }
 
     private ShoppingSession getLatestSession (User user) {
-        List<ShoppingSession> sessions = shoppingSessionRepository.FindLatestSessionByUserId(user.getId(), PageRequest.of(0, 1));
+        List<ShoppingSession> sessions = shoppingSessionRepository.FindLatestSessionByUserId(user.getId()); //, PageRequest.of(0, 1)
 
         ShoppingSession session = null;
         if (sessions.size() == 0 || sessions == null) {
@@ -226,22 +226,22 @@ public class CartService {
         User user = userRepository.findByUsername(username);
         ShoppingSession session = this.getLatestSession(user);
 
-        Product yesProduct = productRepository.findById(model.ProductId);
+        Product yesProduct = productRepository.findById(model.productId);
 
-        CartItem checkCart = cartItemRepository.findFirstByShoppingSessionIdAndProductId(session.getId(), model.ProductId);
+        CartItem checkCart = cartItemRepository.findFirstByShoppingSessionIdAndProductId(session.getId(), model.productId);
 
         if (checkCart == null) {
             CartItem cart = new CartItem();
 
             cart.setProduct(yesProduct);
             cart.setShoppingSession(session);
-            cart.setQuantity(model.Amount);
+            cart.setQuantity(model.amount);
             cart.setUpdated_at(LocalDate.now());
             cart.setCreated_at(LocalDate.now());
 
             cartItemRepository.save(cart);
         } else {
-            checkCart.setQuantity(checkCart.getQuantity() + model.Amount);
+            checkCart.setQuantity(checkCart.getQuantity() + model.amount);
             cartItemRepository.save(checkCart);
         }
 
