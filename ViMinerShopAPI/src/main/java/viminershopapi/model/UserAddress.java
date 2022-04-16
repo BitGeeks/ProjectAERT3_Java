@@ -10,28 +10,107 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table(name="useraddresses")
 public class UserAddress {
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public boolean isDefault() {
+        return isDefault;
+    }
+
+    public void setDefault(boolean aDefault) {
+        isDefault = aDefault;
+    }
+
+    public viminershopapi.model.User getUser() {
+        return User;
+    }
+
+    public void setUser(viminershopapi.model.User user) {
+        User = user;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
+    }
+
+    public String getStreet_name() {
+        return Street_name;
+    }
+
+    public void setStreet_name(String street_name) {
+        Street_name = street_name;
+    }
+
+    public String getCity() {
+        return City;
+    }
+
+    public void setCity(String city) {
+        City = city;
+    }
+
+    public String getPostal_code() {
+        return Postal_code;
+    }
+
+    public void setPostal_code(String postal_code) {
+        Postal_code = postal_code;
+    }
+
+    public String getCountry() {
+        return Country;
+    }
+
+    public void setCountry(String country) {
+        Country = country;
+    }
+
+    public String getTelephone() {
+        return Telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        Telephone = telephone;
+    }
+
+    public String getMobile() {
+        return Mobile;
+    }
+
+    public void setMobile(String mobile) {
+        Mobile = mobile;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int Id;
+    private int Id;
 
-    public boolean isDefault;
+    private boolean isDefault;
 
     @ManyToOne
     @JoinColumn(name = "User_id")
     private User User;
 
-    public String Address;
+    private String Address;
 
-    public String Street_name;
+    private String Street_name;
 
-    public String City;
+    private String City;
 
-    public String Postal_code;
+    private String Postal_code;
 
-    public String Country;
+    private String Country;
 
-    public String Telephone;
+    private String Telephone;
 
-    public String Mobile;
+    private String Mobile;
 }

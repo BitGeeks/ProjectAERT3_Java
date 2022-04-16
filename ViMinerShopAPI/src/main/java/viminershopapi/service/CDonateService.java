@@ -1,17 +1,21 @@
 package viminershopapi.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 import viminershopapi.dto.coupons.CDonatePaginateModel;
 import viminershopapi.model.CouponDonate;
 import viminershopapi.repository.CouponDonateRepository;
 import viminershopapi.repository.UserRepository;
 
+@Service
+@RequiredArgsConstructor
 public class CDonateService {
-    public final UserRepository userRepository;
-    public final CouponDonateRepository couponDonateRepository;
+    private final UserRepository userRepository;
+    private final CouponDonateRepository couponDonateRepository;
 
     public Object GetCouponDonateBy (String username, CDonatePaginateModel paginate, String flag) {
         var user = userRepository.findByUsername(username);
