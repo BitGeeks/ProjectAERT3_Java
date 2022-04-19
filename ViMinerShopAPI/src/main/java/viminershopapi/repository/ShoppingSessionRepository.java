@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import viminershopapi.model.ShoppingSession;
 
 import java.util.List;
@@ -18,5 +19,5 @@ public interface ShoppingSessionRepository extends JpaRepository<ShoppingSession
 
     @Modifying
     @Query("DELETE FROM ShoppingSession s WHERE s.Id = ?1 AND s.User.id = ?2")
-    void deleteByIdAndUserId (int Id, int UserID);
+    void deleteByIdAndUserId (@Param("Id") int Id, @Param("UserID") int UserID);
 }

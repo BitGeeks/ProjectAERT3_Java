@@ -30,7 +30,7 @@
                 <tbody>
                     <tr *ngFor="let ticket of ticketList">
                         <td>{{ ticket.id }}</td>
-                        <td>{{ ticket.user_id }}</td>
+                        <td>{{ ticket.user.id }}</td>
                         <td>{{ renderTicketStatus(ticket.status) }}/{{ renderRepairOrderStatus(ticket.repairOrder !== null ? ticket.repairOrder.status : 0) }}</td>
                         <td>{{ ticket.ticketReason }}</td>
                         <td>${{ ticket.repairOrder !== null ? ticket.repairOrder.price : '0' }}</td>

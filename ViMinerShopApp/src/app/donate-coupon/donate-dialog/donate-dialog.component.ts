@@ -40,7 +40,7 @@ export class DonateDialogComponent implements OnInit {
     this.donateDialog.patchValue({
       id: this.couponState.id,
       code: this.couponState.couponCode,
-      userId: this.couponState.user_id,
+      userId: this.couponState.user.id,
       couponType: this.couponState.couponType,
       couponNumber: this.couponState.couponLeft
     });

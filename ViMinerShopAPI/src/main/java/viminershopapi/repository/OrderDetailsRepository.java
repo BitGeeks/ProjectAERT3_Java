@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface OrderDetailsRepository extends JpaRepository<OrderDetail, Integer> {
-    @Query("SELECT COUNT(o) FROM OrderDetail o LEFT JOIN PaymentDetail p ON p.id = o.PaymentDetail.Id WHERE o.User.id = ?1 AND p.Status <> 0")
+    @Query("SELECT COUNT(o) FROM OrderDetail o LEFT JOIN PaymentDetail p ON p.Id = o.PaymentDetail.Id WHERE o.User.id = ?1 AND p.Status <> 0")
     long countAllByUserIdAndStatusGood(int id);
 
     @Query("SELECT o FROM OrderDetail o WHERE o.Id = ?1 AND o.User.id = ?2")
@@ -22,7 +22,7 @@ public interface OrderDetailsRepository extends JpaRepository<OrderDetail, Integ
     @Query("SELECT o FROM OrderDetail o WHERE o.User.id = ?1 AND o.PaymentDetail.Status = ?2")
     List<OrderDetail> findByUserIdAndPaymentStatus (int userId, int paymentStatus);
 
-    @Query("SELECT o FROM OrderDetail o WHERE o.User.id = ?1 AND o.Created_at >= ?2")
+    @Query("SELECT o FROM OrderDetail o WHERE o.User.id = ?1 AND o.Created_at < ?2")
     List<OrderDetail> findByUserIdAndGreaterDay (int userId, LocalDate greaterDay);
 
     @Query("SELECT o FROM OrderDetail o WHERE o.User.id = ?1")
@@ -42,4 +42,7 @@ public interface OrderDetailsRepository extends JpaRepository<OrderDetail, Integ
 
     @Query("SELECT o.Coupon FROM OrderDetail o WHERE o.User.id = ?1")
     List<OrderDetail> findAllCouponByUserIdAndCouponIdIsNotNull (int userId);
+
+    @Query(value = "SELECT * FROM orderdetails WHERE user_id = ?2 AND id = ?1 LIMIT 1", nativeQuery = true)
+    OrderDetail findFirstByIdAndUserId (int Id, int userId);
 }

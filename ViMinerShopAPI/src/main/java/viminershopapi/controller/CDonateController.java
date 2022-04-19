@@ -11,11 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import viminershopapi.dto.coupons.CDonatePaginateModel;
+import viminershopapi.dto.coupons.TransactionStartModel;
 import viminershopapi.model.CouponDonate;
 import viminershopapi.model.UserRecord;
 import viminershopapi.repository.CouponDonateRepository;
@@ -28,13 +26,34 @@ import viminershopapi.service.CDonateService;
 @RequiredArgsConstructor
 public class CDonateController {
     private final CDonateService cDonateService;
-    @PostMapping("/with/{flag}")
+
+    @GetMapping("/with/{flag}")
     @ApiResponses(value = {//
             @ApiResponse(code = 400, message = "Có lỗi đã xảy ra"), //
             @ApiResponse(code = 422, message = "Thông tin đăng nhập không hợp lệ")})
-    public Object GetCouponDonateBy (@ApiParam @PathVariable String flag, CDonatePaginateModel model) {
+    public Object GetCouponDonateBy (@ModelAttribute CDonatePaginateModel model, @ApiParam("flag") @PathVariable String flag) {
         UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         return cDonateService.GetCouponDonateBy(jud.getUsername(), model, flag);
+    }
+
+    @GetMapping("/countWith/{flag}")
+    @ApiResponses(value = {//
+            @ApiResponse(code = 400, message = "Có lỗi đã xảy ra"), //
+            @ApiResponse(code = 422, message = "Thông tin đăng nhập không hợp lệ")})
+    public Object GetCouponDonateBy (@ApiParam("flag") @PathVariable String flag) {
+        UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        return cDonateService.GetCouponDonateBy(jud.getUsername(), flag);
+    }
+
+    @PostMapping("/transaction")
+    @ApiResponses(value = {//
+            @ApiResponse(code = 400, message = "Có lỗi đã xảy ra"), //
+            @ApiResponse(code = 422, message = "Thông tin đăng nhập không hợp lệ")})
+    public Object PostCouponDonate (@RequestBody TransactionStartModel model) {
+        UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        return cDonateService.PostCouponDonate(jud.getUsername(), model);
     }
 }

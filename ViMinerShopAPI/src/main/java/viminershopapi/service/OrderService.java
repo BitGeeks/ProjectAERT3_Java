@@ -10,17 +10,15 @@ import viminershopapi.dto.orders.OrderDataRequestModel;
 import viminershopapi.dto.orders.UserPaymentMaxMinesRequestModel;
 import viminershopapi.dto.orders.UserPaymentPaypalRequestModel;
 import viminershopapi.dto.payments.PaymentUpdateModel;
-import viminershopapi.model.Coupon;
-import viminershopapi.model.OrderDetail;
-import viminershopapi.model.User;
-import viminershopapi.model.UserRecord;
+import viminershopapi.helper.stringHelper;
+import viminershopapi.model.*;
 import viminershopapi.model.helper.Paginate;
-import viminershopapi.repository.CouponRepository;
-import viminershopapi.repository.OrderDetailsRepository;
-import viminershopapi.repository.UserRepository;
+import viminershopapi.repository.*;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import static viminershopapi.helper.responseHelper.NotFound;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +26,8 @@ public class OrderService {
     private final UserRepository userRepository;
     private final OrderDetailsRepository orderDetailsRepository;
     private final CouponRepository couponRepository;
+    private final PaymentProviderRepository paymentProviderRepository;
+    private final PaymentDetailRepository paymentDetailRepository;
 
     public Object GetAllOrderByType (String username, int type) {
         User user = userRepository.findByUsername(username);
@@ -69,7 +69,7 @@ public class OrderService {
         Pageable pageableWithSortDirection = PageRequest.of(model.page, model.size, Sort.by("Id").descending());
         Page<OrderDetail> orderDetailData = orderDetailsRepository.findByUserIdWithPaginate(user.getId(), pageableWithSortDirection);
 
-        return orderDetailData;
+        return orderDetailData.getContent();
     }
 
     public Object GetUnpaidOrder (String username, OrderDataRequestModel model) {
@@ -165,11 +165,46 @@ public class OrderService {
                     .findByUserIdAndGreaterDay(user.getId(), LocalDate.now().minusDays(30));
         }
 
-        return orders.size();
+        return "" + orders.size();
     }
 
     public Object OnUserPaymentPaypal (String username, UserPaymentPaypalRequestModel model) {
-        // under development
+        var user = userRepository.findByUsername(username);
+
+        var paymentProviders = paymentProviderRepository.findAll();
+        var paymentProvider = this.findProviderByName ("Paypal", paymentProviders);
+
+        var orderDetails = orderDetailsRepository.findFirstByIdAndUserId(Integer.parseInt(model.orderId), user.getId());
+
+        if (orderDetails == null) return NotFound();
+
+        var paymentDetail = paymentDetailRepository.findFirstById(orderDetails.getPaymentDetail().getId());
+
+        if (paymentDetail == null) return NotFound();
+
+        paymentDetail.setPaypalID(model.idPayment);
+        paymentDetail.setStatus(1);
+        paymentDetail.setUpdated_at(LocalDate.now());
+        paymentDetail.setProvider(paymentProvider.getId());
+
+        var coupon = new Coupon();
+
+        coupon.setCouponCode(new stringHelper().randomStr(8));
+        coupon.setUser(user);
+        coupon.setDescription("Cảm ơn bạn đã tin tưởng Vĩ Miner Shop");
+        coupon.setCouponPercent(this.calculateCouponPercenByBill(paymentDetail.getAmount()));
+        coupon.setCouponType("sales");
+        coupon.setMinPrice(1000);
+        coupon.setActive(true);
+        coupon.setCouponLeft(1);
+        coupon.setExpired_at(LocalDate.now().plusDays(19));
+        coupon.setCreated_at(LocalDate.now());
+        coupon.setUpdated_at(LocalDate.now());
+
+        couponRepository.save(coupon);
+
+        this.afterPaymentSuccessful(user, orderDetails, "thanh toán Paypal");
+
         return "";
     }
 
@@ -188,8 +223,52 @@ public class OrderService {
         else return "55";
     }
 
+    public PaymentProvider findProviderByName (String pname, List<PaymentProvider> paymentProviders) {
+        for (var paymentProv : paymentProviders) {
+            if (paymentProv.getName().contains("MaxMines")) {
+                return paymentProv;
+            }
+        }
+        return null;
+    }
+
     public Object OnUserPaymentMaxMines (String username, UserPaymentMaxMinesRequestModel model) {
-        // under development
+        var user = userRepository.findByUsername(username);
+
+        var paymentProviders = paymentProviderRepository.findAll();
+        var paymentProvider = this.findProviderByName ("MaxMines", paymentProviders);
+
+        var orderDetails = orderDetailsRepository.findFirstByIdAndUserId(Integer.parseInt(model.orderId), user.getId());
+
+        if (orderDetails == null) return NotFound();
+
+        var paymentDetail = paymentDetailRepository.findFirstById(orderDetails.getPaymentDetail().getId());
+
+        if (paymentDetail == null) return NotFound();
+
+        paymentDetail.setMaxMinesBillID(model.maxMinesBillCode);
+        paymentDetail.setStatus(1);
+        paymentDetail.setUpdated_at(LocalDate.now());
+        paymentDetail.setProvider(paymentProvider.getId());
+
+        var coupon = new Coupon();
+
+        coupon.setCouponCode(new stringHelper().randomStr(8));
+        coupon.setUser(user);
+        coupon.setDescription("Cảm ơn bạn đã tin tưởng Vĩ Miner Shop");
+        coupon.setCouponPercent(this.calculateCouponPercenByBill(paymentDetail.getAmount()));
+        coupon.setCouponType("sales");
+        coupon.setMinPrice(1000);
+        coupon.setActive(true);
+        coupon.setCouponLeft(1);
+        coupon.setExpired_at(LocalDate.now().plusDays(19));
+        coupon.setCreated_at(LocalDate.now());
+        coupon.setUpdated_at(LocalDate.now());
+
+        couponRepository.save(coupon);
+
+        this.afterPaymentSuccessful(user, orderDetails, "thanh toán MaxMines 0Pay");
+
         return "";
     }
 

@@ -205,7 +205,7 @@ export class CreateRepairTicketComponent implements OnInit {
   requestUserData() {
     this.accountService.getUser().pipe(take(1)).subscribe(data => {
       this.userData = data;
-      this.shippingAddressSelected = data.userAddresss.length !== 0 ? data.userAddresss.filter(data => data.isDefault)[0].id : 0;
+      this.shippingAddressSelected = data.userAddresss.length !== 0 ? data.userAddresss.filter(data => data.default)[0].id : 0;
       this.currentEditingObj = data;
     });
   }

@@ -186,11 +186,11 @@
                                     >
                                     {{ uaddress.address + ", " + uaddress.street_name + ", " + uaddress.city + ", " + uaddress.country + ", " + uaddress.postal_code + ", " + uaddress.telephone + ", " + uaddress.mobile }}
                                     </span>
-                                    <span class="dftag" *ngIf="uaddress.isDefault" translate>Mặc định</span>
+                                    <span class="dftag" *ngIf="uaddress.default" translate>Mặc định</span>
                                     <div class="operation">
-                                        <span *ngIf="!uaddress.isDefault" (click)="onUserClickDefault(uaddress.id)" translate>Đặt là mặc định</span>
+                                        <span *ngIf="!uaddress.default" (click)="onUserClickDefault(uaddress.id)" translate>Đặt là mặc định</span>
                                         <span (click)="onUserClickAddrEdit(uaddress)" translate>Sửa</span>
-                                        <span (click)="onUserClickAddrDelete(uaddress)" *ngIf="!uaddress.isDefault" translate>Xóa</span>
+                                        <span (click)="onUserClickAddrDelete(uaddress)" *ngIf="!uaddress.default" translate>Xóa</span>
                                     </div>
                                 </div>
                             </div>

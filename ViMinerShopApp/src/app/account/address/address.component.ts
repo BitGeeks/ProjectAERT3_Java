@@ -59,8 +59,8 @@ export class AddressComponent implements OnInit {
       this.userData = data;
       if (data.userAddresss.length !== 0)
       {
-        this.shippingAddressSelected = data.userAddresss.filter(data => data.isDefault)[0].id;
-        this.currentEditingObj = data.userAddresss.filter(data => data.isDefault)[0];
+        this.shippingAddressSelected = data.userAddresss.filter(data => data.default)[0].id;
+        this.currentEditingObj = data.userAddresss.filter(data => data.default)[0];
       }
 
       this.innerLoading = false;

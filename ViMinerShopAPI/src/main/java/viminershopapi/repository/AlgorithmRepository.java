@@ -9,8 +9,13 @@ import viminershopapi.model.ProductCategory;
 import java.util.List;
 
 public interface AlgorithmRepository extends JpaRepository<Algorithm, Integer> {
-    @Query(value="SELECT 1 * FROM 'algorithms' WHERE 'name' = :name LIMIT 1", nativeQuery = true)
-    Algorithm findByName (@ApiParam("name") String name);
+    @Query(value="SELECT * FROM algorithms WHERE name = ?1 LIMIT 1", nativeQuery = true)
+    Algorithm findByName (String name);
 
     List<Algorithm> findAllById (Integer Id);
+
+    List<Algorithm> findAll ();
+
+    @Query(value = "SELECT * FROM algorithms WHERE id = ?1", nativeQuery = true)
+    Algorithm findById (int id);
 }

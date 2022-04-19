@@ -1,17 +1,19 @@
 package viminershopapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Data
 @Table(name="shoppingsessions")
-public class ShoppingSession {
+public class ShoppingSession implements Serializable {
     public ShoppingSession () { }
 
     public ShoppingSession(viminershopapi.model.User user, double total, LocalDate created_at, LocalDate updated_at) {
@@ -29,11 +31,13 @@ public class ShoppingSession {
         Id = id;
     }
 
-    public viminershopapi.model.User getUser() {
+    @JsonIgnore
+    public User getUser() {
         return User;
     }
 
-    public void setUser(viminershopapi.model.User user) {
+    @JsonIgnore
+    public void setUser(User user) {
         User = user;
     }
 
@@ -92,7 +96,8 @@ public class ShoppingSession {
     @ManyToOne
     @JoinColumn(name = "User_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private viminershopapi.model.User User;
+    @JsonIgnore
+    private User User;
 
     private double Total;
 
@@ -105,6 +110,7 @@ public class ShoppingSession {
     private Discount Discount;
 
     @OneToMany(mappedBy = "ShoppingSession", fetch = FetchType.EAGER)
+    @Column(name = "CartItems")
     private List<CartItem> CartItems;
 
     @Column(name = "Created_at", columnDefinition = "DATETIME")

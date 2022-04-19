@@ -1,5 +1,6 @@
 package viminershopapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -26,10 +27,12 @@ public class UserAddress {
         isDefault = aDefault;
     }
 
+    @JsonIgnore
     public viminershopapi.model.User getUser() {
         return User;
     }
 
+    @JsonIgnore
     public void setUser(viminershopapi.model.User user) {
         User = user;
     }
@@ -98,6 +101,7 @@ public class UserAddress {
 
     @ManyToOne
     @JoinColumn(name = "User_id")
+    @JsonIgnore
     private User User;
 
     private String Address;

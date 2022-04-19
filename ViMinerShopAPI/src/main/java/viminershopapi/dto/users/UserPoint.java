@@ -2,11 +2,11 @@ package viminershopapi.dto.users;
 
 public class UserPoint {
     public UserPoint(double balance, double point) {
-        Balance = balance;
-        Point = point;
+        this.balance = balance;
+        this.point = point;
     }
 
-    public double Balance;
+    public double balance;
 
-    public double Point;
+    public double point;
 }

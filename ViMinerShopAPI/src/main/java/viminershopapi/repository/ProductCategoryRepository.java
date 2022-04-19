@@ -10,9 +10,12 @@ import java.util.List;
 
 @Repository
 public interface ProductCategoryRepository extends JpaRepository<ProductCategory, Integer> {
-    @Query(value="SELECT 1 * FROM 'productcategories' WHERE 'slug' = :slug LIMIT 1", nativeQuery = true)
-    ProductCategory findBySlug (@ApiParam("slug") String slug);
+    @Query(value="SELECT * FROM productcategories WHERE slug = ?1 LIMIT 1", nativeQuery = true)
+    ProductCategory findBySlug (String slug);
 
-    @Query(value="SELECT 1 * FROM 'productcategories' WHERE 'name' = :name LIMIT 1", nativeQuery = true)
-    ProductCategory findByName (@ApiParam("name") String name);
+    @Query(value="SELECT * FROM productcategories WHERE name = ?1 LIMIT 1", nativeQuery = true)
+    ProductCategory findByName (String name);
+
+    @Query (value= "SELECT * FROM productcategories WHERE id = ?1 LIMIT 1", nativeQuery = true)
+    ProductCategory findById (int id);
 }

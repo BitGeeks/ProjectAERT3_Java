@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import viminershopapi.model.Product;
+import viminershopapi.model.ProductInventory;
 import viminershopapi.model.UserRecord;
 
 import java.util.List;
@@ -32,4 +33,10 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query("SElECT p FROM Product p WHERE p.isActive = true ORDER BY p.ProductInventory.Hps DESC")
     List<Product> findAllByBestMiner ();
+
+    @Query("SELECT p.ProductInventory FROM Product p")
+    List<ProductInventory> selectProductInventoryByAll ();
+
+    @Query("SELECT p FROM Product p")
+    Page<Product> findAllWithPaginate (Pageable pageable);
 }

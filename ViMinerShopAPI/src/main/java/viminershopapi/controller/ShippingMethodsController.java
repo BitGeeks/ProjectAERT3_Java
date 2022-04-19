@@ -15,7 +15,7 @@ import viminershopapi.service.ShippingMethodService;
 @Api(tags = "shippingmethods")
 @RequiredArgsConstructor
 public class ShippingMethodsController {
-    public ShippingMethodService shippingMethodService;
+    private final ShippingMethodService shippingMethodService;
 
     @GetMapping("/all")
     @ApiResponses(value = {

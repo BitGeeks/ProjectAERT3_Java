@@ -1,4 +1,5 @@
 export interface User {
+  id: string;
   email: string;
   firstName: string;
   lastName: string;
@@ -29,7 +30,7 @@ export interface UserAddresss {
   street_name: string;
   telephone: string;
   user_id: number;
-  isDefault: boolean;
+  default: boolean;
 }
 
 export interface ProductCategory {
@@ -312,7 +313,7 @@ export class Coupon {
   id: number;
   minPrice: number;
   updated_at: string;
-  user_id: number;
+  user: User;
   couponLeft: number;
 }
 

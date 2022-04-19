@@ -1,7 +1,9 @@
 package viminershopapi.dto.products;
 
+import lombok.Data;
 import org.springframework.lang.Nullable;
 
+@Data
 public class ProductQueryModel {
     @Nullable
     public int page;

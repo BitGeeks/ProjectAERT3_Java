@@ -1,5 +1,6 @@
 package viminershopapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,10 +21,12 @@ public class OrderItem {
         Id = id;
     }
 
+    @JsonIgnore
     public viminershopapi.model.OrderDetail getOrderDetail() {
         return OrderDetail;
     }
 
+    @JsonIgnore
     public void setOrderDetail(OrderDetail orderDetail) {
         OrderDetail = orderDetail;
     }

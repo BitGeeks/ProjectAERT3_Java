@@ -22,14 +22,14 @@ public class ProductController {
     @GetMapping("/all")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Có lỗi đã xảy ra")})
-    public Object getProducts(@RequestParam(required = false) ProductQueryModel model) {
+    public Object getProducts(@ModelAttribute ProductQueryModel model) {
         return productService.getProducts(model);
     }
 
     @GetMapping("/search")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Có lỗi đã xảy ra")})
-    public Object SearchProduct(@RequestParam ProductSearchQueryModel model) {
+    public Object SearchProduct(@ModelAttribute ProductSearchQueryModel model) {
         return productService.SearchProduct(model);
     }
 
@@ -50,7 +50,7 @@ public class ProductController {
     @GetMapping("/count")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Có lỗi đã xảy ra")})
-    public Object GetProductsCount(@RequestParam ProductQueryModel model) {
+    public Object GetProductsCount(@ModelAttribute ProductQueryModel model) {
         return productService.GetProductsCount(model);
     }
 

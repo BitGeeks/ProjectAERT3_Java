@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,8 @@ import viminershopapi.service.OrderService;
 @RequiredArgsConstructor
 public class OrderController {
     public final OrderService orderService;
-    private final ModelMapper modelMapper;
+    @Autowired
+    private final ModelMapper mapper;
 
     @GetMapping("/all/{type}")
     @ApiResponses(value = {
@@ -34,10 +36,10 @@ public class OrderController {
         return orderService.GetAllOrderByType(jud.getUsername(), type);
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Có lỗi đã xảy ra")})
-    public Object GetOrderDetails(@RequestParam OrderDataRequestModel model) {
+    public Object GetOrderDetails(@ModelAttribute OrderDataRequestModel model) {
         UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         return orderService.GetOrderDetails(jud.getUsername(), model);
@@ -46,7 +48,7 @@ public class OrderController {
     @GetMapping("/unpaid")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Có lỗi đã xảy ra")})
-    public Object GetUnpaidOrder(@RequestParam OrderDataRequestModel model) {
+    public Object GetUnpaidOrder(@ModelAttribute OrderDataRequestModel model) {
         UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         return orderService.GetUnpaidOrder(jud.getUsername(), model);
@@ -55,7 +57,7 @@ public class OrderController {
     @GetMapping("/pending")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Có lỗi đã xảy ra")})
-    public Object GetPendingOrder(@RequestParam OrderDataRequestModel model) {
+    public Object GetPendingOrder(@ModelAttribute OrderDataRequestModel model) {
         UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         return orderService.GetPendingOrder(jud.getUsername(), model);
@@ -64,7 +66,7 @@ public class OrderController {
     @GetMapping("/unshipped")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Có lỗi đã xảy ra")})
-    public Object GetUnshippedOrder(@RequestParam OrderDataRequestModel model) {
+    public Object GetUnshippedOrder(@ModelAttribute OrderDataRequestModel model) {
         UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         return orderService.GetUnshippedOrder(jud.getUsername(), model);
@@ -73,7 +75,7 @@ public class OrderController {
     @GetMapping("/shipping")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Có lỗi đã xảy ra")})
-    public Object GetShippingOrder(@RequestParam OrderDataRequestModel model) {
+    public Object GetShippingOrder(@ModelAttribute OrderDataRequestModel model) {
         UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         return orderService.GetShippingOrder(jud.getUsername(), model);
@@ -82,7 +84,7 @@ public class OrderController {
     @GetMapping("/shipped")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Có lỗi đã xảy ra")})
-    public Object GetShippedOrder(@RequestParam OrderDataRequestModel model) {
+    public Object GetShippedOrder(@ModelAttribute OrderDataRequestModel model) {
         UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         return orderService.GetShippedOrder(jud.getUsername(), model);
@@ -91,7 +93,7 @@ public class OrderController {
     @GetMapping("/expired")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Có lỗi đã xảy ra")})
-    public Object GetExpiredOrder(@RequestParam OrderDataRequestModel model) {
+    public Object GetExpiredOrder(@ModelAttribute OrderDataRequestModel model) {
         UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         return orderService.GetExpiredOrder(jud.getUsername(), model);
@@ -100,7 +102,7 @@ public class OrderController {
     @GetMapping("/count")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Có lỗi đã xảy ra")})
-    public Object GetAllOrderCount(@RequestParam OrderDataRequestModel model) {
+    public Object GetAllOrderCount(@ModelAttribute OrderDataRequestModel model) {
         UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         return orderService.GetAllOrderCount(jud.getUsername());
@@ -136,16 +138,25 @@ public class OrderController {
     @PutMapping("/paymentsetup")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Có lỗi đã xảy ra")})
-    public Object PutOrderDetail(@RequestBody PaymentUpdateModel model) {
+    public Object PutOrderDetail(@ModelAttribute PaymentUpdateModel model) {
         UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         return orderService.PutOrderDetail(jud.getUsername(), model);
     }
 
+    @GetMapping("/couponCount/{type}")
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Có lỗi đã xảy ra")})
+    public Object GetCouponCount(@ApiParam("id") @PathVariable int type) {
+        UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        return orderService.GetCouponCount(jud.getUsername(), type);
+    }
+
     @GetMapping("/availableCoupon")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Có lỗi đã xảy ra")})
-    public Object GetAvailableCoupon(@RequestBody Paginate model) {
+    public Object GetAvailableCoupon(@ModelAttribute Paginate model) {
         UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         return orderService.GetAvailableCoupon(jud.getUsername(), model);
@@ -154,7 +165,7 @@ public class OrderController {
     @GetMapping("/usedCoupon")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Có lỗi đã xảy ra")})
-    public Object GetUsedCoupon(@RequestBody Paginate model) {
+    public Object GetUsedCoupon(@ModelAttribute Paginate model) {
         UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         return orderService.GetUsedCoupon(jud.getUsername(), model);
@@ -163,7 +174,7 @@ public class OrderController {
     @GetMapping("/expiredCoupon")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Có lỗi đã xảy ra")})
-    public Object GetExpiredCoupon(@RequestBody Paginate model) {
+    public Object GetExpiredCoupon(@ModelAttribute Paginate model) {
         UserDetails jud = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         return orderService.GetExpiredCoupon(jud.getUsername(), model);

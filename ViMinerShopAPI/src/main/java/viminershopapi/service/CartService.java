@@ -5,6 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 import viminershopapi.dto.cartitems.CartAmountChangeModel;
 import viminershopapi.dto.cartitems.CartConfirmCreateModel;
@@ -91,6 +92,7 @@ public class CartService {
         return new responseHelper().NotFound();
     }
 
+    @Transactional
     public Object ConfirmCartItem (String username, CartConfirmCreateModel model) {
         User user = userRepository.findByUsername(username);
         // Mail?
@@ -123,6 +125,7 @@ public class CartService {
         orderDetail.setUser(user);
         orderDetail.setTotal(total + shippingAmount);
         orderDetail.setSubTotal(subTotal);
+        orderDetail.setPaymentDetail(paymentDetail);
         orderDetail.setDiscountAmount(discountAmount);
         orderDetail.setCouponAmount(couponAmount);
         orderDetail.setShippingMethod(shippingMethod);
@@ -149,7 +152,7 @@ public class CartService {
             orderItemRepository.save(orderItem);
             cartItemRepository.deleteBySessionIdAndId(model.Id, item.getId());
         }
-
+//
         shoppingSessionRepository.deleteByIdAndUserId(model.Id, user.getId());
 
         return this.getOrderById(user.getUsername(), orderDetail.getId());
@@ -193,6 +196,7 @@ public class CartService {
         return session;
     }
 
+    @Transactional
     public Object DecrementCartItem (String username, CartAmountChangeModel model) {
         User user = userRepository.findByUsername(username);
 

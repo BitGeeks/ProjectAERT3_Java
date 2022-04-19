@@ -109,13 +109,13 @@
           <div class="paymentMethod" *ngIf="providerList">
             {{ getPaymentProvider(order.paymentDetail.provider) }}
           </div>
-          <div class="status">
+          <div class="status" *ngIf="order.paymentDetail != null">
             <p>
               {{ renderStatus(order.paymentDetail.status) }}
             </p>
           </div>
           <div class="operation">
-            <div class="pay" (click)="handlePaybtnType(order.id)" *ngIf="order.paymentDetail.status === 0" translate>
+            <div class="pay" (click)="handlePaybtnType(order.id)" *ngIf="order.paymentDetail != null && order.paymentDetail.status === 0" translate>
               Thanh toán
             </div>
             <p *ngIf="order.paymentDetail.status !== 0" translate>Đã thanh toán</p>

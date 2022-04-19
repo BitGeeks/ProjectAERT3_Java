@@ -1,6 +1,8 @@
 package viminershopapi.service;
 
 import lombok.RequiredArgsConstructor;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -32,7 +34,7 @@ public class ProductService {
         List<Product> productList = productRepository.findAllByActive (true);
 
         // Predicate
-        if (false && (model.size != 0 || model.page != 0)) {
+        if ((model.size != 0 || model.page != 0)) {
             if (model.category != null) {
                 ProductCategory category = productCategoryRepository.findByName(model.category);
                 productList = productList.stream().filter(product -> product.getProductCategory().getId() == category.getId()).collect(Collectors.toList());
@@ -54,20 +56,21 @@ public class ProductService {
                 productList = productList.stream().filter(product -> product.getProductInventory().getHps() <= Double.parseDouble(model.maxHashrate)).collect(Collectors.toList());
             }
             if (model.searchString != null && model.searchString != "") {
-                String searchString = model.searchString.toLowerCase();
-                String[] searchStringArray = searchString.split(" ");
-                Predicate<Product> predicate = new Predicate<Product>() {
-                    @Override
-                    public boolean test(Product product) {
-                        return product.getName().toLowerCase().contains(searchStringArray[0]);
-                    }
-                };
-
-                for (String query: searchStringArray) {
-                    predicate = predicate.and(p -> p.getName().toLowerCase().contains(query));
-                }
-
-                productList = productList.stream().filter(predicate).collect(Collectors.toList());
+                productList = productList.stream().filter(p -> p.getName().contains(model.searchString)).collect(Collectors.toList());
+//                String searchString = model.searchString.toLowerCase();
+//                String[] searchStringArray = searchString.split(" ");
+//                Predicate<Product> predicate = new Predicate<Product>() {
+//                    @Override
+//                    public boolean test(Product product) {
+//                        return product.getName().toLowerCase().contains(searchStringArray[0]);
+//                    }
+//                };
+//
+//                for (String query: searchStringArray) {
+//                    predicate = predicate.and(p -> p.getName().toLowerCase().contains(query));
+//                }
+//
+//                productList = productList.stream().filter(predicate).collect(Collectors.toList());
             }
             if (model.sort != null && model.sort != "any") {
                 if (model.sort == "lowest") {

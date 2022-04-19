@@ -43,10 +43,10 @@
                     </span>
                 </td>
                 <td class="td3">
-                    <div class="td2-default" *ngIf="uaddress.isDefault" translate><span>Mặc định</span></div>
-                    <span class="operating" *ngIf="!uaddress.isDefault" (click)="onUserClickDefault(uaddress.id)" translate>Mặc định</span>
+                    <div class="td2-default" *ngIf="uaddress.default" translate><span>Mặc định</span></div>
+                    <span class="operating" *ngIf="!uaddress.default" (click)="onUserClickDefault(uaddress.id)" translate>Mặc định</span>
                     <span class="operating" (click)="onUserClickAddrEdit(uaddress)" translate>Sửa</span>
-                    <span class="operating" (click)="onUserClickAddrDelete(uaddress)" *ngIf="!uaddress.isDefault" translate>Xóa</span>
+                    <span class="operating" (click)="onUserClickAddrDelete(uaddress)" *ngIf="!uaddress.default" translate>Xóa</span>
                 </td>
               </tr>
             </table>
@@ -178,10 +178,10 @@
           </tr>
           <tr>
               <td translate>Coupon:</td>
-              <td *ngIf="(cartState | async).cart.coupon_id !== null && (cartState | async).cart.coupon !== null">
+              <td *ngIf="(cartState | async).cart.coupon !== null">
                 {{ ((cartState | async).cart.total * ((cartState | async).cart.coupon.couponPercent/100)).toFixed(2) * currencyRate | currency: currency }}
               </td>
-              <td *ngIf="(cartState | async).cart.coupon_id === null">-{{  0 * currencyRate | currency: currency }}</td>
+              <td *ngIf="(cartState | async).cart.coupon === null">-{{  0 * currencyRate | currency: currency }}</td>
           </tr>
           <tr>
               <td translate>Discount:</td>

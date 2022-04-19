@@ -149,6 +149,14 @@ public class OrderDetail {
         OrderItems = orderItems;
     }
 
+    public double getShippingAmount() {
+        return shippingAmount;
+    }
+
+    public void setShippingAmount(double shippingAmount) {
+        this.shippingAmount = shippingAmount;
+    }
+
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
@@ -179,6 +187,8 @@ public class OrderDetail {
     @ManyToOne
     @JoinColumn(name = "Discount_id", nullable = true)
     private Discount Discount;
+
+    private double shippingAmount;
 
     @ManyToOne
     @JoinColumn(name = "Coupon_id", nullable = true)

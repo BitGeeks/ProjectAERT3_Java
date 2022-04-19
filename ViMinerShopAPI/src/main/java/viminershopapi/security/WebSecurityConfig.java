@@ -44,6 +44,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
         .antMatchers("/hpnotices/**").permitAll()
         .antMatchers("/users/register").permitAll()
         .antMatchers("/h2-console/**/**").permitAll()
+        .antMatchers("/shippingmethods/**").permitAll()
+        .antMatchers("/algorithms/**").permitAll()
         .anyRequest().authenticated();
 
     http.exceptionHandling().accessDeniedPage("/login");

@@ -210,6 +210,9 @@ public class User {
   @OneToMany(mappedBy = "User")
   List<UserAddress> UserAddresss;
 
+  @OneToMany(mappedBy = "User")
+  List<ShoppingSession> shoppingSessions;
+
 //  @OneToMany(mappedBy = "User")
 //  List<AppUserRole> appUserRoles;
 

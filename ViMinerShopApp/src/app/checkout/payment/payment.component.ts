@@ -80,7 +80,7 @@ export class PaymentComponent implements OnInit {
             this.maxminesBillCode = atob(prm.mm_pay_source);
             this.orderService.onUserMaxMinesOrderSuccess(config.maxMinesPaymentKey, this.maxminesBillCode, params.orderId)
               .subscribe((data: MaxMinesSuccessPayment) => {
-                this.orderService.onUserPaypalOrderSuccessFinalStep(data.BillCode, this.orderData.id)
+                this.orderService.onUserPaypalOrderSuccessFinalStep(data.BillCode, params.orderId)
                 .pipe(take(1), catchError(
                   error => {
                     this.notifierService.notify('error', this.translatePipe.transform('Đã có lỗi xảy ra trong quá trình thao tác. Vui lòng thử lại!'));
@@ -90,7 +90,7 @@ export class PaymentComponent implements OnInit {
                 )).subscribe(() => {
                   this.isLoading = false;
                   this.notifierService.notify('success', this.translatePipe.transform('Thanh toán thành công'));
-                  this.store.dispatch(new OrderActions.CompleteOrderSetup(this.orderData.id));
+                  this.store.dispatch(new OrderActions.CompleteOrderSetup(params.orderId));
                 });
               });
           }

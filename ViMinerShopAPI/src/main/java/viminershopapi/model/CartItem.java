@@ -1,17 +1,21 @@
 package viminershopapi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Data
 @NoArgsConstructor
 @Table(name="cartitems")
-public class CartItem {
+public class CartItem implements Serializable {
     public int getId() {
         return Id;
     }
@@ -20,10 +24,12 @@ public class CartItem {
         Id = id;
     }
 
+    @JsonIgnore
     public viminershopapi.model.ShoppingSession getShoppingSession() {
         return ShoppingSession;
     }
 
+    @JsonIgnore
     public void setShoppingSession(viminershopapi.model.ShoppingSession shoppingSession) {
         ShoppingSession = shoppingSession;
     }
@@ -64,9 +70,10 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Session_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonIgnore
     private ShoppingSession ShoppingSession;
 
     @ManyToOne

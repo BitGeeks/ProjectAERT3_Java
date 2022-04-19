@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Table(name="paymentdetails")
 public class PaymentDetail {
-    public PaymentDetail(double amount, double provider, double status, String referralBy, LocalDate created_at, LocalDate updated_at) {
+    public PaymentDetail(double amount, int provider, int status, String referralBy, LocalDate created_at, LocalDate updated_at) {
         Amount = amount;
         Provider = provider;
         Status = status;
@@ -37,19 +37,19 @@ public class PaymentDetail {
         Amount = amount;
     }
 
-    public double getProvider() {
+    public int getProvider() {
         return Provider;
     }
 
-    public void setProvider(double provider) {
+    public void setProvider(int provider) {
         Provider = provider;
     }
 
-    public double getStatus() {
+    public int getStatus() {
         return Status;
     }
 
-    public void setStatus(double status) {
+    public void setStatus(int status) {
         Status = status;
     }
 
@@ -99,9 +99,9 @@ public class PaymentDetail {
 
     private double Amount;
 
-    private double Provider;
+    private int Provider;
 
-    private double Status;
+    private int Status;
 
     @Column(nullable = true)
     private String MaxMinesBillID;
